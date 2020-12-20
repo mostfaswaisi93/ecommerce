@@ -4,40 +4,28 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $table    = 'users';
+    protected $fillable = ['name', 'username', 'email', 'image', 'active', 'password'];
+    protected $appends  = ['image_path'];
+    protected $hidden   = ['password', 'remember_token'];
+    protected $casts    = ['email_verified_at' => 'datetime', 'created_at' => 'date:Y-m-d'];
+    protected $dates    = ['created_at', 'updated_at', 'deleted_at'];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function getImagePathAttribute()
+    {
+        return asset('uploads/user_images/' . $this->image);
+    }
 }

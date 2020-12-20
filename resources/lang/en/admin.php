@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sitename'                  => 'Gym',
+    'sitename'                  => 'E-commerce',
     'back_home'                 => 'Go to the Home Page',
     'page_not_found'            => 'Page Not Found',
     'internal_server_error'     => 'Internal Server Error',
