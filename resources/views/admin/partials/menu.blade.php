@@ -112,7 +112,7 @@
                             </div>
                             <span class="avatar">
                                 <img class="round"
-                                    src="{{ url('admin_files/app-assets/images/portrait/small/avatar-s-11.jpg') }}"
+                                    src="{{ url('backend/app-assets/images/portrait/small/avatar-s-11.jpg') }}"
                                     alt="avatar" height="40" width="40">
                                 <span class="avatar-status-online avatar-status-lg"></span>
                             </span>

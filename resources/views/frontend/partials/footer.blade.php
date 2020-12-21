@@ -16,27 +16,27 @@
 <!-- END: Footer-->
 
 <!-- BEGIN: Vendor JS-->
-<script src="{{ url('admin_files/app-assets/vendors/js/vendors.min.js') }}"></script>
+<script src="{{ url('backend/app-assets/vendors/js/vendors.min.js') }}"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
-<script src="{{ url('admin_files/app-assets/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
-<script src="{{ url('admin_files/app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
-<script src="{{ url('admin_files/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
-<script src="{{ url('admin_files/app-assets/vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
-<script src="{{ url('admin_files/app-assets/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
-<script src="{{ url('admin_files/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
-<script src="{{ url('admin_files/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+<script src="{{ url('backend/app-assets/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
+<script src="{{ url('backend/app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+<script src="{{ url('backend/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+<script src="{{ url('backend/app-assets/vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
+<script src="{{ url('backend/app-assets/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
+<script src="{{ url('backend/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
+<script src="{{ url('backend/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="{{ url('admin_files/app-assets/js/core/app-menu.js') }}"></script>
-<script src="{{ url('admin_files/app-assets/js/core/app.js') }}"></script>
-<script src="{{ url('admin_files/app-assets/js/scripts/components.js') }}"></script>
+<script src="{{ url('backend/app-assets/js/core/app-menu.js') }}"></script>
+<script src="{{ url('backend/app-assets/js/core/app.js') }}"></script>
+<script src="{{ url('backend/app-assets/js/scripts/components.js') }}"></script>
 <!-- END: Theme JS-->
 
 {{-- Custom js --}}
-<script src="{{ asset('admin_files/js/image_preview.js') }}"></script>
+<script src="{{ asset('backend/js/image_preview.js') }}"></script>
 
 {{-- CDN --}}
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>

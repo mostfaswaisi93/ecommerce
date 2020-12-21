@@ -11,28 +11,28 @@
     <meta name="keywords" content="Laravel - E-commerce System">
     <meta name="author" content="PIXINVENT">
     <title>429 - {{ trans('admin.too_many_requests') }}</title>
-    <link rel="apple-touch-icon" href="{{ url('admin_files/app-assets/images/ico/apple-icon-120.png') }}">
+    <link rel="apple-touch-icon" href="{{ url('backend/app-assets/images/ico/apple-icon-120.png') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ url('images/theme/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ url('admin_files/app-assets/vendors/css/vendors.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/vendors/css/vendors.min.css') }}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ url('admin_files/app-assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('admin_files/app-assets/css/bootstrap-extended.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('admin_files/app-assets/css/colors.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('admin_files/app-assets/css/components.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('admin_files/app-assets/css/themes/dark-layout.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('admin_files/app-assets/css/themes/semi-dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/bootstrap-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/colors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/themes/dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/themes/semi-dark-layout.css') }}">
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css"
-        href="{{ url('admin_files/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+        href="{{ url('backend/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css"
-        href="{{ url('admin_files/app-assets/css/core/colors/palette-gradient.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('admin_files/app-assets/css/pages/authentication.css') }}">
+        href="{{ url('backend/app-assets/css/core/colors/palette-gradient.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/pages/authentication.css') }}">
     <!-- END: Page CSS-->
 
 </head>
@@ -70,7 +70,7 @@
     <!-- END: Content-->
 
     <!-- BEGIN: Vendor JS-->
-    <script src="{{ url('admin_files/app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ url('backend/app-assets/vendors/js/vendors.min.js') }}"></script>
     <!-- BEGIN Vendor JS-->
 
 </body>
