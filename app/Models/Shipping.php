@@ -9,5 +9,5 @@ class Shipping extends Model
 {
     use HasFactory;
 
-    protected $table = '';
+    protected $table = 'shippings';
 }

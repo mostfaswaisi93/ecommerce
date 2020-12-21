@@ -15,7 +15,9 @@ class CreateManufacturersTable extends Migration
     {
         Schema::create('manufacturers', function (Blueprint $table) {
             $table->id();
+            $table->integer('enabled')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

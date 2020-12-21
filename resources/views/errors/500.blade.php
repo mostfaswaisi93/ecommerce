@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html class="loading" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" lang="{{ LaravelLocalization::getCurrentLocaleName() }}">
+<html class="loading" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}"
+    lang="{{ LaravelLocalization::getCurrentLocaleName() }}">
 <!-- BEGIN: Head-->
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Laravel - Gym System">
-    <meta name="keywords" content="Laravel - Gym System">
+    <meta name="description" content="Laravel - E-commerce System">
+    <meta name="keywords" content="Laravel - E-commerce System">
     <meta name="author" content="PIXINVENT">
     <title>500 - {{ trans('admin.internal_server_error') }}</title>
     <link rel="apple-touch-icon" href="{{ url('admin_files/app-assets/images/ico/apple-icon-120.png') }}">

@@ -6,8 +6,7 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="{{ route('admin.index') }}">
-                    <img src="{{ url('images/theme/logo.png') }}" alt="avatar" height="35" width="35"
-                        style="background-position: -65px -54px;">
+                    <i class="feather icon-shopping-cart"></i>
                     <h2 class="brand-text mb-0" style="color: #fff">{{ trans('admin.sitename') }}</h2>
                 </a>
             </li>

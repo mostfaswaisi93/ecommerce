@@ -98,6 +98,10 @@ label {
     margin: auto;
 }
 
+.navbar-brand .feather {
+    color: #fff;
+}
+
 
 /* Start Parsley JS */
 

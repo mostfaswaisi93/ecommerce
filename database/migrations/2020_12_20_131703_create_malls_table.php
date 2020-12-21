@@ -15,7 +15,9 @@ class CreateMallsTable extends Migration
     {
         Schema::create('malls', function (Blueprint $table) {
             $table->id();
+            $table->integer('enabled')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

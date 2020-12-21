@@ -9,5 +9,5 @@ class TradeMark extends Model
 {
     use HasFactory;
 
-    protected $table = '';
+    protected $table = 'trade_marks';
 }

@@ -9,5 +9,5 @@ class Mall extends Model
 {
     use HasFactory;
 
-    protected $table = '';
+    protected $table = 'malls';
 }
