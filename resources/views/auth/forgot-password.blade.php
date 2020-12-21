@@ -11,7 +11,7 @@
     <meta name="description" content="Laravel - E-commerce System">
     <meta name="keywords" content="Laravel - E-commerce System">
     <meta name="author" content="PIXINVENT">
-    <title>{{ trans('admin.sitename') }} | {{ trans('admin.login') }}</title>
+    <title>{{ trans('admin.sitename') }} | {{ trans('admin.forgot_password') }}</title>
     <link rel="apple-touch-icon" href="{{ url('admin_files/app-assets/images/ico/apple-icon-120.png') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ url('images/theme/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -93,7 +93,7 @@
                                     <div class="card rounded-0 mb-0 px-2"><br> <br>
                                         <div class="card-header pb-1">
                                             <div class="card-title">
-                                                <h4 class="mb-0">{{ trans('admin.login') }}</h4>
+                                                <h4 class="mb-0">{{ trans('admin.forgot_password') }}</h4>
                                             </div>
                                         </div>
                                         <p class="px-2">{{ trans('admin.login_msg') }}</p>

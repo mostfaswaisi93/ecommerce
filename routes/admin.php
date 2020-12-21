@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -14,11 +14,11 @@ Route::group(
             Route::get('/', [AdminController::class, 'index'])->name('index');
 
             // Route::resources([
-            //     'users' => UserController::class,
+            //     'users' => UsersController::class,
             // ]);
 
-            // Route::get('users/destroy/{id}', 'UserController@destroy');
-            // Route::post('users/updateStatus/{id}', 'UserController@updateStatus');
+            // Route::get('users/destroy/{id}', 'UsersController@destroy');
+            // Route::post('users/updateStatus/{id}', 'UsersController@updateStatus');
         });
     }
 );
