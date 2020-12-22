@@ -100,7 +100,6 @@
                                                 <form action="{{route('login')}}" method="POST" id="loginForm">
                                                     @csrf
                                                     @include('partials._errors')
-                                                    <br>
                                                     <fieldset
                                                         class="form-label-group form-group position-relative has-icon-left">
                                                         <input id="email" type="email" class="form-control" name="email"
@@ -122,7 +121,7 @@
                                                      align-items-center">
                                                         <fieldset class="checkbox">
                                                             <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" checked>
                                                                 <span class="vs-checkbox">
                                                                     <span class="vs-checkbox--check">
                                                                         <i class="vs-icon feather icon-check"></i>
@@ -144,7 +143,7 @@
                                         </div>
                                         <div class="login-footer">
                                             <div class="divider">
-                                                {{-- <div class="divider-text">OR</div> --}}
+                                                {{-- <div class="divider-text">-</div> --}}
                                             </div>
                                             {{-- <div class="footer-btn d-inline">
                                                 <a href="#" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>

@@ -33,8 +33,7 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css"
         href="{{ url('backend/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="{{ url('backend/app-assets/css/core/colors/palette-gradient.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/core/colors/palette-gradient.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/pages/authentication.css') }}">
     <!-- END: Page CSS-->
     @else
@@ -49,8 +48,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css-rtl/colors.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css-rtl/components.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css-rtl/themes/dark-layout.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="{{ url('backend/app-assets/css-rtl/themes/semi-dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css-rtl/themes/semi-dark-layout.css') }}">
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css"
@@ -91,7 +89,7 @@
                                         alt="branding logo">
                                 </div>
                                 <div class="col-lg-6 col-12 p-0">
-                                    <div class="card rounded-0 mb-0 p-2">
+                                    <div class="card rounded-0 mb-0 p-2"><br>
                                         <div class="card-header pt-50 pb-1">
                                             <div class="card-title">
                                                 <h4 class="mb-0">{{ trans('admin.create_account') }}</h4>
@@ -103,41 +101,70 @@
                                                 <form action="{{route('register')}}" method="POST">
                                                     @csrf
                                                     @include('partials._errors')
-                                                    <div class="form-label-group">
-                                                        <input type="text" id="name" name="name" class="form-control"
+                                                    <fieldset
+                                                        class="form-label-group form-group position-relative has-icon-left">
+                                                        <input id="name" type="text" class="form-control" name="name"
                                                             placeholder="{{ trans('admin.name') }}">
+                                                        <div class="form-control-position">
+                                                            <i class="feather icon-user"></i>
+                                                        </div>
                                                         <label for="name">{{ trans('admin.name') }}</label>
-                                                    </div>
-                                                    <div class="form-label-group">
-                                                        <input type="text" id="username" name="username"
-                                                            class="form-control"
-                                                            placeholder="{{ trans('admin.username') }}">
-                                                        <label for="username">{{ trans('admin.username') }}</label>
-                                                    </div>
-                                                    <div class="form-label-group">
-                                                        <input type="email" name="email" id="email" class="form-control"
+                                                    </fieldset>
+                                                    <fieldset
+                                                        class="form-label-group form-group position-relative has-icon-left">
+                                                        <input id="email" type="email" class="form-control" name="email"
                                                             placeholder="{{ trans('admin.email') }}">
+                                                        <div class="form-control-position">
+                                                            <i class="feather icon-user"></i>
+                                                        </div>
                                                         <label for="email">{{ trans('admin.email') }}</label>
-                                                    </div>
-                                                    <div class="form-label-group">
-                                                        <input type="password" name="password" id="password"
-                                                            class="form-control"
-                                                            placeholder="{{ trans('admin.password') }}"
-                                                            autocomplete="new-password">
+                                                    </fieldset>
+                                                    <fieldset class="form-label-group position-relative has-icon-left">
+                                                        <input id="password" type="password" class="form-control"
+                                                            name="password" placeholder="{{ trans('admin.password') }}">
+                                                        <div class="form-control-position">
+                                                            <i class="feather icon-lock"></i>
+                                                        </div>
                                                         <label for="password">{{ trans('admin.password') }}</label>
-                                                    </div>
-                                                    <div class="form-label-group">
+                                                    </fieldset>
+                                                    <fieldset class="form-label-group position-relative has-icon-left">
                                                         <input type="password" name="password_confirmation"
                                                             id="password-confirm" class="form-control"
                                                             placeholder="{{ trans('admin.password_confirmation') }}"
                                                             autocomplete="new-password">
-                                                        <label
-                                                            for="password-confirm">{{ trans('admin.password_confirmation') }}</label>
+                                                        <div class="form-control-position">
+                                                            <i class="feather icon-lock"></i>
+                                                        </div>
+                                                        <label for="password-confirm">
+                                                            {{ trans('admin.password_confirmation') }}
+                                                        </label>
+                                                    </fieldset>
+                                                    <div class="form-group row">
+                                                        <div class="col-12">
+                                                            <fieldset class="checkbox">
+                                                                <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                    <input type="checkbox" checked>
+                                                                    <span class="vs-checkbox">
+                                                                        <span class="vs-checkbox--check">
+                                                                            <i class="vs-icon feather icon-check"></i>
+                                                                        </span>
+                                                                    </span>
+                                                                    <span>{{ trans('admin.register_check') }}</span>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
                                                     </div>
-                                                    <a href="{{ route('login') }}"
-                                                        class="btn btn-outline-primary float-left btn-inline mb-50">{{ trans('admin.login') }}</a>
-                                                    <button type="submit"
-                                                        class="btn btn-primary float-right btn-inline mb-50">{{ trans('admin.register') }}</button>
+                                                    <div class="float-md-left d-block mb-1">
+                                                        <a href="{{ route('login') }}"
+                                                            title="{{ trans('admin.back_login') }}"
+                                                            class="btn btn-outline-primary btn-block px-75">
+                                                            {{ trans('admin.login') }}
+                                                        </a>
+                                                    </div>
+                                                    <div class="float-md-right d-block mb-1">
+                                                        <button type="submit"
+                                                            class="btn btn-primary btn-block px-75">{{ trans('admin.register') }}</button>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>

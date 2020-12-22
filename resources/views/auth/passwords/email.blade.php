@@ -70,15 +70,14 @@
 <!-- BEGIN: Body-->
 
 <body
-    class="vertical-layout vertical-menu-modern semi-dark-layout 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page"
+    class="vertical-layout vertical-menu-modern semi-dark-layout 1-column navbar-floating footer-static bg-full-screen-image blank-page blank-page"
     data-open="click" data-menu="vertical-menu-modern" data-col="1-column" data-layout="semi-dark-layout">
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
-            <div class="content-header row">
-            </div>
+            <div class="content-header row"></div>
             <div class="content-body">
                 <section class="row flexbox-container">
                     <div class="col-xl-7 col-md-9 col-10 d-flex justify-content-center px-0">
@@ -95,7 +94,7 @@
                                                 <h4 class="mb-0">{{ trans('admin.forgot_password') }}</h4>
                                             </div>
                                         </div>
-                                        <p class="px-2 mb-0">{{ trans('admin.reset_msg') }}</p>
+                                        <p class="px-2 mb-0">{{ trans('admin.forgot_msg') }}</p>
                                         <div class="card-content">
                                             <div class="card-body">
                                                 <form method="POST" action="{{ route('password.email') }}">
@@ -106,35 +105,16 @@
                                                         {{ session('status') }}
                                                     </div>
                                                     @endif
-                                                    <br>
-                                                    <div class="col-md-6">
-                                                        <input id="email" type="email"
-                                                            class="form-control @error('email') is-invalid @enderror"
-                                                            name="email" value="{{ old('email') }}" required
-                                                            autocomplete="email" autofocus>
-
-                                                        @error('email')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
-
                                                     <fieldset
                                                         class="form-label-group form-group position-relative has-icon-left">
                                                         <input id="email" type="email" class="form-control" name="email"
-                                                            placeholder="{{ trans('admin.email') }}">
+                                                            placeholder="{{ trans('admin.email') }}"
+                                                            autocomplete="email" autofocus>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-user"></i>
                                                         </div>
                                                         <label for="email">{{ trans('admin.email') }}</label>
                                                     </fieldset>
-
-                                                    <div class="form-label-group">
-                                                        <input type="email" id="inputEmail" class="form-control"
-                                                            placeholder="Email">
-                                                        <label for="inputEmail">Email</label>
-                                                    </div>
                                                     <div class="float-md-left d-block mb-1">
                                                         <a href="{{ route('login') }}"
                                                             title="{{ trans('admin.back_login') }}"
@@ -154,11 +134,11 @@
                             </div>
                         </div>
                     </div>
+                </section>
             </div>
-            </section>
         </div>
     </div>
-    </div>
+
     <!-- END: Content-->
 
     <!-- BEGIN: Vendor JS-->

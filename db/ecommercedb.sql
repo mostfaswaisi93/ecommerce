@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 21, 2020 at 08:52 AM
+-- Generation Time: Dec 22, 2020 at 01:20 PM
 -- Server version: 10.5.4-MariaDB-log
 -- PHP Version: 7.4.10
 
@@ -29,8 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cities` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -41,8 +43,10 @@ CREATE TABLE `cities` (
 
 CREATE TABLE `colors` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -53,8 +57,10 @@ CREATE TABLE `colors` (
 
 CREATE TABLE `contacts` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -65,8 +71,10 @@ CREATE TABLE `contacts` (
 
 CREATE TABLE `countries` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -77,8 +85,10 @@ CREATE TABLE `countries` (
 
 CREATE TABLE `departments` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -105,8 +115,10 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `malls` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -117,8 +129,10 @@ CREATE TABLE `malls` (
 
 CREATE TABLE `manufacturers` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -147,12 +161,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2020_12_20_131646_create_countries_table', 1),
 (8, '2020_12_20_131654_create_departments_table', 1),
 (9, '2020_12_20_131703_create_malls_table', 1),
-(10, '2020_12_20_131712_create_manufacturers_table', 1),
-(11, '2020_12_20_131721_create_settings_table', 1),
-(12, '2020_12_20_131729_create_shippings_table', 1),
-(13, '2020_12_20_131737_create_states_table', 1),
-(14, '2020_12_20_131745_create_trade_marks_table', 1),
-(15, '2020_12_20_132429_create_contacts_table', 1);
+(10, '2020_12_20_131721_create_settings_table', 1),
+(11, '2020_12_20_131729_create_shippings_table', 1),
+(12, '2020_12_20_131737_create_states_table', 1),
+(13, '2020_12_20_131745_create_trade_marks_table', 1),
+(14, '2020_12_20_132429_create_contacts_table', 1),
+(15, '2020_12_21_084548_create_manufacturers_table', 1);
 
 -- --------------------------------------------------------
 
@@ -237,8 +251,10 @@ CREATE TABLE `role_has_permissions` (
 
 CREATE TABLE `settings` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -249,8 +265,10 @@ CREATE TABLE `settings` (
 
 CREATE TABLE `shippings` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -261,8 +279,10 @@ CREATE TABLE `shippings` (
 
 CREATE TABLE `states` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -273,8 +293,10 @@ CREATE TABLE `states` (
 
 CREATE TABLE `trade_marks` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -302,7 +324,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `image`, `enabled`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'admin', 'admin@admin.com', 'default.png', 1, NULL, '$2y$10$D/G3NeY9QqVYLmdgMHz.gOAcc/iZlwG2LZ3pf2XSBH.vkdSTCycuO', NULL, '2020-12-20 22:00:00', '2020-12-20 22:00:00', NULL);
+(1, 'admin', 'admin@admin.com', 'default.png', 1, NULL, '$2y$10$BfSVFkgfScb96AU1GEKKfO7wiuw38P620FtSf2haomB./Vs6Tokmq', 'pLjis37uhowhIrzbnuyasY889mFJgZTJyAE4DPfEkpB5IouYJJbolN7SaRiW', '2020-12-21 22:00:00', '2020-12-22 11:19:34', NULL);
 
 --
 -- Indexes for dumped tables
