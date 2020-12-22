@@ -3,6 +3,7 @@
 return [
     'sitename'                  => 'E-commerce',
     'back_home'                 => 'Go to the Home Page',
+    'back_login'                => 'Back to Login Page',
     'page_not_found'            => 'Page Not Found',
     'internal_server_error'     => 'Internal Server Error',
     'home'                      => 'Home',
@@ -28,14 +29,20 @@ return [
     'remember_me'               => 'Remember Me',
     'forgot_password'           => 'Forgot Password?',
     'reset_password'            => 'Reset Password',
+    'reset_msg'                 => 'Please enter your email address and we will send you instructions on how to reset your password.',
+    'recover_password'          => 'Recover Password',
     'password'                  => 'Password',
+    'password_link'             => 'Send Password Reset Link',
     'password_confirmation'     => 'Password Confirmation',
     'change_password'           => 'Change Password',
     'too_many_requests'         => 'Too Many Requests, Wait 60 Seconds and Try Again',
 
+    'are_sure'                  => 'Are you Sure?',
     'confirm_delete'            => 'Confirm Delete',
     'yes'                       => 'Yes',
     'no'                        => 'No',
+    'cancel'                    => 'Cancel',
+    'back'                      => 'Back',
 
     'added_successfully'        => 'Added Successfully',
     'updated_successfully'      => 'updated_successfully',
