@@ -27,6 +27,8 @@ return [
     'login_msg'                 => 'مرحبًا، الرجاء تسجيل الدخول',
     'register_msg'              => 'قم بتعبئة النموذج أدناه لإنشاء حساب جديد',
     'remember_me'               => 'تذكرني',
+    'forgot_password'           => 'هل نسيت كلمة المرور؟',
+    'reset_password'            => 'إعادة تعيين كلمة المرور',
     'password'                  => 'كلمة المرور',
     'password_confirmation'     => 'تأكيد كلمة المرور',
     'change_password'           => 'تغيير كلمة المرور',

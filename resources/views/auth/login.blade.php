@@ -33,8 +33,7 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css"
         href="{{ url('backend/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="{{ url('backend/app-assets/css/core/colors/palette-gradient.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/core/colors/palette-gradient.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css/pages/authentication.css') }}">
     <!-- END: Page CSS-->
     @else
@@ -49,8 +48,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css-rtl/colors.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css-rtl/components.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css-rtl/themes/dark-layout.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="{{ url('backend/app-assets/css-rtl/themes/semi-dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('backend/app-assets/css-rtl/themes/semi-dark-layout.css') }}">
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css"
@@ -120,9 +118,25 @@
                                                         </div>
                                                         <label for="password">{{ trans('admin.password') }}</label>
                                                     </fieldset>
-                                                    {{-- <div class="text-left">
-                                                        <a href="auth-forgot-password.html" class="card-link">Forgot Password?</a>
-                                                    </div> <br> --}}
+                                                    <div class="form-group d-flex justify-content-between
+                                                     align-items-center">
+                                                        <fieldset class="checkbox">
+                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                <input type="checkbox">
+                                                                <span class="vs-checkbox">
+                                                                    <span class="vs-checkbox--check">
+                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                    </span>
+                                                                </span>
+                                                                <span>{{ trans('admin.remember_me') }}</span>
+                                                            </div>
+                                                        </fieldset>
+                                                        <div>
+                                                            <a href="{{route('password.request')}}" class="card-link">
+                                                                {{ trans('admin.forgot_password') }}
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                     <button type="submit"
                                                         class="btn btn-primary float-right btn-inline">{{ trans('admin.login') }}</button>
                                                 </form>

@@ -26,6 +26,8 @@ return [
     'login_msg'                 => 'Hello, Please Log In',
     'register_msg'              => 'Fill out the form below to create a new account!',
     'remember_me'               => 'Remember Me',
+    'forgot_password'           => 'Forgot Password?',
+    'reset_password'            => 'Reset Password',
     'password'                  => 'Password',
     'password_confirmation'     => 'Password Confirmation',
     'change_password'           => 'Change Password',
