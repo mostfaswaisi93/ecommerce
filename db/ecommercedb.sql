@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 22, 2020 at 01:20 PM
+-- Generation Time: Dec 23, 2020 at 04:09 PM
 -- Server version: 10.5.4-MariaDB-log
 -- PHP Version: 7.4.10
 
@@ -192,6 +192,13 @@ CREATE TABLE `model_has_roles` (
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\Models\\User', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -218,6 +225,32 @@ CREATE TABLE `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'create_countries', 'web', '2020-12-23 14:06:13', '2020-12-23 14:06:13'),
+(2, 'read_countries', 'web', '2020-12-23 14:06:13', '2020-12-23 14:06:13'),
+(3, 'update_countries', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(4, 'delete_countries', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(5, 'create_cities', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(6, 'read_cities', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(7, 'update_cities', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(8, 'delete_cities', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(9, 'create_users', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(10, 'read_users', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(11, 'update_users', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(12, 'delete_users', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(13, 'create_roles', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(14, 'read_roles', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(15, 'update_roles', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(16, 'delete_roles', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(17, 'create_settings', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(18, 'read_settings', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(19, 'update_settings', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
+(20, 'delete_settings', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14');
+
 -- --------------------------------------------------------
 
 --
@@ -232,6 +265,14 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'super_admin', 'web', '2020-12-23 14:06:13', '2020-12-23 14:06:13'),
+(2, 'admin', 'web', '2020-12-23 14:06:15', '2020-12-23 14:06:15');
+
 -- --------------------------------------------------------
 
 --
@@ -242,6 +283,32 @@ CREATE TABLE `role_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `role_has_permissions`
+--
+
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 1),
+(10, 1),
+(11, 1),
+(12, 1),
+(13, 1),
+(14, 1),
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 1),
+(19, 1),
+(20, 1);
 
 -- --------------------------------------------------------
 
@@ -324,7 +391,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `image`, `enabled`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'admin', 'admin@admin.com', 'default.png', 1, NULL, '$2y$10$BfSVFkgfScb96AU1GEKKfO7wiuw38P620FtSf2haomB./Vs6Tokmq', 'pLjis37uhowhIrzbnuyasY889mFJgZTJyAE4DPfEkpB5IouYJJbolN7SaRiW', '2020-12-21 22:00:00', '2020-12-22 11:19:34', NULL);
+(1, 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$5GuMLCtN7S9VcrCdFUNQ2.3TXmKgOS2LqOoHRyxao5g6mJxbuyoFi', NULL, '2020-12-22 22:00:00', '2020-12-22 22:00:00', NULL);
 
 --
 -- Indexes for dumped tables
@@ -517,13 +584,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `settings`

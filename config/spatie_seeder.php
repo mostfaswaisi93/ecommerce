@@ -1,11 +1,6 @@
 <?php
 
 return [
-
-    'create_users'      => false,
-
-    'truncate_tables'   => true,
-
     'roles_structure'   => [
         'super_admin' => [
             'countries'    => 'c,r,u,d',
