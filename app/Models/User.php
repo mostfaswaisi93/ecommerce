@@ -22,7 +22,8 @@ class User extends Authenticatable
 
     public function getNameAttribute($value)
     {
-        return ucfirst($value);
+        $word = str_replace('_', ' ', $value);
+        return ucwords($word);
     }
 
     public function getImagePathAttribute()

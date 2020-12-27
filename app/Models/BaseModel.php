@@ -22,4 +22,9 @@ class BaseModel extends Model
     {
         return $query->where('enabled', 0);
     }
+
+    public function getActiveAttribute()
+    {
+        return $this->active == 1 ? "{{ trans('admin.active') }}" : "{{ trans('admin.inactive') }}";
+    }
 }
