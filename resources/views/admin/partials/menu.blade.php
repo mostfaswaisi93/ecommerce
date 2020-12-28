@@ -110,7 +110,7 @@
                                 </span>
                                 <span class="user-status">{{ trans('admin.available') }}</span>
                             </div>
-                            <span class="avatar">
+                            <span class="avatar" style="margin: unset">
                                 <img class="round"
                                     src="{{ url('backend/app-assets/images/portrait/small/avatar-s-11.jpg') }}"
                                     alt="avatar" height="40" width="40">
@@ -121,6 +121,18 @@
                             <a class="dropdown-item" href="page-user-profile.html">
                                 <i class="feather icon-user"></i>
                                 Edit Profile
+                            </a>
+                            <a class="dropdown-item" href="app-email.html">
+                                <i class="feather icon-mail"></i>
+                                My Inbox
+                            </a>
+                            <a class="dropdown-item" href="app-todo.html">
+                                <i class="feather icon-check-square"></i>
+                                Task
+                            </a>
+                            <a class="dropdown-item" href="app-chat.html">
+                                <i class="feather icon-message-square"></i>
+                                Chats
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

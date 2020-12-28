@@ -19,7 +19,7 @@
 </div>
 
 <div class="btn-group">
-    @if (auth()->user()->hasPermission('facilities_create'))
+    @if (auth()->user()->can('facilities_create'))
     <button type="button" name="create_facility" id="create_facility" class="btn btn-primary mb-2">
         <i class="feather icon-plus mr-25"></i>
         {{ trans('admin.create') }}

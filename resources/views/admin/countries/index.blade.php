@@ -30,7 +30,7 @@
             <div class="card-content">
                 <div class="card-body">
                     <div class="btn-group">
-                        @if (auth()->user()->hasPermission('create_countries'))
+                        @if (auth()->user()->can('create_countries'))
                         <a href="{{ route('admin.countries.create') }}">
                             <button class="btn btn-primary mb-2">
                                 <i class="feather icon-plus mr-25"></i>

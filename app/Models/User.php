@@ -15,7 +15,7 @@ class User extends Authenticatable
 
     protected $table    = 'users';
     protected $fillable = ['name', 'email', 'image', 'enabled', 'password'];
-    protected $appends  = ['image_path'];
+    protected $appends  = ['image_path', 'full_name'];
     protected $hidden   = ['password', 'remember_token'];
     protected $casts    = ['email_verified_at' => 'datetime', 'created_at' => 'date:Y-m-d'];
     protected $dates    = ['created_at', 'updated_at', 'deleted_at'];
@@ -24,6 +24,11 @@ class User extends Authenticatable
     {
         $word = str_replace('_', ' ', $value);
         return ucwords($word);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
 
     public function getImagePathAttribute()

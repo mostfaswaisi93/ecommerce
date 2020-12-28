@@ -121,7 +121,7 @@
                                                         <td>
                                                             <div class="vs-checkbox-con vs-checkbox-primary">
                                                                 <input type="checkbox" name="permissions[]"
-                                                                    {{ $user->hasPermission($map . '_' . $model) ? 'checked' : '' }}
+                                                                    {{ $user->can($map . '_' . $model) ? 'checked' : '' }}
                                                                     value="{{ $map . '_' . $model }}">
                                                                 <span class="vs-checkbox">
                                                                     <span class="vs-checkbox--check">

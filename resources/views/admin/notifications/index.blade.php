@@ -21,7 +21,7 @@
 </div>
 
 <div class="btn-group">
-    @if (auth()->user()->hasPermission('create_facilities'))
+    @if (auth()->user()->can('create_facilities'))
     <a href="{{ route('admin.facilities.create') }}">
         <button class="btn btn-primary mb-2">
             <i class="feather icon-plus mr-25"></i>

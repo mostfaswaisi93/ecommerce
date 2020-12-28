@@ -26,16 +26,16 @@ class UsersController extends Controller
         if (request()->ajax()) {
             return datatables()->of($users)
                 ->addColumn('action', function ($data) {
-                    if (auth()->user()->hasPermission('update_users')) {
-                        $button = '<a type="button" title="Edit" name="edit" href="users/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
+                    if (auth()->user()->can('update_users')) {
+                        $button = '<a type="button" title="{{ trans("admin.edit") }}" name="edit" href="users/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
                     } else {
-                        $button = '<a type="button" title="Edit" name="edit" id="' . $data->id . '" class="edit btn btn-sm btn-icon disabled"><i class="fa fa-edit"></i></a>';
+                        $button = '<a type="button" title="{{ trans("admin.edit") }}" name="edit" id="' . $data->id . '" class="edit btn btn-sm btn-icon disabled"><i class="fa fa-edit"></i></a>';
                     }
                     $button .= '&nbsp;&nbsp;';
-                    if (auth()->user()->hasPermission('delete_users')) {
-                        $button .= '<a type="button" title="Delete" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
+                    if (auth()->user()->can('delete_users')) {
+                        $button .= '<a type="button" title="{{ trans("admin.delete") }}" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
                     } else {
-                        $button .= '<a type="button" title="Delete" name="delete" id="' . $data->id . '" class="delete btn btn-sm btn-icon disabled"><i class="fa fa-trash"></i></a>';
+                        $button .= '<a type="button" title="{{ trans("admin.delete") }}" name="delete" id="' . $data->id . '" class="delete btn btn-sm btn-icon disabled"><i class="fa fa-trash"></i></a>';
                     }
                     return $button;
                 })

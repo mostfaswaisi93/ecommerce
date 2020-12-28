@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.users_management') }} @endsection
+@section('title') {{ trans('admin.roles_management') }} @endsection
 
 @section('content')
 
@@ -7,13 +7,13 @@
     <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
             <div class="col-12">
-                <h2 class="content-header-title float-left mb-0">{{ trans('admin.users_management') }}</h2>
+                <h2 class="content-header-title float-left mb-0">{{ trans('admin.roles_management') }}</h2>
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.index') }}">{{ trans('admin.home') }}</a>
                         </li>
-                        <li class="breadcrumb-item active">{{ trans('admin.users_management') }}</li>
+                        <li class="breadcrumb-item active">{{ trans('admin.roles_management') }}</li>
                     </ol>
                 </div>
             </div>
@@ -25,13 +25,13 @@
     <section>
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">{{ trans('admin.users_management') }}</h4>
+                <h4 class="card-title">{{ trans('admin.roles_management') }}</h4>
             </div>
             <div class="card-content">
                 <div class="card-body">
                     <div class="btn-group">
-                        @if (auth()->user()->hasPermission('create_users'))
-                        <a href="{{ route('admin.users.create') }}">
+                        @if (auth()->user()->can('create_roles'))
+                        <a href="{{ route('admin.roles.create') }}">
                             <button class="btn btn-primary mb-2">
                                 <i class="feather icon-user-plus mr-25"></i>
                                 {{ trans('admin.create_user') }}
@@ -83,7 +83,7 @@
             responsive: true,
             order: [[ 2, "desc" ]],
             ajax: {
-                url: "{{ route('admin.users.index') }}",
+                url: "{{ route('admin.roles.index') }}",
             },
             columns: [{
                     render: function(data, type, row, meta) {
@@ -138,7 +138,7 @@
         }).then(function(result){
             if(result.value){
                 $.ajax({
-                    url:"users/destroy/" + user_id,
+                    url:"roles/destroy/" + user_id,
                     success: function(data){
                         console.log(data);
                         $('#data-table').DataTable().ajax.reload();
@@ -164,7 +164,7 @@
             toastr.error('{{ trans('admin.status_not_changed') }}!');
         }
         $.ajax({
-            url:"users/updateStatus/"+user_id+"?active="+status_user,
+            url:"roles/updateStatus/"+user_id+"?active="+status_user,
             headers: {
                 'X-CSRF-Token': "{{ csrf_token() }}"
             },

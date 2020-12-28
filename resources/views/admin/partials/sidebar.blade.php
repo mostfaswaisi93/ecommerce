@@ -73,7 +73,7 @@
                     <span class="menu-title">{{ trans('admin.users_management') }}</span>
                 </a>
                 <ul class="menu-content">
-                    {{-- <li {{ request()->route()->getName() === 'admin.users.index' ? 'class=active' : '' }}>
+                    <li {{ request()->route()->getName() === 'admin.users.index' ? 'class=active' : '' }}>
                         <a href="{{ route('admin.users.index') }}" class="nav-link">
                             <i class="feather icon-users"></i>
                             <span class="title">{{ trans('admin.users') }}</span>
@@ -84,7 +84,7 @@
                             <i class="fa fa-sliders"></i>
                             <span class="title">{{ trans('admin.roles') }}</span>
                         </a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">
