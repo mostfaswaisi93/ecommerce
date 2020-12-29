@@ -52,7 +52,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ trans('admin.image') }}</th>
-                                    <th>{{ trans('admin.name') }}</th>
+                                    <th>{{ trans('admin.full_name') }}</th>
                                     <th>{{ trans('admin.username') }}</th>
                                     <th>{{ trans('admin.email') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
@@ -95,18 +95,18 @@
                         return "<img src=" + data + " width='50px' class='img-thumbnail' />";
                     }, orderable: false , searchable: false
                 },
-                { data: 'name', name: 'name' },
+                { data: 'full_name', name: 'full_name' },
                 { data: 'username', name: 'username' },
                 { data: 'email', name: 'email' },
                 { data: 'created_at', name: 'created_at', format: 'M/D/YYYY' },
-                { data: 'active', name: 'status',
+                { data: 'enabled', name: 'enabled',
                     render: function(data, type, full, meta) {
                         var text = data ? "{{ trans('admin.active') }}" : "{{ trans('admin.inactive') }}";
                         var color = data ? "success" : "danger"; 
                         return "<div class='badge badge-" +color+ "'>"+ text +"</div>";
                     }, orderable: false , searchable: false
                 },
-                { data: 'active', name: 'status' },
+                { data: 'enabled', name: 'enabled' },
                 { data: 'action', name: 'action', orderable: false }
             ], "columnDefs": [ {
                 "targets": 7,
@@ -118,10 +118,22 @@
                     <option value='0'>{{ trans('admin.inactive') }}</option>
                     </select>
                 `);
-                $select.find('option[value="'+row.active+'"]').attr('selected', 'selected');
+                $select.find('option[value="'+row.enabled+'"]').attr('selected', 'selected');
                 return $select[0].outerHTML
                 }
             } ],
+            // dom: 'Bfrtip',
+            // buttons: [
+            //     {
+            //         extend: 'print',
+            //         exportOptions: {
+            //             columns: ':visible'
+            //         }
+            //     }
+            // ],
+            language : {
+                url: getDataTableLanguage()
+            }
         });
     });
     
@@ -164,7 +176,7 @@
             toastr.error('{{ trans('admin.status_not_changed') }}!');
         }
         $.ajax({
-            url:"users/updateStatus/"+user_id+"?active="+status_user,
+            url:"users/updateStatus/"+user_id+"?enabled="+status_user,
             headers: {
                 'X-CSRF-Token': "{{ csrf_token() }}"
             },

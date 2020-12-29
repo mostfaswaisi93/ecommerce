@@ -22,22 +22,16 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = User::OrderBy('created_at', 'desc')->whereRoleIs('admin');
+        $users = User::OrderBy('created_at', 'desc')->role('admin')->get();
         if (request()->ajax()) {
             return datatables()->of($users)
                 ->addColumn('action', function ($data) {
-                    if (auth()->user()->can('update_users')) {
+                    if (auth()->user()->can(['update_users', 'delete_users'])) {
                         $button = '<a type="button" title="{{ trans("admin.edit") }}" name="edit" href="users/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
-                    } else {
-                        $button = '<a type="button" title="{{ trans("admin.edit") }}" name="edit" id="' . $data->id . '" class="edit btn btn-sm btn-icon disabled"><i class="fa fa-edit"></i></a>';
-                    }
-                    $button .= '&nbsp;&nbsp;';
-                    if (auth()->user()->can('delete_users')) {
+                        $button .= '&nbsp;&nbsp;';
                         $button .= '<a type="button" title="{{ trans("admin.delete") }}" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
-                    } else {
-                        $button .= '<a type="button" title="{{ trans("admin.delete") }}" name="delete" id="' . $data->id . '" class="delete btn btn-sm btn-icon disabled"><i class="fa fa-trash"></i></a>';
+                        return $button;
                     }
-                    return $button;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -69,7 +63,7 @@ class UsersController extends Controller
                 ->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(public_path('uploads/images/' . $request->image->hashName()));
+                ->save(public_path('images/users/' . $request->image->hashName()));
             $request_data['image'] = $request->image->hashName();
         }
 
@@ -106,7 +100,7 @@ class UsersController extends Controller
                 ->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(public_path('uploads/images/' . $request->image->hashName()));
+                ->save(public_path('images/users/' . $request->image->hashName()));
             $request_data['image'] = $request->image->hashName();
         }
 
@@ -129,8 +123,8 @@ class UsersController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $user = User::find($id);
-        $active = $request->get('active');
-        $user->active = $active;
+        $enabled = $request->get('enabled');
+        $user->enabled = $enabled;
         $user = $user->save();
 
         if ($user) {

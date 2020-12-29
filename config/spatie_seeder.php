@@ -9,7 +9,9 @@ return [
             'roles'        => 'c,r,u,d',
             'settings'     => 'c,r,u,d',
         ],
-        'admin'       => []
+        'admin'       => [
+            'users'        => 'r',
+        ]
     ],
 
     'permissions_map'   => [

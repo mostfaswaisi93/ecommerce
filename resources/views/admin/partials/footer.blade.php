@@ -1,13 +1,12 @@
 <!-- BEGIN: Footer-->
 <footer class="footer footer-static footer-light">
     <p class="clearfix blue-grey lighten-2 mb-0">
-        <span class="float-md-left d-block d-md-inline-block mt-25">
+        <span class="float-md-left d-block d-md-inline-block">
             <b>&copy; {{ trans('admin.all_rights') }}</b>
-        </span>
-        <span class="float-md-right d-none d-md-block">
             <a href="https://github.com/mostfaswaisi93">mostfaswaisi93</a>
             <i class="feather icon-heart pink"></i>
         </span>
+        <span class="float-md-right d-none d-md-block"><b>v1.0.0</b></span>
         <button class="btn btn-primary btn-icon scroll-top" type="button">
             <i class="feather icon-arrow-up"></i>
         </button>
@@ -54,12 +53,12 @@
     function FileUpload() {
         event.preventDefault();
         document.getElementById("image").click();
-    };
+    }
 
     function IconUpload() {
         event.preventDefault();
         document.getElementById("icon").click();
-    };
+    }
 
     function getDataTableLanguage() {
         var lang = $('html').attr('lang');

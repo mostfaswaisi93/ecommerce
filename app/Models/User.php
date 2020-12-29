@@ -14,7 +14,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable, SoftDeletes, HasRoles;
 
     protected $table    = 'users';
-    protected $fillable = ['name', 'email', 'image', 'enabled', 'password'];
+    protected $fillable = ['first_name', 'last_name', 'username','email', 'image', 'enabled', 'password'];
     protected $appends  = ['image_path', 'full_name'];
     protected $hidden   = ['password', 'remember_token'];
     protected $casts    = ['email_verified_at' => 'datetime', 'created_at' => 'date:Y-m-d'];

@@ -6,6 +6,7 @@ return [
     'back_login'                => 'Back to Login Page',
     'page_not_found'            => 'Page Not Found',
     'internal_server_error'     => 'Internal Server Error',
+    'welcome'                   => 'Welcome ',
     'home'                      => 'Home',
     'logout'                    => 'Logout',
     'available'                 => 'Available',
@@ -50,10 +51,24 @@ return [
     'updated_successfully'      => 'updated_successfully',
     'deleted_successfully'      => 'deleted_successfully',
 
+    'create_user'               => 'Create User',
+    'create_country'            => 'create Country',
+    'create_city'               => 'Create City',
+
+    'edit_user'                 => 'Edit User',
+    'edit_country'              => 'Edit Country',
+    'edit_city'                 => 'Edit City',
+
+    'reports'                   => 'Reports',
+    'messages'                  => 'Messages',
+    'message'                   => 'Message',
+    'update_settings'           => 'Update Settings',
+
     'phone'                     => 'Phone',
     'mobile'                    => 'Mobile',
     'address'                   => 'Address',
     'show_contact'              => 'Show Contact',
+    'full_name'                 => 'Full Name',
     'first_name'                => 'First Name',
     'last_name'                 => 'Last Name',
     'email'                     => 'Email',
@@ -66,6 +81,34 @@ return [
     'icon_upload'               => 'Icon Upload',
     'action'                    => 'Action',
 
+    'enabled'                   => 'Enabled',
+    'active'                    => 'Active',
+    'inactive'                  => 'Inactive',
+
+    'change_status'             => 'Change Status',
+    'status_changed'            => 'Status Changed',
+    'status_not_changed'        => 'Status Not Changed',
+
+    'notifications'             => 'Notifications',
+    'contacts'                  => 'Contacts',
+    'system_constants'          => 'System Constants',
+    'countries'                 => 'Countries',
+    'cities'                    => 'Cities',
+    'payment_methods'           => 'Payment Methods',
+    'rates'                     => 'Rates',
+    'users'                     => 'Users',
+    'roles'                     => 'Roles',
+    'settings'                  => 'Settings',
+
+    'users_management'          => 'Users Management',
+
+    'city'                      => 'City',
+    'country'                   => 'Country',
+    'user'                      => 'User',
+
+    'all_countries'             => 'All Countries',
+    'all_cities'                => 'All Cities',
+
     'permissions'               => 'Permissions',
     'name'                      => 'Name',
     'username'                  => 'Username',
@@ -74,6 +117,8 @@ return [
     'iso_code'                  => 'Iso Code',
     'description'               => 'Description',
     'created_at'                => 'Created at',
+    'total'                     => 'Total',
+    'price'                     => 'Price',
 
     'all_rights'                => 'All Rights Reserved',
     'new_mail'                  => 'New Mail',

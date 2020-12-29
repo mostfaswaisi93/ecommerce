@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 23, 2020 at 04:09 PM
+-- Generation Time: Dec 29, 2020 at 02:42 PM
 -- Server version: 10.5.4-MariaDB-log
 -- PHP Version: 7.4.10
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `ecommercedb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -166,7 +190,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2020_12_20_131737_create_states_table', 1),
 (13, '2020_12_20_131745_create_trade_marks_table', 1),
 (14, '2020_12_20_132429_create_contacts_table', 1),
-(15, '2020_12_21_084548_create_manufacturers_table', 1);
+(15, '2020_12_21_084548_create_manufacturers_table', 1),
+(16, '2020_12_27_110542_create_brands_table', 1),
+(17, '2020_12_27_110559_create_categories_table', 1),
+(18, '2020_12_27_110640_create_sliders_table', 1),
+(19, '2020_12_27_110653_create_sub_categories_table', 1),
+(20, '2020_12_27_110721_create_orders_table', 1);
 
 -- --------------------------------------------------------
 
@@ -197,7 +226,20 @@ CREATE TABLE `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(1, 'App\\Models\\User', 1);
+(1, 'App\\Models\\User', 1),
+(2, 'App\\Models\\User', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -230,26 +272,26 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'create_countries', 'web', '2020-12-23 14:06:13', '2020-12-23 14:06:13'),
-(2, 'read_countries', 'web', '2020-12-23 14:06:13', '2020-12-23 14:06:13'),
-(3, 'update_countries', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(4, 'delete_countries', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(5, 'create_cities', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(6, 'read_cities', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(7, 'update_cities', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(8, 'delete_cities', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(9, 'create_users', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(10, 'read_users', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(11, 'update_users', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(12, 'delete_users', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(13, 'create_roles', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(14, 'read_roles', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(15, 'update_roles', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(16, 'delete_roles', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(17, 'create_settings', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(18, 'read_settings', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(19, 'update_settings', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14'),
-(20, 'delete_settings', 'web', '2020-12-23 14:06:14', '2020-12-23 14:06:14');
+(1, 'create_countries', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(2, 'read_countries', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(3, 'update_countries', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(4, 'delete_countries', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(5, 'create_cities', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(6, 'read_cities', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(7, 'update_cities', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(8, 'delete_cities', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(9, 'create_users', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(10, 'read_users', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(11, 'update_users', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(12, 'delete_users', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(13, 'create_roles', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(14, 'read_roles', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(15, 'update_roles', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(16, 'delete_roles', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(17, 'create_settings', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(18, 'read_settings', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(19, 'update_settings', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(20, 'delete_settings', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57');
 
 -- --------------------------------------------------------
 
@@ -270,8 +312,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'super_admin', 'web', '2020-12-23 14:06:13', '2020-12-23 14:06:13'),
-(2, 'admin', 'web', '2020-12-23 14:06:15', '2020-12-23 14:06:15');
+(1, 'super_admin', 'web', '2020-12-29 12:26:57', '2020-12-29 12:26:57'),
+(2, 'admin', 'web', '2020-12-29 12:26:58', '2020-12-29 12:26:58');
 
 -- --------------------------------------------------------
 
@@ -299,6 +341,7 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (8, 1),
 (9, 1),
 (10, 1),
+(10, 2),
 (11, 1),
 (12, 1),
 (13, 1),
@@ -341,6 +384,18 @@ CREATE TABLE `shippings` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sliders`
+--
+
+CREATE TABLE `sliders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `states`
 --
 
@@ -350,6 +405,18 @@ CREATE TABLE `states` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sub_categories`
+--
+
+CREATE TABLE `sub_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -374,7 +441,9 @@ CREATE TABLE `trade_marks` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default.png',
   `enabled` int(11) NOT NULL DEFAULT 1,
@@ -390,12 +459,25 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `image`, `enabled`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$5GuMLCtN7S9VcrCdFUNQ2.3TXmKgOS2LqOoHRyxao5g6mJxbuyoFi', NULL, '2020-12-22 22:00:00', '2020-12-22 22:00:00', NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `image`, `enabled`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'super', 'admin', 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$kiSx7bVErItz14a0JqWZ9uJwy1Gwk3h3FYCBxUOP5tDlePojfx676', NULL, '2020-12-28 22:00:00', '2020-12-28 22:00:00', NULL),
+(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$Vz241BtIePjbYcY7mg8/4.lmCSawihW/nxF2g48dxKa0RDKJiyWAu', NULL, '2020-12-28 22:00:00', '2020-12-28 22:00:00', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `cities`
@@ -467,6 +549,12 @@ ALTER TABLE `model_has_roles`
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -504,9 +592,21 @@ ALTER TABLE `shippings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `states`
 --
 ALTER TABLE `states`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sub_categories`
+--
+ALTER TABLE `sub_categories`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -520,11 +620,24 @@ ALTER TABLE `trade_marks`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_username_unique` (`username`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -578,7 +691,13 @@ ALTER TABLE `manufacturers`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -605,9 +724,21 @@ ALTER TABLE `shippings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `states`
 --
 ALTER TABLE `states`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sub_categories`
+--
+ALTER TABLE `sub_categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -620,7 +751,7 @@ ALTER TABLE `trade_marks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

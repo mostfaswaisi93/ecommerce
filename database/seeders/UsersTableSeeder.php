@@ -10,7 +10,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name'          => 'super_admin',
+            'first_name'    => 'super',
+            'last_name'     => 'admin',
+            'username'      => 'super_admin',
             'email'         => 'super@admin.com',
             'password'      => bcrypt('password'),
             'created_at'    => date('Y-m-d'),
@@ -18,5 +20,17 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $user->assignRole('super_admin');
+
+        $user2 = User::create([
+            'first_name'    => 'Mustafa',
+            'last_name'     => 'Al-Swaisi',
+            'username'      => 'mostfaswaisi93',
+            'email'         => 'mostfaswaisi93@gmail.com',
+            'password'      => bcrypt('password'),
+            'created_at'    => date('Y-m-d'),
+            'updated_at'    => date('Y-m-d'),
+        ]);
+
+        $user2->assignRole('admin');
     }
 }

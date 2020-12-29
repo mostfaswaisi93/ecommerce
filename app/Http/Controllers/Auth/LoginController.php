@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -21,5 +23,10 @@ class LoginController extends Controller
     public function username()
     {
         return 'email'; // Login with Email
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        Toastr::success('', __("admin.welcome") . $user->full_name, ["positionClass" => "toast-top-center"]);
     }
 }
