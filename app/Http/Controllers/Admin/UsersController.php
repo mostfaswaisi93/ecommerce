@@ -27,9 +27,9 @@ class UsersController extends Controller
             return datatables()->of($users)
                 ->addColumn('action', function ($data) {
                     if (auth()->user()->can(['update_users', 'delete_users'])) {
-                        $button = '<a type="button" title="{{ trans("admin.edit") }}" name="edit" href="users/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
-                        $button .= '&nbsp;&nbsp;';
-                        $button .= '<a type="button" title="{{ trans("admin.delete") }}" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
+                        $button = '<a type="button" title="'.trans("admin.edit").'" name="edit" href="users/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
+                        $button .= '&nbsp;';
+                        $button .= '<a type="button" title="'.trans("admin.delete").'" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
                         return $button;
                     }
                 })

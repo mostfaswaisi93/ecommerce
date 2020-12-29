@@ -6,6 +6,7 @@
 <div class="content-header row"></div>
 
 <div class="content-body">
+    @include('partials.flash')
     <section id="dashboard-ecommerce">
         <div class="row">
             <div class="col-lg-3 col-sm-6 col-12">

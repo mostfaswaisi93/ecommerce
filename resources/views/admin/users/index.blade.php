@@ -55,10 +55,15 @@
                                     <th>{{ trans('admin.full_name') }}</th>
                                     <th>{{ trans('admin.username') }}</th>
                                     <th>{{ trans('admin.email') }}</th>
+                                    <th>{{ trans('admin.last_login') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>{{ trans('admin.status') }}</th>
                                     <th>{{ trans('admin.change_status') }}</th>
-                                    <th>{{ trans('admin.action') }}</th>
+                                    <th>
+                                        @if(auth()->user()->can(['update_users', 'delete_users']))
+                                        {{ trans('admin.action') }}
+                                        @endif
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -91,16 +96,23 @@
                     }, searchable: false, orderable: false
                 },
                 { data: 'image_path', name: 'image_path',
-                    render: function(data, type, full, meta) {
+                    render: function(data, type, row, meta) {
                         return "<img src=" + data + " width='50px' class='img-thumbnail' />";
                     }, orderable: false , searchable: false
                 },
                 { data: 'full_name', name: 'full_name' },
                 { data: 'username', name: 'username' },
                 { data: 'email', name: 'email' },
-                { data: 'created_at', name: 'created_at', format: 'M/D/YYYY' },
+                { data: 'last_login_at', name: 'last_login_at',
+                    render: function(data, type, row, meta){
+                        var text1 = "<div>"+data+"</div>";
+                        var text2 = "<div>"+row.last_login+"</div>";
+                        return text1 + text2;
+                    }
+                },
+                { data: 'created_at', name: 'created_at' },
                 { data: 'enabled', name: 'enabled',
-                    render: function(data, type, full, meta) {
+                    render: function(data, type, row, meta) {
                         var text = data ? "{{ trans('admin.active') }}" : "{{ trans('admin.inactive') }}";
                         var color = data ? "success" : "danger"; 
                         return "<div class='badge badge-" +color+ "'>"+ text +"</div>";
@@ -109,7 +121,7 @@
                 { data: 'enabled', name: 'enabled' },
                 { data: 'action', name: 'action', orderable: false }
             ], "columnDefs": [ {
-                "targets": 7,
+                "targets": 8,
                 render: function (data, type, row, meta){
                 var $select = $(`
                     <select class='status form-control'

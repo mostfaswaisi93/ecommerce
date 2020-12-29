@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -27,6 +27,11 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        Toastr::success('', __("admin.welcome") . $user->full_name, ["positionClass" => "toast-top-center"]);
+        $user->update([
+            'last_login_at' => Carbon::now()->toDateTimeString(),
+            'last_login_ip' => $request->getClientIp()
+        ]);
+
+        $request->session()->flash('welcome_msg', __("admin.welcome"));
     }
 }

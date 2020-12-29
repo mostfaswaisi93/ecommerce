@@ -1,7 +1,12 @@
 /* style */
 
-.btn.btn-sm.btn-icon:hover {
+.edit.btn.btn-sm.btn-icon:hover {
     background-color: #6d63e6;
+    color: #fff;
+}
+
+.delete.btn.btn-sm.btn-icon:hover {
+    background-color: #E42728;
     color: #fff;
 }
 
