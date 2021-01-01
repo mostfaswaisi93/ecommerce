@@ -26,18 +26,12 @@ class RolesController extends Controller
         if (request()->ajax()) {
             return datatables()->of($roles)
                 ->addColumn('action', function ($data) {
-                    if (auth()->user()->can('update_roles')) {
-                        $button = '<a type="button" title="{{ trans("admin.edit") }}" name="edit" href="roles/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
-                    } else {
-                        $button = '<a type="button" title="{{ trans("admin.edit") }}" name="edit" id="' . $data->id . '" class="edit btn btn-sm btn-icon disabled"><i class="fa fa-edit"></i></a>';
+                    if (auth()->user()->can(['update_roles', 'delete_roles'])) {
+                        $button = '<a type="button" title="' . trans("admin.edit") . '" name="edit" href="roles/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
+                        $button .= '&nbsp;';
+                        $button .= '<a type="button" title="' . trans("admin.delete") . '" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
+                        return $button;
                     }
-                    $button .= '&nbsp;&nbsp;';
-                    if (auth()->user()->can('delete_roles')) {
-                        $button .= '<a type="button" title="{{ trans("admin.delete") }}" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
-                    } else {
-                        $button .= '<a type="button" title="{{ trans("admin.delete") }}" name="delete" id="' . $data->id . '" class="delete btn btn-sm btn-icon disabled"><i class="fa fa-trash"></i></a>';
-                    }
-                    return $button;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -124,17 +118,5 @@ class RolesController extends Controller
             Storage::disk('public_uploads')->delete('/images/' . $user->image);
         }
         $user->delete();
-    }
-
-    public function updateStatus(Request $request, $id)
-    {
-        $user = User::find($id);
-        $enabled = $request->get('enabled');
-        $user->enabled = $enabled;
-        $user = $user->save();
-
-        if ($user) {
-            return response(['success' => true, "message" => 'Done']);
-        }
     }
 }

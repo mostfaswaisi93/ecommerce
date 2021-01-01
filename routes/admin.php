@@ -18,7 +18,6 @@ Route::group(
             ]);
 
             Route::get('roles/destroy/{id}', 'RolesController@destroy');
-            Route::post('roles/updateStatus/{id}', 'RolesController@updateStatus');
 
             Route::get('users/destroy/{id}', 'UsersController@destroy');
             Route::post('users/updateStatus/{id}', 'UsersController@updateStatus');

@@ -62,7 +62,7 @@
 
     function getDataTableLanguage() {
         var lang = $('html').attr('lang');
-        return '//cdn.datatables.net/plug-ins/1.10.21/i18n/' + lang + '.json'
+        return '//cdn.datatables.net/plug-ins/1.10.21/i18n/' + lang + '.json';
     }
 </script>
 

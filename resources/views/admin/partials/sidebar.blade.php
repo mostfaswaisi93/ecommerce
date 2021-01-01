@@ -82,7 +82,7 @@
                     <li {{ request()->route()->getName() === 'admin.roles.index' ? 'class=active' : '' }}>
                         <a href="{{ route('admin.roles.index') }}" class="nav-link">
                             <i class="fa fa-sliders"></i>
-                            <span class="title">{{ trans('admin.roles') }}</span>
+                            <span class="title">{{ trans('admin.per_roles') }}</span>
                         </a>
                     </li>
                 </ul>

@@ -98,6 +98,7 @@ return [
     'payment_methods'           => 'Payment Methods',
     'rates'                     => 'Rates',
     'users'                     => 'Users',
+    'per_roles'                 => 'Permissions and Roles',
     'roles'                     => 'Roles',
     'settings'                  => 'Settings',
 
