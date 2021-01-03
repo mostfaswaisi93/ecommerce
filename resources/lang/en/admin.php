@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sitename'                  => 'E-commerce',
+    'sitename'                  => 'Ecommerce',
     'back_home'                 => 'Go to the Home Page',
     'back_login'                => 'Back to Login Page',
     'page_not_found'            => 'Page Not Found',
@@ -52,11 +52,13 @@ return [
     'updated_successfully'      => 'updated_successfully',
     'deleted_successfully'      => 'deleted_successfully',
 
-    'create_user'               => 'Create User',
-    'create_country'            => 'create Country',
-    'create_city'               => 'Create City',
+    'create_user'               => 'Add New User',
+    'create_role'               => 'Add New Role',
+    'create_country'            => 'Add New Country',
+    'create_city'               => 'Add New City',
 
     'edit_user'                 => 'Edit User',
+    'edit_role'                 => 'Edit Role',
     'edit_country'              => 'Edit Country',
     'edit_city'                 => 'Edit City',
 

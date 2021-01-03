@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role as AppRole;
+use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
@@ -22,7 +25,7 @@ class RolesController extends Controller
 
     public function index()
     {
-        $roles = Role::OrderBy('created_at', 'desc')->get();
+        $roles = AppRole::OrderBy('created_at', 'desc')->get();
         if (request()->ajax()) {
             return datatables()->of($roles)
                 ->addColumn('action', function ($data) {

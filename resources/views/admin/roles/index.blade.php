@@ -3,48 +3,30 @@
 
 @section('content')
 
-<div class="content-header row">
-    <div class="content-header-left col-md-9 col-12 mb-2">
-        <div class="row breadcrumbs-top">
-            <div class="col-12">
-                <h2 class="content-header-title float-left mb-0">{{ trans('admin.roles') }}</h2>
-                <div class="breadcrumb-wrapper col-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('admin.index') }}">{{ trans('admin.home') }}</a>
-                        </li>
-                        <li class="breadcrumb-item active">{{ trans('admin.roles') }}</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="content-body">
     <section>
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">{{ trans('admin.roles') }}</h4>
-            </div>
+                <div class="tbl-title">{{ trans('admin.roles') }}</div>
+                <div class="btn-group">
+                    @if (auth()->user()->can('create_roles'))
+                    <a href="{{ route('admin.roles.create') }}">
+                        <button class="btn btn-sm btn-primary">
+                            <i class="feather icon-plus"></i>
+                            {{ trans('admin.create_role') }}
+                        </button>
+                    </a>
+                    @else
+                    <a href="#">
+                        <button class="btn btn-primary disabled">
+                            <i class="feather icon-plus"></i> {{ trans('admin.create_role') }}
+                        </button>
+                    </a>
+                    @endif
+                </div> 
+            </div><hr>
             <div class="card-content">
                 <div class="card-body">
-                    <div class="btn-group">
-                        @if (auth()->user()->can('create_roles'))
-                        <a href="{{ route('admin.roles.create') }}">
-                            <button class="btn btn-primary mb-2">
-                                <i class="feather icon-user-plus mr-25"></i>
-                                {{ trans('admin.create_role') }}
-                            </button>
-                        </a>
-                        @else
-                        <a href="#">
-                            <button class="btn btn-primary mb-2 disabled">
-                                <i class="feather icon-user-plus"></i> {{ trans('admin.create_role') }}
-                            </button>
-                        </a>
-                        @endif
-                    </div>
                     <div class="table-responsive">
                         <table id="roles-table" class="table table-striped table-bordered dt-responsive nowrap"
                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -52,6 +34,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ trans('admin.name') }}</th>
+                                    <th>{{ trans('admin.users_count') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>
                                         @if(auth()->user()->can(['update_roles', 'delete_roles']))
@@ -76,6 +59,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#roles-table').DataTable({
+            // scrollY: "50vh",
+            // scrollCollapse: true,
             processing: true,
             serverSide: true,
             responsive: true,
@@ -85,23 +70,34 @@
             },
             columns: [{
                     render: function(data, type, row, meta) {
+                        console.log(row);
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }, searchable: false, orderable: false
                 },
-                { data: 'name', name: 'name' },
-                { data: 'created_at', name: 'created_at' },
-                { data: 'action', name: 'action', orderable: false }
+                { data: 'name' },
+                { data: 'users_count', 
+                    render: function(data, type, row, meta) {
+                        console.log(row.users_count);
+                        return "<div class='badge badge-success'>"+ data +"</div>";
+                    }
+                },
+                { data: 'created_at' },
+                { data: 'action', orderable: false }
             ],
-            // dom: 'Bfrtip',
+            // dom: 'Blfrtip',
             // buttons: [
             //     {
-            //         extend: 'print',
+            //         text: '<i class="fa fa-plus"></i>', className: 'btn btn-info'
+            //     },
+            //     {
+            //         extend: 'csv',
             //         exportOptions: {
             //             columns: ':visible'
             //         }
             //     }
             // ],
-            language : {
+            // lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+            language: {
                 url: getDataTableLanguage()
             }
         });

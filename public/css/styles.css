@@ -28,6 +28,19 @@ label {
     background-color: #1caf9a !important;
 }
 
+.navigation {
+    font-size: unset;
+}
+
+.main-menu.menu-dark .navigation>li {
+    padding: 0 10px !important;
+}
+
+.tbl-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
 
 /* Portlet */
 

@@ -17,6 +17,9 @@ Route::group(
                 'users' => UsersController::class,
             ]);
 
+            Route::get('settings', 'SettingsController@index')->name('settings.index');
+            Route::post('settings', 'SettingsController@update')->name('settings.update');
+
             Route::get('roles/destroy/{id}', 'RolesController@destroy');
 
             Route::get('users/destroy/{id}', 'UsersController@destroy');

@@ -2,7 +2,7 @@
 <footer class="footer footer-static footer-light">
     <p class="clearfix blue-grey lighten-2 mb-0">
         <span class="float-md-left d-block d-md-inline-block">
-            <b>&copy; {{ trans('admin.all_rights') }}</b>
+            <b>&copy; {{ trans('admin.all_rights') }} - <span id="year"></span></b>
             <a href="https://github.com/mostfaswaisi93">mostfaswaisi93</a>
             <i class="feather icon-heart pink"></i>
         </span>
@@ -49,6 +49,9 @@
     $(document).ready(function () {
         CKEDITOR.config.language    =  "{{ app()->getLocale() }}";
     });
+
+    // Footer Year
+    document.getElementById("year").innerHTML = new Date().getFullYear();
 
     function FileUpload() {
         event.preventDefault();

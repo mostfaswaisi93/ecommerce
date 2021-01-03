@@ -54,10 +54,12 @@ return [
     'deleted_successfully'      => 'تم حذف البيانات بنجاح',
 
     'create_user'               => 'إضافة مستخدم جديد',
+    'create_role'               => 'إضافة دور جديد',
     'create_country'            => 'إضافة دولة جديدة',
     'create_city'               => 'إضافة مدينة جديدة',
 
     'edit_user'                 => 'تعديل مستخدم',
+    'edit_role'                 => 'تعديل دور',
     'edit_country'              => 'تعديل دولة',
     'edit_city'                 => 'تعديل مدينة',
 
