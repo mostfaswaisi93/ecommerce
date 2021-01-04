@@ -105,6 +105,7 @@ return [
     'settings'                  => 'Settings',
 
     'users_management'          => 'Users Management',
+    'users_count'               => 'Users Count',
 
     'city'                      => 'City',
     'country'                   => 'Country',
@@ -124,6 +125,7 @@ return [
     'total'                     => 'Total',
     'price'                     => 'Price',
 
+    'copyright'                 => 'Copyright',
     'all_rights'                => 'All Rights Reserved',
     'new_mail'                  => 'New Mail',
     'save_print'                => 'Save and Print',

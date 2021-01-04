@@ -23,8 +23,9 @@
                         </button>
                     </a>
                     @endif
-                </div> 
-            </div><hr>
+                </div>
+            </div>
+            <hr>
             <div class="card-content">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -59,8 +60,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#roles-table').DataTable({
-            // scrollY: "50vh",
-            // scrollCollapse: true,
+            // charset: 'utf-8',
             processing: true,
             serverSide: true,
             responsive: true,
@@ -70,35 +70,39 @@
             },
             columns: [{
                     render: function(data, type, row, meta) {
-                        console.log(row);
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }, searchable: false, orderable: false
                 },
                 { data: 'name' },
                 { data: 'users_count', 
                     render: function(data, type, row, meta) {
-                        console.log(row.users_count);
                         return "<div class='badge badge-success'>"+ data +"</div>";
                     }
                 },
                 { data: 'created_at' },
                 { data: 'action', orderable: false }
             ],
-            // dom: 'Blfrtip',
-            // buttons: [
-            //     {
-            //         text: '<i class="fa fa-plus"></i>', className: 'btn btn-info'
-            //     },
-            //     {
-            //         extend: 'csv',
-            //         exportOptions: {
-            //             columns: ':visible'
-            //         }
-            //     }
-            // ],
-            // lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+            dom:    "<'row'<'col-sm-2'l><'col-sm-8 text-center'B><'col-sm-2'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [
+                { text: '<i class="fa fa-refresh"></i> {{ trans("admin.refresh") }}', className: 'btn dtbtn btn-sm btn-default',
+                    action: function (e, dt, node, config) {
+                        dt.ajax.reload(null, false);
+                    }
+                },
+                { extend: 'csvHtml5', charset: "UTF-8", bom: true, className: 'btn dtbtn btn-sm btn-success', text: '<i class="fa fa-file"></i> CSV' },
+                { extend: 'excelHtml5', charset: "UTF-8", bom: true, className: 'btn dtbtn btn-sm btn-success', text: '<i class="fa fa-file"></i> Excel' },
+                { extend: 'pdfHtml5', charset: "UTF-8", bom: true, className: 'btn dtbtn btn-sm btn-success', text: '<i class="fa fa-file"></i> PDF' },
+                { extend: 'print', className: 'btn dtbtn btn-sm btn-primary', text: '<i class="fa fa-print"></i> {{ trans("admin.print") }}' },
+
+                { text: '<i class="fa fa-trash"></i> {{ trans("admin.trash") }}', className: 'btn dtbtn btn-sm btn-danger delBtn' },
+                { text: '<i class="fa fa-plus"></i> {{ trans("admin.create_role") }}', className: 'btn dtbtn btn-sm btn-primary' },
+            ],
             language: {
-                url: getDataTableLanguage()
+                url: getDataTableLanguage(),
+                search: ' ',
+                searchPlaceholder: '{{ trans("admin.search") }}...'
             }
         });
     });
@@ -118,7 +122,6 @@
                 $.ajax({
                     url:"roles/destroy/" + role_id,
                     success: function(data){
-                        console.log(data);
                         $('#roles-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');
                     }

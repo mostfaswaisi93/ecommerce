@@ -1,5 +1,9 @@
 /* Style */
 
+body {
+    font-family: Arial, sans-serif;
+}
+
 .edit.btn.btn-sm.btn-icon:hover {
     background-color: #6d63e6;
     color: #fff;
@@ -39,6 +43,12 @@ label {
 .tbl-title {
     font-size: 24px;
     font-weight: 600;
+}
+
+.btn.dtbtn i {
+    float: none;
+    margin-left: unset;
+    color: #fff;
 }
 
 

@@ -106,6 +106,7 @@ return [
     'settings'                  => 'إعدادات النظام',
 
     'users_management'          => 'إدارة المستخدمين',
+    'users_count'               => 'عدد المستخدمين',
 
     'city'                      => 'المدينة',
     'country'                   => 'الدولة',
@@ -125,6 +126,7 @@ return [
     'total'                     => 'المجموع',
     'price'                     => 'السعر',
 
+    'copyright'                 => 'حقوق النشر',
     'all_rights'                => 'جميع الحقوق محفوظة',
     'new_mail'                  => 'رسالة جديدة',
     'save_print'                => 'حفظ وطباعة',

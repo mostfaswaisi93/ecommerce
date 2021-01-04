@@ -17,6 +17,14 @@ Route::group(
                 'users' => UsersController::class,
             ]);
 
+            Route::resource('countries', 'CountriesController');
+            Route::get('countries/destroy/{id}', 'CountriesController@destroy');
+            Route::post('countries/updateStatus/{id}', 'CountriesController@updateStatus');
+
+            Route::resource('cities', 'CitiesController');
+            Route::get('cities/destroy/{id}', 'CitiesController@destroy');
+            Route::post('cities/updateStatus/{id}', 'CitiesController@updateStatus');
+
             Route::get('settings', 'SettingsController@index')->name('settings.index');
             Route::post('settings', 'SettingsController@update')->name('settings.update');
 
