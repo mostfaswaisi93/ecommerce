@@ -1,6 +1,5 @@
-<!-- Facility Modal -->
-
-<div class="modal fade" id="facilityModal" role="dialog" aria-hidden="true">
+<!-- Role Modal -->
+<div class="modal fade" id="roleModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <!-- Modal content-->
         <div class="modal-content">
@@ -13,18 +12,10 @@
             <!-- Modal body-->
             <div class="modal-body">
                 <span id="form_result"></span>
-                <form method="POST" id="facilityForm" class="form-horizontal" accept-charset="UTF-8"
+                <form method="POST" id="roleForm" class="form-horizontal" accept-charset="UTF-8"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        @foreach (config('translatable.locales') as $locale)
-                        <div class="form-group col-md-6">
-                            <label>{{ trans('admin.' . $locale . '.name') }}</label>
-                            <input type="text" id="{{ $locale }}[name]" name="{{ $locale }}[name]" class="form-control"
-                                value="{{ old($locale . '.name') }}"
-                                placeholder="{{ trans('admin.' . $locale . '.name') }}">
-                        </div>
-                        @endforeach
                         <div class="form-group col-md-6">
                             <label for="enabled">{{ trans('admin.status') }}</label>
                             <select id="enabled" name="enabled" class="form-control">

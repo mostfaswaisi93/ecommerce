@@ -8,22 +8,6 @@
         <div class="card">
             <div class="card-header">
                 <div class="tbl-title">{{ trans('admin.roles') }}</div>
-                <div class="btn-group">
-                    @if (auth()->user()->can('create_roles'))
-                    <a href="{{ route('admin.roles.create') }}">
-                        <button class="btn btn-sm btn-primary">
-                            <i class="feather icon-plus"></i>
-                            {{ trans('admin.create_role') }}
-                        </button>
-                    </a>
-                    @else
-                    <a href="#">
-                        <button class="btn btn-primary disabled">
-                            <i class="feather icon-plus"></i> {{ trans('admin.create_role') }}
-                        </button>
-                    </a>
-                    @endif
-                </div>
             </div>
             <hr>
             <div class="card-content">
@@ -60,7 +44,6 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#roles-table').DataTable({
-            // charset: 'utf-8',
             processing: true,
             serverSide: true,
             responsive: true,
@@ -82,22 +65,52 @@
                 { data: 'created_at' },
                 { data: 'action', orderable: false }
             ],
-            dom:    "<'row'<'col-sm-2'l><'col-sm-8 text-center'B><'col-sm-2'f>>" +
+            dom:    "<'row'<''l><'col-sm-8 text-center'B><''f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
-                { text: '<i class="fa fa-refresh"></i> {{ trans("admin.refresh") }}', className: 'btn dtbtn btn-sm btn-default',
+                { text: '<i class="feather icon-refresh-ccw"></i> {{ trans("admin.refresh") }}',
+                  className: 'btn dtbtn btn-sm btn-dark',
+                  attr: { title: '{{ trans("admin.refresh") }}' },
                     action: function (e, dt, node, config) {
                         dt.ajax.reload(null, false);
                     }
                 },
-                { extend: 'csvHtml5', charset: "UTF-8", bom: true, className: 'btn dtbtn btn-sm btn-success', text: '<i class="fa fa-file"></i> CSV' },
-                { extend: 'excelHtml5', charset: "UTF-8", bom: true, className: 'btn dtbtn btn-sm btn-success', text: '<i class="fa fa-file"></i> Excel' },
-                { extend: 'pdfHtml5', charset: "UTF-8", bom: true, className: 'btn dtbtn btn-sm btn-success', text: '<i class="fa fa-file"></i> PDF' },
-                { extend: 'print', className: 'btn dtbtn btn-sm btn-primary', text: '<i class="fa fa-print"></i> {{ trans("admin.print") }}' },
-
-                { text: '<i class="fa fa-trash"></i> {{ trans("admin.trash") }}', className: 'btn dtbtn btn-sm btn-danger delBtn' },
-                { text: '<i class="fa fa-plus"></i> {{ trans("admin.create_role") }}', className: 'btn dtbtn btn-sm btn-primary' },
+                { text: '<i class="feather icon-trash-2"></i> {{ trans("admin.trash") }}',
+                  className: 'btn dtbtn btn-sm btn-danger delBtn',
+                  attr: { title: '{{ trans("admin.trash") }}' }
+                },
+                { extend: 'csvHtml5', charset: "UTF-8", bom: true,
+                  className: 'btn dtbtn btn-sm btn-success',
+                  text: '<i class="feather icon-file"></i> CSV',
+                  attr: { title: 'CSV' }
+                },
+                { extend: 'excelHtml5', charset: "UTF-8", bom: true,
+                  className: 'btn dtbtn btn-sm btn-success',
+                  text: '<i class="feather icon-file"></i> Excel',
+                  attr: { title: 'Excel' }
+                },
+                { extend: 'print', className: 'btn dtbtn btn-sm btn-primary',
+                  text: '<i class="feather icon-printer"></i> {{ trans("admin.print") }}',
+                  attr: { title: '{{ trans("admin.print") }}' }
+                },
+                { extend: 'pdfHtml5', charset: "UTF-8", bom: true, 
+                  className: 'btn dtbtn btn-sm bg-gradient-danger',
+                  text: '<i class="feather icon-file"></i> PDF',
+                  attr: { title: 'PDF' }
+                },
+                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_role") }}',
+                  className: '@if (auth()->user()->can("create_roles")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
+                  attr: {
+                          title: '{{ trans("admin.create_role") }}',
+                          href: '{{ route("admin.roles.create") }}' 
+                        },
+                    action: function (e, dt, node, config)
+                    {
+                        // href location
+                        window.location.href = '{{ route("admin.roles.create") }}';
+                    }
+                },
             ],
             language: {
                 url: getDataTableLanguage(),

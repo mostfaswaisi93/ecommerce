@@ -10,6 +10,7 @@ return [
             'settings'     => 'c,r,u,d',
         ],
         'admin'       => [
+            'roles'        => 'r',
             'users'        => 'r',
         ]
     ],
@@ -18,6 +19,7 @@ return [
         'c' => 'create',
         'r' => 'read',
         'u' => 'update',
-        'd' => 'delete'
+        'd' => 'delete',
+        'p' => 'print'
     ]
 ];

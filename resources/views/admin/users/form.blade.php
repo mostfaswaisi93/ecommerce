@@ -1,157 +1,61 @@
-<!-- Facility Modal -->
-
-<div class="modal fade" id="facilityModal" role="dialog">
-    <div class="modal-dialog">
+<!-- Role Modal -->
+<div class="modal fade" id="roleModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add New Facility</h4>
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <!-- Modal body-->
             <div class="modal-body">
                 <span id="form_result"></span>
-                <form method="post" id="facilityForm" class="form-horizontal" enctype="multipart/form-data">
+                <form method="POST" id="roleForm" class="form-horizontal" accept-charset="UTF-8"
+                    enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label for="fullName" class="control-label col-md-2">Full Name: </label>
-                        <div class="col-md-9">
-                            <input type="text" name="fullName" id="fullName" class="form-control"
-                                placeholder="Enter Full Name" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="col-md-2 control-label">Email: </label>
-                        <div class="col-md-9">
-                            <input class="form-control" id="email" name="email" type="text" placeholder="Enter Email" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone" class="col-md-2 control-label">Phone: </label>
-                        <div class="col-md-9">
-                            <input class="form-control" id="phone" name="phone" type="text" placeholder="Enter Phone" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">Address: </label>
-                        <div class="col-md-9">
-                            <input class="form-control" id="address" name="address" type="text"
-                                placeholder="Enter Address" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="jobTitle" class="col-md-2 control-label">Job Title: </label>
-                        <div class="col-md-9">
-                            <input class="form-control" id="jobTitle" name="jobTitle" type="text"
-                                placeholder="Enter Job Title" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="department_id" class="col-md-2 control-label">Department: </label>
-                        <div class="col-md-9">
-                            <select class="form-control select2" name="department_id" id="department_id"
-                                style="width: 100%;">
-                                @foreach ($departments as $department)
-                                <option value="{{$department->id}}">{{$department->name}}</option>
-                                @endforeach
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="enabled">{{ trans('admin.status') }}</label>
+                            <select id="enabled" name="enabled" class="form-control">
+                                <option value="1">فعال</option>
+                                <option value="0">معطل</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="skill_id" class="col-md-2 control-label">Skills: </label>
-                        <div class="col-md-9">
-                            <select class="form-control selectSkill" id="skill_id" name="skill_id[]" multiple="multiple"
-                                style="width: 100%;">
-                                @foreach ($skills as $skill)
-                                <option value="{{$skill->id}}">{{$skill->name}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6 col-12">
+                            <div class="media mb-2">
+                                <div class="media-body">
+                                    <label>{{ trans('admin.icon') }}</label>
+                                    <div>
+                                        <input type="file" class="form-control-file icon" name="icon" id="icon"
+                                            style="display:none;">
+                                        <button class="btn btn-primary" onclick="IconUpload();">
+                                            <i class="fa fa-plus"></i>
+                                            {{ trans('admin.file_upload') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media mb-2">
+                                <img class="icon-preview" height="70" style="display: none;" />
+                            </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="action" id="action" />
-                        <input type="hidden" name="hidden_id" id="hidden_id" />
-                        <button type="submit" class="btn btn-primary" id="action_button" name="action_button"
-                            value="Add"><i class="fas fa-save"></i>
-                            Save changes</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                            Close</button>
-                    </div>
-                </form>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Show Facility Modal -->
-
-<div class="modal fade" id="showModal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Show Facility</h4>
+            <!-- Modal footer-->
+            <div class="modal-footer">
+                <input type="hidden" name="action" id="action" />
+                <input type="hidden" name="hidden_id" id="hidden_id" />
+                <button type="submit" class="btn btn-success" id="action_button" name="action_button" value="Add">
+                    {{ trans('admin.save') }}
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{ trans('admin.close') }}
+                </button>
             </div>
-            <div class="modal-body">
-                <form method="post" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="showFullName" class="control-label col-md-2">Full Name: </label>
-                        <div class="col-md-9">
-                            <div id="showFullName" name="fullName" class="showStyle"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="showEmail" class="control-label col-md-2">Email: </label>
-                        <div class="col-md-9">
-                            <div id="showEmail" name="email" class="showStyle"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="showPhone" class="control-label col-md-2">Phone: </label>
-                        <div class="col-md-9">
-                            <div id="showPhone" name="phone" class="showStyle"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="showAdress" class="control-label col-md-2">Adress: </label>
-                        <div class="col-md-9">
-                            <div id="showAdress" name="adress" class="showStyle"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="showJobTitle" class="control-label col-md-2">Job Title: </label>
-                        <div class="col-md-9">
-                            <div id="showJobTitle" name="jobTitle" class="showStyle"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="showDepartment" class="control-label col-md-2">Department: </label>
-                        <div class="col-md-9">
-                            <div id="showDepartment" name="department" class="showStyle"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="showSkills" class="control-label col-md-2">Skills: </label>
-                        <div class="col-md-9 selectStyle">
-                            <select class="form-control showStyle selectSkills" id="showSkills"
-                                name="showSkills[]" multiple="multiple" style="width: 100%;">
-                                @foreach ($skills as $skill)
-                                <option value="{{$skill->id}}">{{$skill->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="showStatus" class="col-md-2 control-label">Status: </label>
-                        <div class="col-md-9">
-                            <div id="showStatus" name="status" class="showStyle"></div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-success"><i class="fas fa-thumbs-up"></i>
-                            OK</button>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
 </div>

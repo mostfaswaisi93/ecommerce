@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 29, 2020 at 05:59 PM
+-- Generation Time: Jan 04, 2021 at 03:40 PM
 -- Server version: 10.5.4-MariaDB-log
 -- PHP Version: 7.4.10
 
@@ -272,26 +272,26 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'create_countries', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(2, 'read_countries', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(3, 'update_countries', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(4, 'delete_countries', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(5, 'create_cities', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(6, 'read_cities', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(7, 'update_cities', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(8, 'delete_cities', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(9, 'create_users', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(10, 'read_users', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(11, 'update_users', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(12, 'delete_users', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(13, 'create_roles', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(14, 'read_roles', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(15, 'update_roles', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(16, 'delete_roles', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(17, 'create_settings', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(18, 'read_settings', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(19, 'update_settings', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46'),
-(20, 'delete_settings', 'web', '2020-12-29 13:57:46', '2020-12-29 13:57:46');
+(1, 'create_countries', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(2, 'read_countries', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(3, 'update_countries', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(4, 'delete_countries', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(5, 'create_cities', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(6, 'read_cities', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(7, 'update_cities', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(8, 'delete_cities', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(9, 'create_users', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(10, 'read_users', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(11, 'update_users', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(12, 'delete_users', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(13, 'create_roles', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(14, 'read_roles', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(15, 'update_roles', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(16, 'delete_roles', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(17, 'create_settings', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(18, 'read_settings', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(19, 'update_settings', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(20, 'delete_settings', 'web', '2021-01-03 09:52:34', '2021-01-03 09:52:34');
 
 -- --------------------------------------------------------
 
@@ -312,8 +312,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'super_admin', 'web', '2020-12-29 13:57:45', '2020-12-29 13:57:45'),
-(2, 'admin', 'web', '2020-12-29 13:57:47', '2020-12-29 13:57:47');
+(1, 'super_admin', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
+(2, 'admin', 'web', '2021-01-03 09:52:34', '2021-01-03 09:52:34');
 
 -- --------------------------------------------------------
 
@@ -450,7 +450,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_login_at` datetime DEFAULT NULL,
+  `last_login_at` timestamp NULL DEFAULT NULL,
   `last_login_ip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -462,8 +462,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `image`, `enabled`, `email_verified_at`, `password`, `remember_token`, `last_login_at`, `last_login_ip`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'super', 'admin', 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$l8ZEuprMNKnqZJTzv185J.HMqcmfY984wPFN9IFq51UBl0lERRweS', NULL, '2020-12-29 17:20:54', '127.0.0.1', '2020-12-28 22:00:00', '2020-12-29 15:20:54', NULL),
-(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$hPUqJy9ffRDAXmN6Y/DugOKuPxnmeAlwzw2OF0Q0/0p8od6FNRnUi', NULL, '2020-12-29 16:01:11', '127.0.0.1', '2020-12-28 22:00:00', '2020-12-29 14:01:11', NULL);
+(1, 'super', 'admin', 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$pYZE6fZ44cOwYKf0oFhgiutnUGgUFQReTvE0JcEUrzQVqrpspeF6i', NULL, '2021-01-04 09:52:50', '127.0.0.1', '2021-01-02 22:00:00', '2021-01-04 09:52:50', NULL),
+(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$sjQIb9mx4wN/Fjcbyb5q0.xDNipyzz6bOGZuBmA2Zx7yYI9kryVm2', NULL, '2021-01-03 12:03:03', '127.0.0.1', '2021-01-02 22:00:00', '2021-01-03 12:03:03', NULL);
 
 --
 -- Indexes for dumped tables

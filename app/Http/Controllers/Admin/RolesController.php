@@ -7,11 +7,9 @@ use App\Models\Role as AppRole;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
-use Spatie\Permission\Models\Role;
 
 class RolesController extends Controller
 {
@@ -30,9 +28,9 @@ class RolesController extends Controller
             return datatables()->of($roles)
                 ->addColumn('action', function ($data) {
                     if (auth()->user()->can(['update_roles', 'delete_roles'])) {
-                        $button = '<a type="button" title="' . trans("admin.edit") . '" name="edit" href="roles/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
+                        $button = '<a type="button" title="' . trans("admin.edit") . '" name="edit" href="roles/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="feather icon-edit"></i></a>';
                         $button .= '&nbsp;';
-                        $button .= '<a type="button" title="' . trans("admin.delete") . '" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
+                        $button .= '<a type="button" title="' . trans("admin.delete") . '" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="feather icon-trash-2"></i></a>';
                         return $button;
                     }
                 })
