@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RolesRequest;
 use App\Models\Role as AppRole;
-use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
-use Intervention\Image\Facades\Image;
+use Spatie\Permission\Models\Role;
 
 class RolesController extends Controller
 {
@@ -45,79 +43,32 @@ class RolesController extends Controller
         return view('admin.roles.create');
     }
 
-    public function store(Request $request)
+    public function store(RolesRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'username' => 'required|unique:roles',
-            'email' => 'required|unique:roles',
-            'image' => 'image',
-            'password' => 'required|confirmed',
-            'permissions' => 'required|min:1',
+        Role::create([
+            'name' => $request->name
         ]);
-
-        $request_data = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
-        $request_data['password'] = bcrypt($request->password);
-
-        if ($request->image) {
-            Image::make($request->image)
-                ->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(public_path('images/roles/' . $request->image->hashName()));
-            $request_data['image'] = $request->image->hashName();
-        }
-
-        $user = User::create($request_data);
-        $user->attachRole('admin');
-        $user->syncPermissions($request->permissions);
-
         Toastr::success(__('admin.added_successfully'));
         return redirect()->route('admin.roles.index');
     }
 
-    public function edit(User $user)
+    public function edit(Role $role)
     {
-        return view('admin.roles.edit')->with('user', $user);
+        return view('admin.roles.edit')->with('role', $role);
     }
 
-    public function update(Request $request, User $user)
+    public function update(RolesRequest $request, Role $role)
     {
-        $request->validate([
-            'name' => 'required',
-            'username' => ['required', Rule::unique('roles')->ignore($user->id)],
-            'email' => ['required', Rule::unique('roles')->ignore($user->id)],
-            'image' => 'image',
-            'permissions' => 'required|min:1',
+        $role->update([
+            'name' => $request->name
         ]);
-
-        $request_data = $request->except(['permissions', 'image']);
-        if ($request->image) {
-            if ($user->image != 'default.png') {
-                Storage::disk('public_uploads')->delete('/images/' . $user->image);
-            }
-
-            Image::make($request->image)
-                ->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(public_path('images/roles/' . $request->image->hashName()));
-            $request_data['image'] = $request->image->hashName();
-        }
-
-        $user->update($request_data);
-        $user->syncPermissions($request->permissions);
-
         Toastr::success(__('admin.updated_successfully'));
         return redirect()->route('admin.roles.index');
     }
 
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        if ($user->image != 'default.png') {
-            Storage::disk('public_uploads')->delete('/images/' . $user->image);
-        }
-        $user->delete();
+        $role = Role::findOrFail($id);
+        $role->delete();
     }
 }

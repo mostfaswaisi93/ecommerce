@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DepartmentsRequest extends FormRequest
+class ManufacturersRequest extends FormRequest
 {
     public function authorize()
     {
