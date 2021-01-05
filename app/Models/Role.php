@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role as SpatieRole;
 
 class Role extends Model
 {
@@ -16,23 +17,33 @@ class Role extends Model
     protected $casts    = ['created_at' => 'date:Y-m-d'];
     protected $dates    = ['created_at', 'updated_at'];
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function getNameAttribute($value)
     {
         $word = str_replace('_', ' ', $value);
         return ucwords($word);
     }
 
-    public function getUsersCountAttribute($val)
+    public function getUsersCountAttribute()
     {
-        // Users Count
-        $users = User::role('super_admin')->count();
+        // SELECT COUNT(role_id) as 'result' FROM model_has_roles GROUP BY role_id
 
-        $roles = Role::pluck('name');
+        // Users Count
+        $users = DB::table('model_has_roles')
+            ->addSelect(DB::raw('COUNT(role_id) as result'))
+            ->groupBy('role_id')
+            ->count();
+
+        $roles = SpatieRole::pluck('name');
         foreach ($roles as $role) {
             $userCount = User::whereHas('roles', function ($query) use ($role) {
                 $query->where('name', $role);
             })->count();
         }
-        return $users;
+        return $userCount;
     }
 }

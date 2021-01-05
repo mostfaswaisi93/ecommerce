@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 04, 2021 at 03:40 PM
+-- Generation Time: Jan 05, 2021 at 03:41 PM
 -- Server version: 10.5.4-MariaDB-log
 -- PHP Version: 7.4.10
 
@@ -227,7 +227,8 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
-(2, 'App\\Models\\User', 2);
+(2, 'App\\Models\\User', 2),
+(2, 'App\\Models\\User', 3);
 
 -- --------------------------------------------------------
 
@@ -272,26 +273,26 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'create_countries', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(2, 'read_countries', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(3, 'update_countries', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(4, 'delete_countries', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(5, 'create_cities', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(6, 'read_cities', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(7, 'update_cities', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(8, 'delete_cities', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(9, 'create_users', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(10, 'read_users', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(11, 'update_users', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(12, 'delete_users', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(13, 'create_roles', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(14, 'read_roles', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(15, 'update_roles', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(16, 'delete_roles', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(17, 'create_settings', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(18, 'read_settings', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(19, 'update_settings', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(20, 'delete_settings', 'web', '2021-01-03 09:52:34', '2021-01-03 09:52:34');
+(1, 'create_countries', 'web', '2021-01-05 14:42:40', '2021-01-05 14:42:40'),
+(2, 'read_countries', 'web', '2021-01-05 14:42:40', '2021-01-05 14:42:40'),
+(3, 'update_countries', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(4, 'delete_countries', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(5, 'create_cities', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(6, 'read_cities', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(7, 'update_cities', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(8, 'delete_cities', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(9, 'create_users', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(10, 'read_users', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(11, 'update_users', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(12, 'delete_users', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(13, 'create_roles', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(14, 'read_roles', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(15, 'update_roles', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(16, 'delete_roles', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(17, 'create_settings', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(18, 'read_settings', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(19, 'update_settings', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
+(20, 'delete_settings', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41');
 
 -- --------------------------------------------------------
 
@@ -312,8 +313,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'super_admin', 'web', '2021-01-03 09:52:33', '2021-01-03 09:52:33'),
-(2, 'admin', 'web', '2021-01-03 09:52:34', '2021-01-03 09:52:34');
+(1, 'super_admin', 'web', '2021-01-05 14:42:40', '2021-01-05 14:42:40'),
+(2, 'admin', 'web', '2021-01-05 14:42:42', '2021-01-05 14:42:42');
 
 -- --------------------------------------------------------
 
@@ -346,6 +347,7 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (12, 1),
 (13, 1),
 (14, 1),
+(14, 2),
 (15, 1),
 (16, 1),
 (17, 1),
@@ -462,8 +464,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `image`, `enabled`, `email_verified_at`, `password`, `remember_token`, `last_login_at`, `last_login_ip`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'super', 'admin', 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$pYZE6fZ44cOwYKf0oFhgiutnUGgUFQReTvE0JcEUrzQVqrpspeF6i', NULL, '2021-01-04 09:52:50', '127.0.0.1', '2021-01-02 22:00:00', '2021-01-04 09:52:50', NULL),
-(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$sjQIb9mx4wN/Fjcbyb5q0.xDNipyzz6bOGZuBmA2Zx7yYI9kryVm2', NULL, '2021-01-03 12:03:03', '127.0.0.1', '2021-01-02 22:00:00', '2021-01-03 12:03:03', NULL);
+(1, 'super', 'admin', 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$81lZSuTmiYfEkdvFV4VeXOrWyEZKXdbiEO3l3LjAHhIJptrn1.PBe', NULL, NULL, NULL, '2021-01-04 22:00:00', '2021-01-04 22:00:00', NULL),
+(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$FMQpPl1jXBLRlvnH7Uj0TuxIaJJSRED3YS2BMN0KGhJagLjTD2Ce2', NULL, NULL, NULL, '2021-01-04 22:00:00', '2021-01-04 22:00:00', NULL),
+(3, 'ali', 'ali', 'ali', 'ali@gmail.com', 'default.png', 1, NULL, '$2y$10$TNeIzZm89hWodVwbkRtxoueE0a1/NJGoKMQZ.3mUH6E78iS0wWxw2', NULL, NULL, NULL, '2021-01-05 14:46:15', '2021-01-05 14:46:15', NULL);
 
 --
 -- Indexes for dumped tables
@@ -753,7 +756,7 @@ ALTER TABLE `trade_marks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

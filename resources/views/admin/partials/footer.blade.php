@@ -25,7 +25,7 @@
 <!-- END: Theme JS-->
 
 {{-- Custom js --}}
-<script src="{{ asset('backend/js/image_preview.js') }}"></script>
+<script src="{{ url('backend/js/image_preview.js') }}"></script>
 
 {{-- CDNs --}}
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
@@ -42,8 +42,8 @@
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.foundation.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.69/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.69/vfs_fonts.min.js"></script>
+<script src="{{ url('backend/js/pdfMake/pdfmake.js') }}"></script>
+<script src="{{ url('backend/js/pdfMake/vfs_fonts.js') }}"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
 

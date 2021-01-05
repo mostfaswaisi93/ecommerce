@@ -8,29 +8,12 @@
         <div class="card">
             <div class="card-header">
                 <div class="tbl-title">{{ trans('admin.roles') }}</div>
-                {{-- <div class="btn-group">
-                    @if (auth()->user()->can('create_roles'))
-                    <a href="{{ route('admin.roles.create') }}">
-                        <button class="btn btn-sm btn-primary">
-                            <i class="feather icon-plus"></i>
-                            {{ trans('admin.create_role') }}
-                        </button>
-                    </a>
-                    @else
-                    <a href="#">
-                        <button class="btn btn-primary disabled">
-                            <i class="feather icon-plus"></i> {{ trans('admin.create_role') }}
-                        </button>
-                    </a>
-                    @endif
-                </div> --}}
             </div>
             <hr>
             <div class="card-content">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="roles-table" class="table table-striped table-bordered dt-responsive nowrap"
-                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <table id="roles-table" class="table table-striped table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -81,9 +64,9 @@
                 { data: 'created_at' },
                 { data: 'action', orderable: false }
             ],
-            dom:    "<'row'<''l><'col-sm-8 text-center'B><''f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom:  "<'row'<''l><'col-sm-8 text-center'B><''f>>" +
+                  "<'row'<'col-sm-12'tr>>" +
+                  "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 { text: '<i class="feather icon-refresh-ccw"></i> {{ trans("admin.refresh") }}',
                   className: 'btn dtbtn btn-sm btn-dark',
@@ -113,11 +96,19 @@
                 { extend: 'pdfHtml5', charset: "UTF-8", bom: true, 
                   className: 'btn dtbtn btn-sm bg-gradient-danger',
                   text: '<i class="feather icon-file"></i> PDF',
-                  attr: { title: 'PDF' }
+                  pageSize: 'A4', attr: { title: 'PDF' }
                 },
                 { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_role") }}',
-                  className: 'btn dtbtn btn-sm btn-primary',
-                  attr: { title: '{{ trans("admin.create_role") }}' }
+                  className: '@if (auth()->user()->can("create_roles")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
+                  attr: {
+                          title: '{{ trans("admin.create_role") }}',
+                          href: '{{ route("admin.roles.create") }}' 
+                        },
+                    action: function (e, dt, node, config)
+                    {
+                        // href location
+                        window.location.href = '{{ route("admin.roles.create") }}';
+                    }
                 },
             ],
             language: {
