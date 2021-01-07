@@ -1,5 +1,5 @@
-@extends('layouts.admin')
-@section('title') {{ trans('admin.home') }}@endsection
+@extends('layouts.frontend')
+@section('title') {{ trans('frontend.home') }}@endsection
 
 @section('content')
 

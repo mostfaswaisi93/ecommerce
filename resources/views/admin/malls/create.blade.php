@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.create_role') }} @endsection
+@section('title') {{ trans('admin.create_mall') }} @endsection
 
 @section('content')
 
@@ -11,13 +11,13 @@
                     <div class="card-header">
                         <h4 class="card-title">
                             <i class="feather icon-plus mr-25"></i>
-                            {{ trans('admin.create_role') }}
+                            {{ trans('admin.create_mall') }}
                         </h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                             @include('partials._errors')
-                            <form action="{{ route('admin.roles.store') }}" method="post">
+                            <form action="{{ route('admin.malls.store') }}" method="post">
                                 @csrf
                                 @method('POST')
                                 <div class="row">

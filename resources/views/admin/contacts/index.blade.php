@@ -3,37 +3,17 @@
 
 @section('content')
 
-<div class="content-header row">
-    <div class="content-header-left col-md-9 col-12 mb-2">
-        <div class="row breadcrumbs-top">
-            <div class="col-12">
-                <h2 class="content-header-title float-left mb-0">{{ trans('admin.contacts') }}</h2>
-                <div class="breadcrumb-wrapper col-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('admin.index') }}">{{ trans('admin.home') }}</a>
-                        </li>
-                        <li class="breadcrumb-item active">{{ trans('admin.contacts') }}</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="content-body">
     <section>
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">
-                    {{ trans('admin.contacts') }}
-                </h4>
+                <div class="tbl-title">{{ trans('admin.contacts') }}</div>
             </div>
+            <hr>
             <div class="card-content">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap"
-                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <table id="contacts-table" class="table table-striped table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -41,7 +21,11 @@
                                     <th>{{ trans('admin.customer') }}</th>
                                     <th>{{ trans('admin.mobile') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
-                                    <th>{{ trans('admin.action') }}</th>
+                                    <th>
+                                        @if(auth()->user()->can(['update_contacts', 'delete_contacts']))
+                                        {{ trans('admin.action') }}
+                                        @endif
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -58,9 +42,8 @@
 @push('scripts')
 
 <script type="text/javascript">
-    var status  = '';
     $(document).ready(function(){
-        $('#data-table').DataTable({
+        $('#contacts-table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
@@ -73,19 +56,71 @@
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }, searchable: false, orderable: false
                 },
-                { data: 'title', name: 'title' },
-                { data: 'customer', name: 'customer', 
+                { data: 'title' },
+                { data: 'customer', 
                     render: function(data, type, full, meta) {
                         return "<div class='badge badge-primary'>"+ data +"</div>";
                     }, orderable: false , searchable: false
                 },
-                { data: 'mobile', name: 'mobile' },
-                { data: 'created_at', name: 'created_at', format: 'M/D/YYYY' },
-                { data: 'action', name: 'action', orderable: false }
-            ]
+                { data: 'mobile' },
+                { data: 'created_at' },
+                { data: 'action', orderable: false }
+            ],
+            dom:  "<'row'<''l><'col-sm-8 text-center'B><''f>>" +
+                  "<'row'<'col-sm-12'tr>>" +
+                  "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [
+                { text: '<i class="feather icon-refresh-ccw"></i> {{ trans("admin.refresh") }}',
+                  className: 'btn dtbtn btn-sm btn-dark',
+                  attr: { title: '{{ trans("admin.refresh") }}' },
+                    action: function (e, dt, node, config) {
+                        dt.ajax.reload(null, false);
+                    }
+                },
+                { text: '<i class="feather icon-trash-2"></i> {{ trans("admin.trash") }}',
+                  className: 'btn dtbtn btn-sm btn-danger delBtn',
+                  attr: { title: '{{ trans("admin.trash") }}' }
+                },
+                { extend: 'csvHtml5', charset: "UTF-8", bom: true,
+                  className: 'btn dtbtn btn-sm btn-success',
+                  text: '<i class="feather icon-file"></i> CSV',
+                  attr: { title: 'CSV' }
+                },
+                { extend: 'excelHtml5', charset: "UTF-8", bom: true,
+                  className: 'btn dtbtn btn-sm btn-success',
+                  text: '<i class="feather icon-file"></i> Excel',
+                  attr: { title: 'Excel' }
+                },
+                { extend: 'print', className: 'btn dtbtn btn-sm btn-primary',
+                  text: '<i class="feather icon-printer"></i> {{ trans("admin.print") }}',
+                  attr: { title: '{{ trans("admin.print") }}' }
+                },
+                { extend: 'pdfHtml5', charset: "UTF-8", bom: true, 
+                  className: 'btn dtbtn btn-sm bg-gradient-danger',
+                  text: '<i class="feather icon-file"></i> PDF',
+                  pageSize: 'A4', attr: { title: 'PDF' }
+                },
+                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_contact") }}',
+                  className: '@if (auth()->user()->can("create_contacts")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
+                  attr: {
+                          title: '{{ trans("admin.create_contact") }}',
+                          href: '{{ route("admin.contacts.create") }}' 
+                        },
+                    action: function (e, dt, node, config)
+                    {
+                        // href location
+                        window.location.href = '{{ route("admin.contacts.create") }}';
+                    }
+                },
+            ],
+            language: {
+                url: getDataTableLanguage(),
+                search: ' ',
+                searchPlaceholder: '{{ trans("admin.search") }}...'
+            }
         });
     });
-
+    
     $(document).on('click', '.delete', function(){
         contact_id = $(this).attr('id');
         swal({
@@ -101,8 +136,7 @@
                 $.ajax({
                     url:"contacts/destroy/" + contact_id,
                     success: function(data){
-                        console.log(data);
-                        $('#data-table').DataTable().ajax.reload();
+                        $('#contacts-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');
                     }
                 });

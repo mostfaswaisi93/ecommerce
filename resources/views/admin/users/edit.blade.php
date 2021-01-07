@@ -3,27 +3,6 @@
 
 @section('content')
 
-<div class="content-header row">
-    <div class="content-header-left col-md-9 col-12 mb-2">
-        <div class="row breadcrumbs-top">
-            <div class="col-12">
-                <h2 class="content-header-title float-left mb-0">{{ trans('admin.edit_user') }}</h2>
-                <div class="breadcrumb-wrapper col-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('admin.index') }}">{{ trans('admin.home') }}</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('admin.users.index') }}">{{ trans('admin.users_management') }}</a>
-                        </li>
-                        <li class="breadcrumb-item active">{{ trans('admin.edit_user') }}</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="content-body">
     <section class="portlet">
         <div class="row">
@@ -32,7 +11,7 @@
                     <div class="card-header">
                         <h4 class="card-title">
                             <i class="feather icon-edit mr-25"></i>
-                            {{ trans('admin.edit_user') }} - {{ $user->name }}
+                            {{ trans('admin.edit_user') }} - {{ $user->full_name }}
                         </h4>
                     </div>
                     <div class="card-content">
@@ -98,8 +77,7 @@
                                                 {{ trans('admin.permissions') }}
                                             </h6> <br>
                                             @php
-                                            $models = ['users', 'categories', 'items', 'countries', 'cities',
-                                            'locations', 'languages'];
+                                            $models = ['users', 'categories', 'countries', 'cities'];
                                             $maps = ['create', 'read', 'update', 'delete'];
                                             @endphp
                                             <table class="table table-borderless">

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.edit_role') }} @endsection
+@section('title') {{ trans('admin.edit_mall') }} @endsection
 
 @section('content')
 
@@ -11,13 +11,13 @@
                     <div class="card-header">
                         <h4 class="card-title">
                             <i class="feather icon-edit mr-25"></i>
-                            {{ trans('admin.edit_role') }} - {{ $role->name }}
+                            {{ trans('admin.edit_mall') }} - {{ $mall->name }}
                         </h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                             @include('partials._errors')
-                            <form action="{{ route('admin.roles.update', $role->id) }}" method="post"
+                            <form action="{{ route('admin.malls.update', $mall->id) }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -27,7 +27,7 @@
                                             <div class="controls">
                                                 <label>{{ trans('admin.name') }}</label>
                                                 <input id="name" type="text" name="name" class="form-control"
-                                                    value="{{ $role->name }}" placeholder="{{ trans('admin.name') }}">
+                                                    value="{{ $mall->name }}" placeholder="{{ trans('admin.name') }}">
                                             </div>
                                         </div>
                                     </div>

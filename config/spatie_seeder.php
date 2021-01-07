@@ -13,6 +13,7 @@ return [
             'malls'             => 'c,r,u,d',
             'sliders'           => 'c,r,u,d',
             'brands'            => 'c,r,u,d',
+            'notifications'     => 'c,r,u,d',
             'contacts'          => 'c,r,u,d',
             'countries'         => 'c,r,u,d',
             'cities'            => 'c,r,u,d',

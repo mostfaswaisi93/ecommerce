@@ -19,6 +19,8 @@ Route::group(
                 'manufacturers' => ManufacturersController::class,
                 'shippings' => ShippingsController::class,
                 'malls' => MallsController::class,
+                'notifications' => NotificationsController::class,
+                'contacts' => ContactsController::class,
                 'countries' => CountriesController::class,
                 'cities' => CitiesController::class,
                 'states' => StatesController::class,

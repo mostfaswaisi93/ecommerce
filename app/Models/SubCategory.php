@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class SubCategory extends Model
+class SubCategory extends BaseModel
 {
     use HasFactory;
+
+    protected $table    = 'sub_categories';
 }

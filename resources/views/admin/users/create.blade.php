@@ -3,27 +3,6 @@
 
 @section('content')
 
-<div class="content-header row">
-    <div class="content-header-left col-md-9 col-12 mb-2">
-        <div class="row breadcrumbs-top">
-            <div class="col-12">
-                <h2 class="content-header-title float-left mb-0">{{ trans('admin.create_user') }}</h2>
-                <div class="breadcrumb-wrapper col-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('admin.index') }}">{{ trans('admin.home') }}</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('admin.users.index') }}">{{ trans('admin.users_management') }}</a>
-                        </li>
-                        <li class="breadcrumb-item active">{{ trans('admin.create_user') }}</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="content-body">
     <section class="portlet">
         <div class="row">
@@ -92,8 +71,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="media mb-2">
                                             <a class="mr-2 my-25" href="#">
-                                                <img src="{{ asset('images/user_images/default.png') }}"
-                                                    alt="users avatar"
+                                                <img src="{{ asset('images/users/default.png') }}" alt="users avatar"
                                                     class="users-avatar-shadow rounded image img-thumbnail image-preview"
                                                     height="70" width="70">
                                             </a>
@@ -117,8 +95,7 @@
                                                 {{ trans('admin.permissions') }}
                                             </h6> <br>
                                             @php
-                                            $models = ['users', 'categories', 'items', 'countries', 'cities',
-                                            'locations', 'languages'];
+                                            $models = ['users', 'categories', 'countries', 'cities'];
                                             $maps = ['create', 'read', 'update', 'delete'];
                                             @endphp
                                             <table class="table table-borderless">

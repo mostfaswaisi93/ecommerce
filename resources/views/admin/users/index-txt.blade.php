@@ -1,20 +1,52 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.users') }} @endsection
+@section('title') {{ trans('admin.users_management') }} @endsection
 
 @section('content')
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">{{ trans('admin.users_management') }}</h2>
+                <div class="breadcrumb-wrapper col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.index') }}">{{ trans('admin.home') }}</a>
+                        </li>
+                        <li class="breadcrumb-item active">{{ trans('admin.users_management') }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="content-body">
     <section>
         <div class="card">
             <div class="card-header">
-                <div class="tbl-title">{{ trans('admin.users') }}</div>
+                <h4 class="card-title">{{ trans('admin.users_management') }}</h4>
             </div>
-            <hr>
             <div class="card-content">
                 <div class="card-body">
+                    <div class="btn-group">
+                        @if(auth()->user()->can('create_users'))
+                        <a href="{{ route('admin.users.create') }}">
+                            <button class="btn btn-primary mb-2">
+                                <i class="feather icon-user-plus mr-25"></i>
+                                {{ trans('admin.create_user') }}
+                            </button>
+                        </a>
+                        @else
+                        <a href="#">
+                            <button class="btn btn-primary mb-2 disabled">
+                                <i class="feather icon-user-plus"></i> {{ trans('admin.create_user') }}
+                            </button>
+                        </a>
+                        @endif
+                    </div>
                     <div class="table-responsive">
-                        <table id="users-table" class="table table-striped table-bordered dt-responsive nowrap"
-                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <table id="users-table" class="table table-striped table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -47,6 +79,7 @@
 @push('scripts')
 
 <script type="text/javascript">
+    var status  = '';
     $(document).ready(function(){
         $('#users-table').DataTable({
             processing: true,
@@ -61,14 +94,14 @@
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }, searchable: false, orderable: false
                 },
-                { data: 'image_path',
+                { data: 'image_path', name: 'image_path',
                     render: function(data, type, row, meta) {
                         return "<img src=" + data + " width='70px' class='img-thumbnail' />";
                     }, orderable: false , searchable: false
                 },
-                { data: 'full_name' },
-                // { data: 'username' },
-                // { data: 'email' },
+                { data: 'full_name', name: 'full_name' },
+                // { data: 'username', name: 'username' },
+                // { data: 'email', name: 'email' },
                 { data: 'last_login_at', name: 'last_login_at',
                     render: function(data, type, row, meta){
                         var text1 = "<div>"+row.last_login+"</div>";
@@ -76,16 +109,16 @@
                         return text1 + text2;
                     }
                 },
-                { data: 'created_at' },
-                { data: 'enabled',
+                { data: 'created_at', name: 'created_at' },
+                { data: 'enabled', name: 'enabled',
                     render: function(data, type, row, meta) {
                         var text = data ? "{{ trans('admin.active') }}" : "{{ trans('admin.inactive') }}";
                         var color = data ? "success" : "danger"; 
                         return "<div class='badge badge-" +color+ "'>"+ text +"</div>";
                     }, orderable: false , searchable: false
                 },
-                { data: 'enabled' },
-                { data: 'action', orderable: false }
+                { data: 'enabled', name: 'enabled' },
+                { data: 'action', name: 'action', orderable: false }
             ], "columnDefs": [ {
                 "targets": 6,
                 render: function (data, type, row, meta){
@@ -99,58 +132,18 @@
                 $select.find('option[value="'+row.enabled+'"]').attr('selected', 'selected');
                 return $select[0].outerHTML
                 }
-            } ],            
-            dom:  "<'row'<''l><'col-sm-8 text-center'B><''f>>" +
-                  "<'row'<'col-sm-12'tr>>" +
-                  "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            buttons: [
-                { text: '<i class="feather icon-refresh-ccw"></i> {{ trans("admin.refresh") }}',
-                  className: 'btn dtbtn btn-sm btn-dark',
-                  attr: { title: '{{ trans("admin.refresh") }}' },
-                    action: function (e, dt, node, config) {
-                        dt.ajax.reload(null, false);
-                    }
-                },
-                { text: '<i class="feather icon-trash-2"></i> {{ trans("admin.trash") }}',
-                  className: 'btn dtbtn btn-sm btn-danger delBtn',
-                  attr: { title: '{{ trans("admin.trash") }}' }
-                },
-                { extend: 'csvHtml5', charset: "UTF-8", bom: true,
-                  className: 'btn dtbtn btn-sm btn-success',
-                  text: '<i class="feather icon-file"></i> CSV',
-                  attr: { title: 'CSV' }
-                },
-                { extend: 'excelHtml5', charset: "UTF-8", bom: true,
-                  className: 'btn dtbtn btn-sm btn-success',
-                  text: '<i class="feather icon-file"></i> Excel',
-                  attr: { title: 'Excel' }
-                },
-                { extend: 'print', className: 'btn dtbtn btn-sm btn-primary',
-                  text: '<i class="feather icon-printer"></i> {{ trans("admin.print") }}',
-                  attr: { title: '{{ trans("admin.print") }}' }
-                },
-                { extend: 'pdfHtml5', charset: "UTF-8", bom: true, 
-                  className: 'btn dtbtn btn-sm bg-gradient-danger',
-                  text: '<i class="feather icon-file"></i> PDF',
-                  pageSize: 'A4', attr: { title: 'PDF' }
-                },
-                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_user") }}',
-                  className: '@if (auth()->user()->can("create_users")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
-                  attr: {
-                          title: '{{ trans("admin.create_user") }}',
-                          href: '{{ route("admin.users.create") }}' 
-                        },
-                    action: function (e, dt, node, config)
-                    {
-                        // href location
-                        window.location.href = '{{ route("admin.users.create") }}';
-                    }
-                },
-            ],
-            language: {
-                url: getDataTableLanguage(),
-                search: ' ',
-                searchPlaceholder: '{{ trans("admin.search") }}...'
+            } ],
+            // dom: 'Bfrtip',
+            // buttons: [
+            //     {
+            //         extend: 'print',
+            //         exportOptions: {
+            //             columns: ':visible'
+            //         }
+            //     }
+            // ],
+            language : {
+                url: getDataTableLanguage()
             }
         });
     });
@@ -170,10 +163,56 @@
                 $.ajax({
                     url:"users/destroy/" + user_id,
                     success: function(data){
+                        console.log(data);
                         $('#users-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');
                     }
                 });
+            }
+        });
+    });
+
+    function selectStatus(id){
+        user_id = id;
+    }
+
+    $(document).on('change', '#status', function(e) {
+        var status_user = $(this).find("option:selected").val();
+        console.log(status_user)
+        if(status_user == "1"){
+            toastr.success('{{ trans('admin.status_changed') }}!');
+        }else if(status_user == "0"){
+            toastr.success('{{ trans('admin.status_changed') }}!');
+        } else {
+            toastr.error('{{ trans('admin.status_not_changed') }}!');
+        }
+        $.ajax({
+            url:"users/updateStatus/"+user_id+"?enabled="+status_user,
+            headers: {
+                'X-CSRF-Token': "{{ csrf_token() }}"
+            },
+            method:"POST",
+            data:{},
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType:"json",
+            success:function(data)
+                {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                {
+                    html += '<p>' + data.errors[count] + '</p>';
+                }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    $('#users-table').DataTable().ajax.reload();
+                }
             }
         });
     });
