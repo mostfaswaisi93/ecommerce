@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.roles') }} @endsection
+@section('title') {{ trans('admin.shippings') }} @endsection
 
 @section('content')
 
@@ -7,13 +7,13 @@
     <section>
         <div class="card">
             <div class="card-header">
-                <div class="tbl-title">{{ trans('admin.roles') }}</div>
+                <div class="tbl-title">{{ trans('admin.shippings') }}</div>
             </div>
             <hr>
             <div class="card-content">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="roles-table" class="table table-striped table-bordered dt-responsive nowrap">
+                        <table id="shippings-table" class="table table-striped table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -21,7 +21,7 @@
                                     <th>{{ trans('admin.users_count') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>
-                                        @if(auth()->user()->can(['update_roles', 'delete_roles']))
+                                        @if(auth()->user()->can(['update_shippings', 'delete_shippings']))
                                         {{ trans('admin.action') }}
                                         @endif
                                     </th>
@@ -42,13 +42,13 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#roles-table').DataTable({
+        $('#shippings-table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             order: [[ 2, "desc" ]],
             ajax: {
-                url: "{{ route('admin.roles.index') }}",
+                url: "{{ route('admin.shippings.index') }}",
             },
             columns: [{
                     render: function(data, type, row, meta) {
@@ -98,16 +98,16 @@
                   text: '<i class="feather icon-file"></i> PDF',
                   pageSize: 'A4', attr: { title: 'PDF' }
                 },
-                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_role") }}',
-                  className: '@if (auth()->user()->can("create_roles")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
+                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_shipping") }}',
+                  className: '@if (auth()->user()->can("create_shippings")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
                   attr: {
                           title: '{{ trans("admin.create_role") }}',
-                          href: '{{ route("admin.roles.create") }}' 
+                          href: '{{ route("admin.shippings.create") }}' 
                         },
                     action: function (e, dt, node, config)
                     {
                         // href location
-                        window.location.href = '{{ route("admin.roles.create") }}';
+                        window.location.href = '{{ route("admin.shippings.create") }}';
                     }
                 },
             ],
@@ -132,9 +132,9 @@
         }).then(function(result){
             if(result.value){
                 $.ajax({
-                    url:"roles/destroy/" + role_id,
+                    url:"shippings/destroy/" + role_id,
                     success: function(data){
-                        $('#roles-table').DataTable().ajax.reload();
+                        $('#shippings-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');
                     }
                 });

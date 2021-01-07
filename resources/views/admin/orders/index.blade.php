@@ -98,10 +98,10 @@
                   text: '<i class="feather icon-file"></i> PDF',
                   pageSize: 'A4', attr: { title: 'PDF' }
                 },
-                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_role") }}',
+                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_order") }}',
                   className: '@if (auth()->user()->can("create_orders")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
                   attr: {
-                          title: '{{ trans("admin.create_role") }}',
+                          title: '{{ trans("admin.create_order") }}',
                           href: '{{ route("admin.orders.create") }}' 
                         },
                     action: function (e, dt, node, config)
@@ -120,7 +120,7 @@
     });
     
     $(document).on('click', '.delete', function(){
-        role_id = $(this).attr('id');
+        order_id = $(this).attr('id');
         swal({
             title: "{{ trans('admin.are_sure') }}",
             type: 'warning',
@@ -132,7 +132,7 @@
         }).then(function(result){
             if(result.value){
                 $.ajax({
-                    url:"orders/destroy/" + role_id,
+                    url:"orders/destroy/" + order_id,
                     success: function(data){
                         $('#orders-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');

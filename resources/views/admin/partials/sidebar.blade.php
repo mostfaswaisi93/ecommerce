@@ -24,8 +24,46 @@
             <li class="navigation-header"></li>
             <li {{ request()->route()->getName() === 'admin.index' ? 'class=active' : '' }}>
                 <a href="{{ route('admin.index') }}" class="nav-link">
-                    <i class="fa fa-home"></i>
+                    <i class="feather icon-home"></i>
                     <span class="title">{{ trans('admin.home') }}</span>
+                </a>
+            </li>
+            <li {{ request()->route()->getName() === 'admin.trade_marks.index' ? 'class=active' : '' }}>
+                <a href="{{ route('admin.trade_marks.index') }}" class="nav-link">
+                    <i class="feather icon-bookmark"></i>
+                    <span class="title">{{ trans('admin.trade_marks') }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#">
+                    <i class="feather icon-tag"></i>
+                    <span class="menu-title">{{ trans('admin.categories_management') }}</span>
+                </a>
+                <ul class="menu-content">
+                    <li {{ request()->route()->getName() === 'admin.categories.index' ? 'class=active' : '' }}>
+                        <a href="{{ route('admin.categories.index') }}" class="nav-link">
+                            <i class="feather icon-tag"></i>
+                            <span class="title">{{ trans('admin.categories') }}</span>
+                        </a>
+                    </li>
+                    <li {{ request()->route()->getName() === 'admin.sub_categories.index' ? 'class=active' : '' }}>
+                        <a href="{{ route('admin.sub_categories.index') }}" class="nav-link">
+                            <i class="feather icon-tag"></i>
+                            <span class="title">{{ trans('admin.sub_categories') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li {{ request()->route()->getName() === 'admin.manufacturers.index' ? 'class=active' : '' }}>
+                <a href="{{ route('admin.manufacturers.index') }}" class="nav-link">
+                    <i class="feather icon-bookmark"></i>
+                    <span class="title">{{ trans('admin.manufacturers') }}</span>
+                </a>
+            </li>
+            <li {{ request()->route()->getName() === 'admin.shippings.index' ? 'class=active' : '' }}>
+                <a href="{{ route('admin.shippings.index') }}" class="nav-link">
+                    <i class="feather icon-bookmark"></i>
+                    <span class="title">{{ trans('admin.shippings') }}</span>
                 </a>
             </li>
             {{-- <li {{ request()->route()->getName() === 'admin.notifications.index' ? 'class=active' : '' }}>
@@ -42,14 +80,14 @@
             </li> --}}
             <li class="nav-item">
                 <a href="#">
-                    <i class="fa fa-info-circle"></i>
+                    <i class="feather icon-info"></i>
                     <span class="menu-title">{{ trans('admin.system_constants') }}</span>
                     {{-- <span class="badge badge badge-primary badge-pill float-right mr-2">New</span> --}}
                 </a>
                 <ul class="menu-content">
                     {{-- <li {{ request()->route()->getName() === 'admin.countries.index' ? 'class=active' : '' }}>
                         <a href="{{ route('admin.countries.index') }}" class="nav-link">
-                            <i class="fa fa-flag"></i>
+                            <i class="feather icon-flag"></i>
                             <span class="title">{{ trans('admin.countries') }}</span>
                         </a>
                     </li>
@@ -81,7 +119,7 @@
                     </li>
                     <li {{ request()->route()->getName() === 'admin.roles.index' ? 'class=active' : '' }}>
                         <a href="{{ route('admin.roles.index') }}" class="nav-link">
-                            <i class="fa fa-sliders"></i>
+                            <i class="feather icon-sliders"></i>
                             <span class="title">{{ trans('admin.per_roles') }}</span>
                         </a>
                     </li>
@@ -89,7 +127,7 @@
             </li>
             <li class="nav-item">
                 <a href="#">
-                    <i class="fa fa-bar-chart"></i>
+                    <i class="feather icon-bar-chart"></i>
                     <span class="menu-title">{{ trans('admin.reports') }}</span>
                 </a>
                 <ul class="menu-content">
