@@ -13,17 +13,43 @@ Route::group(
             Route::get('/', [AdminController::class, 'index'])->name('index');
 
             Route::resources([
+                'trade_marks' => TradeMarksController::class,
+                'categories' => CategoriesController::class,
+                'sub_categories' => SubCategoriesController::class,
+                'manufacturers' => ManufacturersController::class,
+                'shippings' => ShippingsController::class,
+                'malls' => MallsController::class,
+                'countries' => CountriesController::class,
+                'cities' => CitiesController::class,
+                'states' => StatesController::class,
+                'colors' => ColorsController::class,
+                'settings' => SettingsController::class,
                 'roles' => RolesController::class,
                 'users' => UsersController::class,
             ]);
 
-            Route::resource('countries', 'CountriesController');
+            Route::get('trade_marks/destroy/{id}', 'TradeMarksController@destroy');
+
+            Route::get('categories/destroy/{id}', 'CategoriesController@destroy');
+
+            Route::get('sub_categories/destroy/{id}', 'SubCategoriesController@destroy');
+
+            Route::get('manufacturers/destroy/{id}', 'ManufacturersController@destroy');
+
+            Route::get('shippings/destroy/{id}', 'ShippingsController@destroy');
+
+            Route::get('malls/destroy/{id}', 'MallsController@destroy');
+
             Route::get('countries/destroy/{id}', 'CountriesController@destroy');
             Route::post('countries/updateStatus/{id}', 'CountriesController@updateStatus');
 
-            Route::resource('cities', 'CitiesController');
             Route::get('cities/destroy/{id}', 'CitiesController@destroy');
             Route::post('cities/updateStatus/{id}', 'CitiesController@updateStatus');
+
+            Route::get('states/destroy/{id}', 'StatesController@destroy');
+            Route::post('states/updateStatus/{id}', 'StatesController@updateStatus');
+
+            Route::get('colors/destroy/{id}', 'ColorsController@destroy');
 
             Route::get('settings', 'SettingsController@index')->name('settings.index');
             Route::post('settings', 'SettingsController@update')->name('settings.update');

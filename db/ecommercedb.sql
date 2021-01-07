@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 05, 2021 at 03:41 PM
+-- Generation Time: Jan 07, 2021 at 10:04 AM
 -- Server version: 10.5.4-MariaDB-log
 -- PHP Version: 7.4.10
 
@@ -227,8 +227,7 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
-(2, 'App\\Models\\User', 2),
-(2, 'App\\Models\\User', 3);
+(2, 'App\\Models\\User', 2);
 
 -- --------------------------------------------------------
 
@@ -273,26 +272,78 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'create_countries', 'web', '2021-01-05 14:42:40', '2021-01-05 14:42:40'),
-(2, 'read_countries', 'web', '2021-01-05 14:42:40', '2021-01-05 14:42:40'),
-(3, 'update_countries', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(4, 'delete_countries', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(5, 'create_cities', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(6, 'read_cities', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(7, 'update_cities', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(8, 'delete_cities', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(9, 'create_users', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(10, 'read_users', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(11, 'update_users', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(12, 'delete_users', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(13, 'create_roles', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(14, 'read_roles', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(15, 'update_roles', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(16, 'delete_roles', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(17, 'create_settings', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(18, 'read_settings', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(19, 'update_settings', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41'),
-(20, 'delete_settings', 'web', '2021-01-05 14:42:41', '2021-01-05 14:42:41');
+(1, 'create_trade_marks', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(2, 'read_trade_marks', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(3, 'update_trade_marks', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(4, 'delete_trade_marks', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(5, 'create_categories', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(6, 'read_categories', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(7, 'update_categories', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(8, 'delete_categories', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(9, 'create_sub_categories', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(10, 'read_sub_categories', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(11, 'update_sub_categories', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(12, 'delete_sub_categories', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(13, 'create_departments', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(14, 'read_departments', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(15, 'update_departments', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(16, 'delete_departments', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(17, 'create_manufacturers', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(18, 'read_manufacturers', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(19, 'update_manufacturers', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(20, 'delete_manufacturers', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(21, 'create_shippings', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(22, 'read_shippings', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(23, 'update_shippings', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(24, 'delete_shippings', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(25, 'create_orders', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(26, 'read_orders', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(27, 'update_orders', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(28, 'delete_orders', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(29, 'create_malls', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(30, 'read_malls', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(31, 'update_malls', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(32, 'delete_malls', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(33, 'create_sliders', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(34, 'read_sliders', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(35, 'update_sliders', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(36, 'delete_sliders', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(37, 'create_brands', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(38, 'read_brands', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(39, 'update_brands', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(40, 'delete_brands', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(41, 'create_contacts', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(42, 'read_contacts', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(43, 'update_contacts', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(44, 'delete_contacts', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(45, 'create_countries', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(46, 'read_countries', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(47, 'update_countries', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(48, 'delete_countries', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(49, 'create_cities', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(50, 'read_cities', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(51, 'update_cities', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(52, 'delete_cities', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(53, 'create_states', 'web', '2021-01-07 10:01:38', '2021-01-07 10:01:38'),
+(54, 'read_states', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(55, 'update_states', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(56, 'delete_states', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(57, 'create_colors', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(58, 'read_colors', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(59, 'update_colors', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(60, 'delete_colors', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(61, 'create_users', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(62, 'read_users', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(63, 'update_users', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(64, 'delete_users', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(65, 'create_roles', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(66, 'read_roles', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(67, 'update_roles', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(68, 'delete_roles', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(69, 'create_settings', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(70, 'read_settings', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(71, 'update_settings', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39'),
+(72, 'delete_settings', 'web', '2021-01-07 10:01:39', '2021-01-07 10:01:39');
 
 -- --------------------------------------------------------
 
@@ -313,8 +364,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'super_admin', 'web', '2021-01-05 14:42:40', '2021-01-05 14:42:40'),
-(2, 'admin', 'web', '2021-01-05 14:42:42', '2021-01-05 14:42:42');
+(1, 'super_admin', 'web', '2021-01-07 10:01:37', '2021-01-07 10:01:37'),
+(2, 'admin', 'web', '2021-01-07 10:01:41', '2021-01-07 10:01:41');
 
 -- --------------------------------------------------------
 
@@ -342,18 +393,70 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (8, 1),
 (9, 1),
 (10, 1),
-(10, 2),
 (11, 1),
 (12, 1),
 (13, 1),
 (14, 1),
-(14, 2),
 (15, 1),
 (16, 1),
 (17, 1),
 (18, 1),
 (19, 1),
-(20, 1);
+(20, 1),
+(21, 1),
+(22, 1),
+(23, 1),
+(24, 1),
+(25, 1),
+(26, 1),
+(27, 1),
+(28, 1),
+(29, 1),
+(30, 1),
+(31, 1),
+(32, 1),
+(33, 1),
+(34, 1),
+(35, 1),
+(36, 1),
+(37, 1),
+(38, 1),
+(39, 1),
+(40, 1),
+(41, 1),
+(42, 1),
+(43, 1),
+(44, 1),
+(45, 1),
+(46, 1),
+(47, 1),
+(48, 1),
+(49, 1),
+(50, 1),
+(51, 1),
+(52, 1),
+(53, 1),
+(54, 1),
+(55, 1),
+(56, 1),
+(57, 1),
+(58, 1),
+(59, 1),
+(60, 1),
+(61, 1),
+(62, 1),
+(62, 2),
+(63, 1),
+(64, 1),
+(65, 1),
+(66, 1),
+(66, 2),
+(67, 1),
+(68, 1),
+(69, 1),
+(70, 1),
+(71, 1),
+(72, 1);
 
 -- --------------------------------------------------------
 
@@ -464,9 +567,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `image`, `enabled`, `email_verified_at`, `password`, `remember_token`, `last_login_at`, `last_login_ip`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'super', 'admin', 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$81lZSuTmiYfEkdvFV4VeXOrWyEZKXdbiEO3l3LjAHhIJptrn1.PBe', NULL, NULL, NULL, '2021-01-04 22:00:00', '2021-01-04 22:00:00', NULL),
-(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$FMQpPl1jXBLRlvnH7Uj0TuxIaJJSRED3YS2BMN0KGhJagLjTD2Ce2', NULL, NULL, NULL, '2021-01-04 22:00:00', '2021-01-04 22:00:00', NULL),
-(3, 'ali', 'ali', 'ali', 'ali@gmail.com', 'default.png', 1, NULL, '$2y$10$TNeIzZm89hWodVwbkRtxoueE0a1/NJGoKMQZ.3mUH6E78iS0wWxw2', NULL, NULL, NULL, '2021-01-05 14:46:15', '2021-01-05 14:46:15', NULL);
+(1, 'super', 'admin', 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$3rhbZFPHP0ifM15zFtWiKeSlYXaMMZnl2oP6yzx/xmFfwiq4wMZX2', NULL, NULL, NULL, '2021-01-06 22:00:00', '2021-01-06 22:00:00', NULL),
+(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$jCqGlHGdjoDyRAOZU9Hy3uJj7J.DcZ60V/teOXpTS/6Taf.z09tCC', NULL, NULL, NULL, '2021-01-06 22:00:00', '2021-01-06 22:00:00', NULL);
 
 --
 -- Indexes for dumped tables
@@ -708,7 +810,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -756,7 +858,7 @@ ALTER TABLE `trade_marks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
