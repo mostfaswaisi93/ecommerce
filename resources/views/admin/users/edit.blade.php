@@ -22,16 +22,27 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
-                                    <div class="col-md-4 col-12">
+                                    <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <div class="controls">
-                                                <label>{{ trans('admin.name') }}</label>
-                                                <input id="name" type="text" name="name" class="form-control"
-                                                    value="{{ $user->name }}" placeholder="{{ trans('admin.name') }}">
+                                                <label>{{ trans('admin.first_name') }}</label>
+                                                <input id="first_name" type="text" name="first_name"
+                                                    class="form-control" value="{{ $user->first_name }}"
+                                                    placeholder="{{ trans('admin.first_name') }}">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 col-12">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <div class="controls">
+                                                <label>{{ trans('admin.last_name') }}</label>
+                                                <input id="last_name" type="text" name="last_name" class="form-control"
+                                                    value="{{ $user->last_name }}"
+                                                    placeholder="{{ trans('admin.last_name') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <div class="controls">
                                                 <label>{{ trans('admin.username') }}</label>
@@ -41,7 +52,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 col-12">
+                                    <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <div class="controls">
                                                 <label>{{ trans('admin.email') }}</label>
@@ -83,12 +94,76 @@
                                             <table class="table table-borderless">
                                                 <thead>
                                                     <tr>
-                                                        <th>{{ trans('admin.module') }}</th>
+                                                        <th>#</th>
                                                         @foreach ($maps as $map)
                                                         <th>
                                                             {{ trans('admin.' .$map) }}
                                                         </th>
                                                         @endforeach
+                                                    </tr>
+                                                    <tr>
+                                                        <th>
+                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                <input type="checkbox" name="" id="select-all">
+                                                                <span class="vs-checkbox">
+                                                                    <span class="vs-checkbox--check">
+                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                    </span>
+                                                                </span> {{ trans('admin.select_all_permissions') }}
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                <i class="feather icon-pocket feather-select"></i>
+                                                                &nbsp;
+                                                                <input type="checkbox" name="" id="select-create"
+                                                                    title="{{ trans('admin.select_all') }}">
+                                                                <span class="vs-checkbox">
+                                                                    <span class="vs-checkbox--check">
+                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                <i class="feather icon-pocket feather-select"></i>
+                                                                &nbsp;
+                                                                <input type="checkbox" name="" id="select-read"
+                                                                    title="{{ trans('admin.select_all') }}">
+                                                                <span class="vs-checkbox">
+                                                                    <span class="vs-checkbox--check">
+                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                <i class="feather icon-pocket feather-select"></i>
+                                                                &nbsp;
+                                                                <input type="checkbox" name="" id="select-update"
+                                                                    title="{{ trans('admin.select_all') }}">
+                                                                <span class="vs-checkbox">
+                                                                    <span class="vs-checkbox--check">
+                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                <i class="feather icon-pocket feather-select"></i>
+                                                                &nbsp;
+                                                                <input type="checkbox" name="" id="select-delete"
+                                                                    title="{{ trans('admin.select_all') }}">
+                                                                <span class="vs-checkbox">
+                                                                    <span class="vs-checkbox--check">
+                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -138,3 +213,31 @@
 </div>
 
 @endsection
+
+@push('scripts')
+
+<script type="text/javascript">
+    document.getElementById('select-all').onclick = function() {
+  var checkboxes = document.getElementsByName('permissions[]');
+  for (var checkbox of checkboxes) {
+    checkbox.checked = this.checked;
+  }
+}
+
+// Select All By Name
+var models = ["users", "categories", "countries", "cities"];
+var mLen = models.length;
+var maps = ["create", "read", "update", "delete"];
+var text;
+document.getElementById('select-create').onclick = function() {
+  for (i = 0; i < mLen; i++) {
+    text = "create_" + models[i];
+  }
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  for (var checkbox of checkboxes) {
+    checkbox.checked = this.checked;
+  }
+}
+</script>
+
+@endpush

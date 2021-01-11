@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UsersRequest;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -27,9 +28,9 @@ class UsersController extends Controller
             return datatables()->of($users)
                 ->addColumn('action', function ($data) {
                     if (auth()->user()->can(['update_users', 'delete_users'])) {
-                        $button = '<a type="button" title="'.trans("admin.edit").'" name="edit" href="users/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
+                        $button = '<a type="button" title="' . trans("admin.edit") . '" name="edit" href="users/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
                         $button .= '&nbsp;';
-                        $button .= '<a type="button" title="'.trans("admin.delete").'" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
+                        $button .= '<a type="button" title="' . trans("admin.delete") . '" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
                         return $button;
                     }
                 })
@@ -44,17 +45,8 @@ class UsersController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(Request $request)
+    public function store(UsersRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'username' => 'required|unique:users',
-            'email' => 'required|unique:users',
-            'image' => 'image',
-            'password' => 'required|confirmed',
-            'permissions' => 'required|min:1',
-        ]);
-
         $request_data = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
         $request_data['password'] = bcrypt($request->password);
 
@@ -68,7 +60,7 @@ class UsersController extends Controller
         }
 
         $user = User::create($request_data);
-        $user->attachRole('admin');
+        $user->assignRole('admin');
         $user->syncPermissions($request->permissions);
 
         Toastr::success(__('admin.added_successfully'));
@@ -83,7 +75,8 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'username' => ['required', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', Rule::unique('users')->ignore($user->id)],
             'image' => 'image',
@@ -93,7 +86,7 @@ class UsersController extends Controller
         $request_data = $request->except(['permissions', 'image']);
         if ($request->image) {
             if ($user->image != 'default.png') {
-                Storage::disk('public_uploads')->delete('/images/' . $user->image);
+                Storage::disk('public_uploads')->delete('/users/' . $user->image);
             }
 
             Image::make($request->image)
@@ -115,7 +108,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         if ($user->image != 'default.png') {
-            Storage::disk('public_uploads')->delete('/images/' . $user->image);
+            Storage::disk('public_uploads')->delete('/users/' . $user->image);
         }
         $user->delete();
     }

@@ -150,6 +150,9 @@ return [
     'all_countries'             => 'All Countries',
     'all_cities'                => 'All Cities',
 
+    'select_all'                => 'Select All',
+    'select_all_permissions'    => 'Select All Permissions',
+
     'permissions'               => 'Permissions',
     'name'                      => 'Name',
     'username'                  => 'Username',

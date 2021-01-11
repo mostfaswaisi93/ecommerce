@@ -151,6 +151,9 @@ return [
     'all_countries'             => 'كل الدول',
     'all_cities'                => 'كل المدن',
 
+    'select_all'                => 'اختر الكل',
+    'select_all_permissions'    => 'حدد كافة الصلاحيات',
+
     'permissions'               => 'الصلاحيات',
     'name'                      => 'الاسم',
     'username'                  => 'اسم المستخدم',
