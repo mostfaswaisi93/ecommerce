@@ -9,4 +9,10 @@ class Color extends BaseModel
     use HasFactory;
 
     protected $table = 'colors';
+
+    protected $fillable = [
+        'name_ar',
+        'name_en',
+        'color',
+    ];
 }

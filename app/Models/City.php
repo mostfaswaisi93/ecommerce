@@ -9,4 +9,15 @@ class City extends BaseModel
     use HasFactory;
 
     protected $table = 'cities';
+
+    protected $fillable = [
+        'city_name_ar',
+        'city_name_en',
+        'country_id',
+    ];
+
+    public function country_id()
+    {
+        return $this->hasOne('App\Models\Country', 'id', 'country_id');
+    }
 }
