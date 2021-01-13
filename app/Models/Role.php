@@ -34,6 +34,11 @@ class Role extends Model
 
         // Users Count
         $users = DB::table('model_has_roles')
+            ->join('users', 'users.id', '=', 'model_has_roles.role_id')
+            ->select('users.id', 'model_has_roles.role_id')
+            ->get();
+
+        $users = DB::table('model_has_roles')
             ->addSelect(DB::raw('COUNT(role_id) as result'))
             ->groupBy('role_id')
             ->count();
@@ -44,6 +49,6 @@ class Role extends Model
                 $query->where('name', $role);
             })->count();
         }
-        return $userCount;
+        return $users;
     }
 }

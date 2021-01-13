@@ -71,6 +71,8 @@ Route::group(
             Route::get('roles/destroy/{id}', 'RolesController@destroy');
 
             Route::get('users/destroy/{id}', 'UsersController@destroy');
+            Route::delete('users/destroy/all', 'UsersController@multi_delete');
+            Route::get('users/multi', 'UsersController@multi')->name('users.multi');
             Route::post('users/updateStatus/{id}', 'UsersController@updateStatus');
         });
     }

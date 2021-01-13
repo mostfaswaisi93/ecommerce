@@ -3,21 +3,6 @@
 
 @section('content')
 
-<div class="content-header">
-    <div class="breadcrumbs-style mb-2">
-        <div class="breadcrumbs-top row">
-            <div class="col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('admin.index') }}">{{ trans('admin.home') }}</a>
-                    </li>
-                    <li class="breadcrumb-item active">{{ trans('admin.facilities') }}</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="btn-group">
     @if (auth()->user()->can('facilities_create'))
     <button type="button" name="create_facility" id="create_facility" class="btn btn-primary mb-2">

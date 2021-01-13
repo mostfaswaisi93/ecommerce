@@ -113,6 +113,26 @@ class UsersController extends Controller
         $user->delete();
     }
 
+    public function multi_delete() {
+		if (is_array(request('item'))) {
+			User::destroy(request('item'));
+		} else {
+			User::find(request('item'))->delete();
+		}
+		session()->flash('success', trans('admin.deleted_record'));
+		return redirect(aurl('users'));
+    }
+    
+    function multi(Request $request)
+    {
+        $user_id_array = $request->input('id');
+        $user = User::whereIn('id', $user_id_array);
+        if($user->delete())
+        {
+            echo 'Data Deleted';
+        }
+    }
+
     public function updateStatus(Request $request, $id)
     {
         $user = User::find($id);

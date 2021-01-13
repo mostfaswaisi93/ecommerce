@@ -25,6 +25,7 @@
 <!-- END: Theme JS-->
 
 {{-- Custom js --}}
+<script src="{{ url('backend/js/functions.js') }}"></script>
 <script src="{{ url('backend/js/image_preview.js') }}"></script>
 
 {{-- CDNs --}}
@@ -48,39 +49,6 @@
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
 
 {!! Toastr::message() !!}
-
-<script>
-    $(document).ready(function () {
-        CKEDITOR.config.language    =  "{{ app()->getLocale() }}";
-    });
-
-    // Footer Year
-    document.getElementById("year").innerHTML = new Date().getFullYear();
-
-    function FileUpload() {
-        event.preventDefault();
-        document.getElementById("image").click();
-    }
-
-    function IconUpload() {
-        event.preventDefault();
-        document.getElementById("icon").click();
-    }
-
-    function getDataTableLanguage() {
-        var lang = $('html').attr('lang');
-        return '//cdn.datatables.net/plug-ins/1.10.22/i18n/' + lang + '.json';
-    }
-
-    function check_all(){
-        $('input[class="item_checkbox"]:checkbox').each(function(){
-            if($('input[class="check_all"]:checkbox:checked').length == 0)
-            {
-                $(this).prop('checked', false);
-            }
-        });
-    }
-</script>
 
 @stack('scripts')
 
