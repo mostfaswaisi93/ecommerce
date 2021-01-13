@@ -13,10 +13,20 @@
             <div class="card-content">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="roles-table" class="table table-striped table-bordered dt-responsive nowrap">
+                        <table id="roles-table" class="table table-striped table-bordered dt-responsive nowrap"
+                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>
+                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                            <input type="checkbox" name="" id="">
+                                            <span class="vs-checkbox">
+                                                <span class="vs-checkbox--check">
+                                                    <i class="vs-icon feather icon-check"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </th>
                                     <th>#</th>
                                     <th>{{ trans('admin.name') }}</th>
                                     <th>{{ trans('admin.users_count') }}</th>
@@ -53,7 +63,7 @@
             },
             columns: [
                 {
-                    'defaultContent': '<input type="checkbox" />',
+                    'defaultContent': '<div class="vs-checkbox-con vs-checkbox-primary"><input type="checkbox" name="" id=""><span class="vs-checkbox"><span class="vs-checkbox--check"><i class="vs-icon feather icon-check"></i></span></span></div>',
                     'data'           : 'checkbox',
                     'name'           : 'checkbox',
                     'orderable'      : false,

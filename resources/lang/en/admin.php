@@ -64,6 +64,8 @@ return [
     'create_city'               => 'Add New City',
     'create_state'              => 'Add New State',
     'create_color'              => 'Add New Color',
+    'create_weight'             => 'Add New Weight',
+    'create_size'               => 'Add New Size',
     'create_role'               => 'Add New Role',
     'create_user'               => 'Add New User',
 
@@ -77,6 +79,8 @@ return [
     'edit_city'                 => 'Edit City',
     'edit_state'                => 'Edit State',
     'edit_color'                => 'Edit Color',
+    'edit_weight'               => 'Edit Weight',
+    'edit_size'                 => 'Edit Size',
     'edit_role'                 => 'Edit Role',
     'edit_user'                 => 'Edit User',
 
@@ -123,6 +127,8 @@ return [
     'cities'                    => 'Cities',
     'states'                    => 'States',
     'colors'                    => 'Colors',
+    'weights'                   => 'Weights',
+    'sizes'                     => 'Sizes',
     'payment_methods'           => 'Payment Methods',
     'rates'                     => 'Rates',
     'users'                     => 'Users',
@@ -144,6 +150,8 @@ return [
     'city'                      => 'City',
     'state'                     => 'State',
     'color'                     => 'Color',
+    'weight'                    => 'Weight',
+    'size'                      => 'Size',
     'role'                      => 'Role',
     'user'                      => 'User',
 

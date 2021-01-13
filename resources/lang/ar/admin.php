@@ -65,6 +65,8 @@ return [
     'create_city'               => 'إضافة مدينة جديدة',
     'create_state'              => 'إضافة منطقة جديدة',
     'create_color'              => 'إضافة لون جديد',
+    'create_weight'             => 'إضافة مقاس جديد',
+    'create_size'               => 'إضافة حجم جديد',
     'create_role'               => 'إضافة دور جديد',
     'create_user'               => 'إضافة مستخدم جديد',
 
@@ -78,6 +80,8 @@ return [
     'edit_city'                 => 'تعديل مدينة',
     'edit_state'                => 'تعديل منطقة',
     'edit_color'                => 'تعديل لون',
+    'edit_weight'               => 'تعديل مقاس',
+    'edit_size'                 => 'تعديل حجم',
     'edit_role'                 => 'تعديل دور',
     'edit_user'                 => 'تعديل مستخدم',
 
@@ -124,6 +128,8 @@ return [
     'cities'                    => 'المدن',
     'states'                    => 'المناطق',
     'colors'                    => 'الألوان',
+    'weights'                   => 'المقاسات',
+    'sizes'                     => 'الأحجام',
     'payment_methods'           => 'طرق الدفع',
     'rates'                     => 'التقييم',
     'users'                     => 'المستخدمين',
@@ -145,6 +151,8 @@ return [
     'city'                      => 'المدينة',
     'state'                     => 'المنطقة',
     'color'                     => 'اللون',
+    'weight'                    => 'المقاس',
+    'size'                      => 'الحجم',
     'role'                      => 'دور',
     'user'                      => 'مستخدم',
 

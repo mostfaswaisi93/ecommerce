@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Size extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name_ar',
+        'name_en',
+        'department_id',
+        'is_public',
+    ];
+
+    public function department_id()
+    {
+        return $this->hasOne('App\Models\Department', 'id', 'department_id');
+    }
 }

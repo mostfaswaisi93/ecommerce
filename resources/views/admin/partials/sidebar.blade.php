@@ -139,6 +139,22 @@
                         </a>
                     </li>
                     @endif
+                    @if (auth()->user()->can('read_weights'))
+                    <li {{ request()->route()->getName() === 'admin.weights.index' ? 'class=active' : '' }}>
+                        <a href="{{ route('admin.weights.index') }}" class="nav-link">
+                            <i class="fa fa-building-o"></i>
+                            <span class="title">{{ trans('admin.weights') }}</span>
+                        </a>
+                    </li>
+                    @endif
+                    @if (auth()->user()->can('read_sizes'))
+                    <li {{ request()->route()->getName() === 'admin.sizes.index' ? 'class=active' : '' }}>
+                        <a href="{{ route('admin.sizes.index') }}" class="nav-link">
+                            <i class="fa fa-building-o"></i>
+                            <span class="title">{{ trans('admin.sizes') }}</span>
+                        </a>
+                    </li>
+                    @endif
                     {{-- <li {{ request()->route()->getName() === 'admin.payments.index' ? 'class=active' : '' }}>
                         <a href="{{ route('admin.payments.index') }}" class="nav-link">
                             <i class="fa fa-money"></i>

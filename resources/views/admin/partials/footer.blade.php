@@ -71,6 +71,15 @@
         var lang = $('html').attr('lang');
         return '//cdn.datatables.net/plug-ins/1.10.22/i18n/' + lang + '.json';
     }
+
+    function check_all(){
+        $('input[class="item_checkbox"]:checkbox').each(function(){
+            if($('input[class="check_all"]:checkbox:checked').length == 0)
+            {
+                $(this).prop('checked', false);
+            }
+        });
+    }
 </script>
 
 @stack('scripts')

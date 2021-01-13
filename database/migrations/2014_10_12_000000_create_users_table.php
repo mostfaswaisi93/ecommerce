@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
@@ -25,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamp('last_login_at')->nullable();
+            $table->timestamp('last_login_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('last_login_ip')->nullable();
             $table->timestamps();
             $table->softDeletes();

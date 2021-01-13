@@ -17,6 +17,16 @@
                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
+                                    <th>
+                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                            <input type="checkbox" name="" id="">
+                                            <span class="vs-checkbox">
+                                                <span class="vs-checkbox--check">
+                                                    <i class="vs-icon feather icon-check"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </th>
                                     <th>#</th>
                                     <th>{{ trans('admin.image') }}</th>
                                     <th>{{ trans('admin.full_name') }}</th>
@@ -56,7 +66,18 @@
             ajax: {
                 url: "{{ route('admin.users.index') }}",
             },
-            columns: [{
+            columns: [
+                {
+                    'defaultContent': '<div class="vs-checkbox-con vs-checkbox-primary"><input type="checkbox" name="" id=""><span class="vs-checkbox"><span class="vs-checkbox--check"><i class="vs-icon feather icon-check"></i></span></span></div>',
+                    'data'           : 'checkbox',
+                    'name'           : 'checkbox',
+                    'orderable'      : false,
+                    'searchable'     : false,
+                    'exportable'     : false,
+                    'printable'      : true,
+                    'width'          : '10px'
+                },
+                {
                     render: function(data, type, row, meta) {
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }, searchable: false, orderable: false
@@ -87,7 +108,7 @@
                 { data: 'enabled' },
                 { data: 'action', orderable: false }
             ], "columnDefs": [ {
-                "targets": 6,
+                "targets": 7,
                 render: function (data, type, row, meta){
                 var $select = $(`
                     <select class='status form-control'

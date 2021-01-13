@@ -14,8 +14,10 @@ Route::group(
 
             Route::resources([
                 'trade_marks' => TradeMarksController::class,
+                'departments' => DepartmentsController::class,
                 'categories' => CategoriesController::class,
                 'sub_categories' => SubCategoriesController::class,
+                'products' => ProductsController::class,
                 'manufacturers' => ManufacturersController::class,
                 'shippings' => ShippingsController::class,
                 'malls' => MallsController::class,
@@ -25,6 +27,8 @@ Route::group(
                 'cities' => CitiesController::class,
                 'states' => StatesController::class,
                 'colors' => ColorsController::class,
+                'weights' => WeightsController::class,
+                'sizes' => SizesController::class,
                 'settings' => SettingsController::class,
                 'roles' => RolesController::class,
                 'users' => UsersController::class,
@@ -32,9 +36,13 @@ Route::group(
 
             Route::get('trade_marks/destroy/{id}', 'TradeMarksController@destroy');
 
+            Route::get('departments/destroy/{id}', 'DepartmentsController@destroy');
+
             Route::get('categories/destroy/{id}', 'CategoriesController@destroy');
 
             Route::get('sub_categories/destroy/{id}', 'SubCategoriesController@destroy');
+
+            Route::get('products/destroy/{id}', 'ProductsController@destroy');
 
             Route::get('manufacturers/destroy/{id}', 'ManufacturersController@destroy');
 
@@ -52,6 +60,10 @@ Route::group(
             Route::post('states/updateStatus/{id}', 'StatesController@updateStatus');
 
             Route::get('colors/destroy/{id}', 'ColorsController@destroy');
+
+            Route::get('weights/destroy/{id}', 'WeightsController@destroy');
+
+            Route::get('sizes/destroy/{id}', 'SizesController@destroy');
 
             Route::get('settings', 'SettingsController@index')->name('settings.index');
             Route::post('settings', 'SettingsController@update')->name('settings.update');
