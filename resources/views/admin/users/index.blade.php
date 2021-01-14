@@ -210,8 +210,9 @@
     $(document).on('click', '.delete', function(){
         user_id = $(this).attr('id');
         swal({
-            title: "{{ trans('admin.are_sure') }}",
+            title: "{{ trans('admin.delete_msg') }}",
             type: 'warning',
+            showCloseButton: true,
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -232,16 +233,31 @@
 
     // Multi Delete
     $(document).on('click', '.multi_delete', function(){
-        user_id = $(this).attr('id');
-        swal({
-            title: "{{ trans('admin.are_sure') }}",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '{{ trans('admin.yes') }}',
-            cancelButtonText: '{{ trans('admin.cancel') }}'
-        }).then(function(result){
+        var item_checked = $('input[class="item_checkbox"]:checkbox').filter(":checked").length;
+        var swalAlert;
+        if (item_checked > 0) {
+            swalAlert = swal({
+                title: "{{ trans('admin.multi_delete') }} "+ item_checked +"!",
+                type: 'warning',
+                showCloseButton: true,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '{{ trans('admin.yes') }}',
+                cancelButtonText: '{{ trans('admin.cancel') }}'
+            }) 
+        } else {
+            swalAlert = swal({
+                title: "{{ trans('admin.no_multi_data') }}",
+                type: "warning",
+                showCloseButton: true,
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonColor: '#222223',
+                cancelButtonText: '{{ trans('admin.close') }}'
+            })
+        }
+        swalAlert.then(function(result){
             if(result.value){
                 $.ajax({
                     url:"users/destroy/" + user_id,

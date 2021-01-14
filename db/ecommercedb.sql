@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 13, 2021 at 04:44 PM
+-- Generation Time: Jan 14, 2021 at 02:52 PM
 -- Server version: 10.5.4-MariaDB-log
 -- PHP Version: 7.4.10
 
@@ -699,7 +699,27 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `image`, `enabled`, `email_verified_at`, `password`, `remember_token`, `last_login_at`, `last_login_ip`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'super', 'admin', 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$W.4lLhRZ6pmfcY4dhmIHEegqeNj.jzPpRuElukqngOM3wG53hy26C', NULL, '2021-01-13 16:43:50', NULL, '2021-01-12 22:00:00', '2021-01-12 22:00:00', NULL),
-(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$d6AzeoDSyoQlBUavvaJSTOKwSoCmvIat48EUt4oFkCGCQp2oAg.y6', NULL, '2021-01-13 16:43:50', NULL, '2021-01-12 22:00:00', '2021-01-12 22:00:00', NULL);
+(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$d6AzeoDSyoQlBUavvaJSTOKwSoCmvIat48EUt4oFkCGCQp2oAg.y6', NULL, '2021-01-13 16:43:50', NULL, '2021-01-12 22:00:00', '2021-01-14 11:27:22', NULL),
+(3, 'Annamarie', 'Reichel', 'sheila10', 'wilton.okeefe@example.org', 'default.png', 1, '2021-01-14 12:06:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'RjDUntO3Ln', '2021-01-14 12:06:01', NULL, '2021-01-14 12:06:01', '2021-01-14 12:06:01', NULL),
+(4, 'Shakira', 'Huel', 'millie.reinger', 'hudson.alfred@example.org', 'default.png', 1, '2021-01-14 12:06:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'd5C2UWdMhl', '2021-01-14 12:06:01', NULL, '2021-01-14 12:06:01', '2021-01-14 12:06:01', NULL),
+(5, 'Lorenz', 'Klein', 'sbradtke', 'borer.carolanne@example.net', 'default.png', 1, '2021-01-14 12:06:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'LuPVfdDHJz', '2021-01-14 12:06:01', NULL, '2021-01-14 12:06:01', '2021-01-14 12:06:01', NULL),
+(6, 'Linda', 'Adams', 'georgiana90', 'pablo55@example.com', 'default.png', 1, '2021-01-14 12:06:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'nXloHnKFZG', '2021-01-14 12:06:01', NULL, '2021-01-14 12:06:01', '2021-01-14 12:06:01', NULL),
+(7, 'Dario', 'Gutmann', 'ostark', 'eleanora.larson@example.net', 'default.png', 1, '2021-01-14 12:06:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ifsCq6hfVj', '2021-01-14 12:06:01', NULL, '2021-01-14 12:06:01', '2021-01-14 12:06:01', NULL),
+(8, 'Eladio', 'Blick', 'qerdman', 'hmacejkovic@example.org', 'default.png', 1, '2021-01-14 12:06:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'J2km7sswsv', '2021-01-14 12:06:01', NULL, '2021-01-14 12:06:01', '2021-01-14 12:06:01', NULL),
+(9, 'Eloisa', 'Koch', 'tianna.marquardt', 'gleichner.freddy@example.com', 'default.png', 1, '2021-01-14 12:06:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'SUt4hAFBuZ', '2021-01-14 12:06:01', NULL, '2021-01-14 12:06:01', '2021-01-14 12:06:01', NULL),
+(10, 'Virginie', 'Reichel', 'savanah.kuhic', 'obarrows@example.org', 'default.png', 1, '2021-01-14 12:06:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'b2O8tVmKIL', '2021-01-14 12:06:01', NULL, '2021-01-14 12:06:01', '2021-01-14 12:06:01', NULL),
+(11, 'Kristian', 'Walker', 'bernard19', 'albert64@example.com', 'default.png', 1, '2021-01-14 12:06:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'RIhnnEXMMC', '2021-01-14 12:06:01', NULL, '2021-01-14 12:06:01', '2021-01-14 12:06:01', NULL),
+(12, 'Virgil', 'Flatley', 'uerdman', 'jazlyn.rodriguez@example.net', 'default.png', 1, '2021-01-14 12:06:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'NaIP0QDchr', '2021-01-14 12:06:01', NULL, '2021-01-14 12:06:01', '2021-01-14 12:06:01', NULL),
+(13, 'Ardella', 'Frami', 'angelo.leannon', 'homenick.sean@example.com', 'default.png', 1, '2021-01-14 12:11:09', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'XeepeBz5Oi', '2021-01-14 12:11:09', NULL, '2021-01-14 12:11:09', '2021-01-14 12:11:09', NULL),
+(14, 'Margaret', 'Mayert', 'cruickshank.orie', 'gwaelchi@example.org', 'default.png', 1, '2021-01-14 12:11:09', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'obuIOAuKZn', '2021-01-14 12:11:09', NULL, '2021-01-14 12:11:09', '2021-01-14 12:11:09', NULL),
+(15, 'Karolann', 'Luettgen', 'isac.balistreri', 'myrtie81@example.com', 'default.png', 1, '2021-01-14 12:11:09', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2nyulqdhHx', '2021-01-14 12:11:09', NULL, '2021-01-14 12:11:09', '2021-01-14 12:11:09', NULL),
+(16, 'Reina', 'Harber', 'kassulke.antwon', 'fward@example.net', 'default.png', 1, '2021-01-14 12:11:09', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'mMzIftnXmP', '2021-01-14 12:11:09', NULL, '2021-01-14 12:11:09', '2021-01-14 12:11:09', NULL),
+(17, 'Santos', 'Baumbach', 'scollier', 'iolson@example.net', 'default.png', 1, '2021-01-14 12:11:09', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'wJVVDq6tJC', '2021-01-14 12:11:09', NULL, '2021-01-14 12:11:09', '2021-01-14 12:11:09', NULL),
+(18, 'Carroll', 'Wisozk', 'randy48', 'zemlak.twila@example.org', 'default.png', 1, '2021-01-14 12:11:09', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ob8ypXF4N3', '2021-01-14 12:11:09', NULL, '2021-01-14 12:11:09', '2021-01-14 12:11:09', NULL),
+(19, 'Alvah', 'Veum', 'lang.maude', 'cindy.hoppe@example.com', 'default.png', 1, '2021-01-14 12:11:09', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '9csRcoE01g', '2021-01-14 12:11:09', NULL, '2021-01-14 12:11:09', '2021-01-14 12:11:09', NULL),
+(20, 'Ellis', 'Kiehn', 'kade51', 'nienow.adolphus@example.com', 'default.png', 1, '2021-01-14 12:11:09', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '91H86sFK6Z', '2021-01-14 12:11:09', NULL, '2021-01-14 12:11:09', '2021-01-14 12:11:09', NULL),
+(21, 'Ned', 'Cartwright', 'marquardt.alta', 'abdul11@example.net', 'default.png', 1, '2021-01-14 12:11:09', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2rSENrue6C', '2021-01-14 12:11:09', NULL, '2021-01-14 12:11:09', '2021-01-14 12:11:09', NULL),
+(22, 'Kyra', 'Schulist', 'nicholaus.hoeger', 'nella55@example.com', 'default.png', 1, '2021-01-14 12:11:09', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'eZpUeARLBV', '2021-01-14 12:11:09', NULL, '2021-01-14 12:11:09', '2021-01-14 12:11:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -1079,7 +1099,7 @@ ALTER TABLE `trade_marks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `weights`

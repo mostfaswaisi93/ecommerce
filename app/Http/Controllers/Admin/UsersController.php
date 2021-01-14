@@ -23,7 +23,8 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = User::OrderBy('created_at', 'desc')->role('admin')->get();
+        // $users = User::OrderBy('created_at', 'desc')->role('admin')->get();
+        $users = User::OrderBy('created_at', 'desc')->get();
         if (request()->ajax()) {
             return datatables()->of($users)
                 ->addColumn('action', function ($data) {
@@ -117,7 +118,11 @@ class UsersController extends Controller
 		if (is_array(request('item'))) {
 			User::destroy(request('item'));
 		} else {
-			User::find(request('item'))->delete();
+            $user = User::find(request('item'));
+            if ($user->image != 'default.png') {
+                Storage::disk('public_uploads')->delete('/users/' . $user->image);
+            }
+            $user->delete();
 		}
 		session()->flash('success', trans('admin.deleted_record'));
 		return redirect(aurl('users'));
@@ -125,8 +130,8 @@ class UsersController extends Controller
     
     function multi(Request $request)
     {
-        $user_id_array = $request->input('id');
-        $user = User::whereIn('id', $user_id_array);
+        $users = $request->input('id');
+        $user = User::whereIn('id', $users);
         if($user->delete())
         {
             echo 'Data Deleted';

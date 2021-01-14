@@ -43,7 +43,9 @@ return [
     'change_password'           => 'Change Password',
     'too_many_requests'         => 'Too Many Requests, Wait 60 Seconds and Try Again',
 
-    'are_sure'                  => 'Are you Sure?',
+    'delete_msg'                => 'Are you Sure?',
+    'multi_delete'              => 'Do you agree to delete the following records and their number ',
+    'no_multi_data'             => 'Please select some records to delete!',
     'confirm_delete'            => 'Confirm Delete',
     'yes'                       => 'Yes',
     'no'                        => 'No',

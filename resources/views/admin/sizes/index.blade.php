@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.roles') }} @endsection
+@section('title') {{ trans('admin.sizes') }} @endsection
 
 @section('content')
 
@@ -7,13 +7,13 @@
     <section>
         <div class="card">
             <div class="card-header">
-                <div class="tbl-title">{{ trans('admin.roles') }}</div>
+                <div class="tbl-title">{{ trans('admin.sizes') }}</div>
             </div>
             <hr>
             <div class="card-content">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="roles-table" class="table table-striped table-bordered dt-responsive nowrap">
+                        <table id="sizes-table" class="table table-striped table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -22,7 +22,7 @@
                                     <th>{{ trans('admin.users_count') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>
-                                        @if(auth()->user()->can(['update_roles', 'delete_roles']))
+                                        @if(auth()->user()->can(['update_sizes', 'delete_sizes']))
                                         {{ trans('admin.action') }}
                                         @endif
                                     </th>
@@ -43,13 +43,13 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#roles-table').DataTable({
+        $('#sizes-table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             order: [[ 2, "desc" ]],
             ajax: {
-                url: "{{ route('admin.roles.index') }}",
+                url: "{{ route('admin.sizes.index') }}",
             },
             columns: [
                 {
@@ -110,16 +110,16 @@
                   text: '<i class="feather icon-file"></i> PDF',
                   pageSize: 'A4', attr: { title: 'PDF' }
                 },
-                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_role") }}',
-                  className: '@if (auth()->user()->can("create_roles")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
+                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_size") }}',
+                  className: '@if (auth()->user()->can("create_sizes")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
                   attr: {
-                          title: '{{ trans("admin.create_role") }}',
-                          href: '{{ route("admin.roles.create") }}' 
+                          title: '{{ trans("admin.create_size") }}',
+                          href: '{{ route("admin.sizes.create") }}' 
                         },
                     action: function (e, dt, node, config)
                     {
                         // href location
-                        window.location.href = '{{ route("admin.roles.create") }}';
+                        window.location.href = '{{ route("admin.sizes.create") }}';
                     }
                 },
             ],
@@ -132,7 +132,7 @@
     });
     
     $(document).on('click', '.delete', function(){
-        role_id = $(this).attr('id');
+        size_id = $(this).attr('id');
         swal({
             title: "{{ trans('admin.are_sure') }}",
             type: 'warning',
@@ -144,9 +144,9 @@
         }).then(function(result){
             if(result.value){
                 $.ajax({
-                    url:"roles/destroy/" + role_id,
+                    url:"sizes/destroy/" + size_id,
                     success: function(data){
-                        $('#roles-table').DataTable().ajax.reload();
+                        $('#sizes-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');
                     }
                 });
