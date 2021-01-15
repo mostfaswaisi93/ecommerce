@@ -15,7 +15,9 @@ class CreateRelatedProudctsTable extends Migration
     {
         Schema::create('related_proudcts', function (Blueprint $table) {
             $table->id();
+            $table->integer('enabled')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

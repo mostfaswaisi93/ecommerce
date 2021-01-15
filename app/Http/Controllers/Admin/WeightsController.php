@@ -9,6 +9,26 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class WeightsController extends Controller
 {
+
+    public function test()
+    {
+        // $weight = new Weight();
+        // $weight->name = 'saied';
+        // $weight->save();
+
+        $weight = new Weight();
+        $translations = [
+            'ar' => 'الاسم في العربي',
+            'en' => 'Naam in English'
+         ];
+        $weight->setTranslations('name', $translations)->save();
+
+        // return Weight::all();
+
+        // $weight = Weight::find(7);
+        // return $weight->getTranslations();
+    }
+
     public function __construct()
     {
         $this->middleware(['permission:read_weights'])->only('index');

@@ -15,7 +15,9 @@ class CreateOtherDataTable extends Migration
     {
         Schema::create('other_data', function (Blueprint $table) {
             $table->id();
+            $table->integer('enabled')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

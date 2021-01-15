@@ -19,7 +19,7 @@
                                 <tr>
                                     <th>
                                         <div class="vs-checkbox-con vs-checkbox-primary">
-                                            <input type="checkbox" class="check_all" onclick="check_all()">
+                                            <input type="checkbox" class="check_all" onclick="check_all()" name="ids">
                                             <span class="vs-checkbox vs-checkbox-sm">
                                                 <span class="vs-checkbox--check">
                                                     <i class="vs-icon feather icon-check"></i>
@@ -231,9 +231,10 @@
         });
     });
 
-    // Multi Delete
+    // Multiple Delete
     $(document).on('click', '.multi_delete', function(){
         var item_checked = $('input[class="item_checkbox"]:checkbox').filter(":checked").length;
+        var allids = [];
         var swalAlert;
         if (item_checked > 0) {
             swalAlert = swal({
@@ -260,7 +261,8 @@
         swalAlert.then(function(result){
             if(result.value){
                 $.ajax({
-                    url:"users/destroy/" + user_id,
+                    type: "DELETE",
+                    url: "users/multi" + item_checked,
                     success: function(data){
                         $('#users-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');
@@ -277,7 +279,7 @@
 
     $(document).on('change', '#status', function(e) {
         var status_user = $(this).find("option:selected").val();
-        console.log(status_user)
+        // console.log(status_user)
         if(status_user == "1"){
             toastr.success('{{ trans('admin.status_changed') }}!');
         }else if(status_user == "0"){

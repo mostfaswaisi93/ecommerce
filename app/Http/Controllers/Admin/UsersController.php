@@ -138,6 +138,12 @@ class UsersController extends Controller
         }
     }
 
+    public function deleteChecked(Request $request)
+    {
+        $ids = $request->ids;
+        User::whereIn('id', $ids)->delete();
+    }
+
     public function updateStatus(Request $request, $id)
     {
         $user = User::find($id);

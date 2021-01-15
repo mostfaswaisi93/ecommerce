@@ -62,6 +62,7 @@ Route::group(
             Route::get('colors/destroy/{id}', 'ColorsController@destroy');
 
             Route::get('weights/destroy/{id}', 'WeightsController@destroy');
+            Route::get('weights-test', 'WeightsController@test');
 
             Route::get('sizes/destroy/{id}', 'SizesController@destroy');
 
@@ -71,6 +72,7 @@ Route::group(
             Route::get('roles/destroy/{id}', 'RolesController@destroy');
 
             Route::get('users/destroy/{id}', 'UsersController@destroy');
+            Route::delete('users/selected-users', 'UsersController@deleteChecked')->name('users.deleteSelected');
             Route::delete('users/destroy/all', 'UsersController@multi_delete');
             Route::get('users/multi', 'UsersController@multi')->name('users.multi');
             Route::post('users/updateStatus/{id}', 'UsersController@updateStatus');

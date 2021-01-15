@@ -13,13 +13,22 @@
             <div class="card-content">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="weights-table" class="table table-striped table-bordered dt-responsive nowrap">
+                        <table id="weights-table" class="table table-striped table-bordered dt-responsive nowrap"
+                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>
+                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                            <input type="checkbox" class="check_all" onclick="check_all()">
+                                            <span class="vs-checkbox vs-checkbox-sm">
+                                                <span class="vs-checkbox--check">
+                                                    <i class="vs-icon feather icon-check"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </th>
                                     <th>#</th>
                                     <th>{{ trans('admin.name') }}</th>
-                                    <th>{{ trans('admin.users_count') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>
                                         @if(auth()->user()->can(['update_weights', 'delete_weights']))
@@ -53,14 +62,9 @@
             },
             columns: [
                 {
-                    'defaultContent': '<input type="checkbox" />',
-                    'data'           : 'checkbox',
-                    'name'           : 'checkbox',
-                    'orderable'      : false,
-                    'searchable'     : false,
-                    'exportable'     : false,
-                    'printable'      : true,
-                    'width'          : '10px'
+                    render: function(data, type, row, meta) {
+                        return '<div class="vs-checkbox-con vs-checkbox-primary"><input type="checkbox" name="item[]" class="item_checkbox" value="' + row.id + '"><span class="vs-checkbox vs-checkbox-sm"><span class="vs-checkbox--check"><i class="vs-icon feather icon-check"></i></span></span></div>';
+                    }, searchable: false, orderable: false
                 },
                 {
                     render: function(data, type, row, meta) {
@@ -68,11 +72,6 @@
                     }, searchable: false, orderable: false
                 },
                 { data: 'name' },
-                { data: 'users_count', 
-                    render: function(data, type, row, meta) {
-                        return "<div class='badge badge-success'>"+ data +"</div>";
-                    }
-                },
                 { data: 'created_at' },
                 { data: 'action', orderable: false }
             ],
