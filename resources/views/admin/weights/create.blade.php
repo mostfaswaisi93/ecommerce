@@ -21,15 +21,20 @@
                                 @csrf
                                 @method('POST')
                                 <div class="row">
-                                    <div class="col-md-4 col-12">
+                                    @foreach (config('translatable.locales') as $locale)
+                                    <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <div class="controls">
-                                                <label>{{ trans('admin.name') }}</label>
+                                                <label>{{ trans('admin.' . $locale . '.name') }}</label>
                                                 <input id="name" type="text" name="name" class="form-control"
-                                                    value="{{ old('name') }}" placeholder="{{ trans('admin.name') }}">
+                                                    value="{{ old('name') }}"
+                                                    placeholder="{{ trans('admin.' . $locale . '.name') }}">
+                                                {{-- <input type="text" name="{{ $locale }}[name]" class="form-control"
+                                                value="{{ old($locale . '.name') }}"> --}}
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                     <div class="col-12">
                                         <hr>
                                     </div>

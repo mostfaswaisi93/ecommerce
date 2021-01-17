@@ -3,16 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Translatable\HasTranslations;
 
 class Manufacturer extends BaseModel
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
-    protected $table = 'manufacturers';
-
-    protected $fillable = [
-        'name_ar',
-        'name_en',
+    protected $table        = 'manufacturers';
+    protected $fillable     = [
+        'name',
         'email',
         'mobile',
         'facebook',
@@ -23,5 +22,17 @@ class Manufacturer extends BaseModel
         'lat',
         'lng',
         'icon',
+        'enabled'
     ];
+    protected $appends      = ['name_trans'];
+    public $translatable    = ['name'];
+
+    public function getNameTransAttribute()
+    {
+        if (app()->getLocale() == 'ar') {
+            return $this->getTranslation('name', 'ar');
+        } else {
+            return $this->getTranslation('name', 'en');
+        }
+    }
 }

@@ -3,16 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Translatable\HasTranslations;
 
 class Color extends BaseModel
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
-    protected $table = 'colors';
+    protected $table        = 'colors';
+    protected $fillable     = ['name', 'color', 'enabled'];
+    protected $appends      = ['name_trans'];
+    public $translatable    = ['name'];
 
-    protected $fillable = [
-        'name_ar',
-        'name_en',
-        'color',
-    ];
+    public function getNameTransAttribute()
+    {
+        if (app()->getLocale() == 'ar') {
+            return $this->getTranslation('name', 'ar');
+        } else {
+            return $this->getTranslation('name', 'en');
+        }
+    }
 }

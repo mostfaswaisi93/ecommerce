@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\WeightsRequest;
 use App\Models\Weight;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
@@ -20,7 +21,7 @@ class WeightsController extends Controller
         $translations = [
             'ar' => 'الاسم في العربي',
             'en' => 'Naam in English'
-         ];
+        ];
         $weight->setTranslations('name', $translations)->save();
 
         // return Weight::all();
@@ -61,7 +62,31 @@ class WeightsController extends Controller
         return view('admin.weights.create');
     }
 
-    public function store(WeightsRequest $request)
+    // public function store(Request $request)
+    // {
+    //     $rules = [];
+
+    //     foreach (config('translatable.locales') as $locale) {
+
+            
+    //         $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')]];
+    //     }
+
+    //     $weight = new Weight();
+    //     $translations = [
+    //         'ar' => 'الاسم في العربي',
+    //         'en' => 'Naam in English'
+    //     ];
+    //     $weight->setTranslations('name', $translations)->save();
+
+    //     $request->validate($rules);
+
+    //     Weight::create($request->all());
+    //     Toastr::success(__('admin.added_successfully'));
+    //     return redirect()->route('admin.weights.index');
+    // }
+
+    public function store(Request $request)
     {
         Weight::create([
             'name' => $request->name

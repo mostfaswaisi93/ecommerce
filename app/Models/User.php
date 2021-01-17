@@ -24,7 +24,7 @@ class User extends Authenticatable
     protected $hidden   = ['password', 'remember_token'];
     protected $casts    = [
         'email_verified_at' => 'datetime', 'created_at' => 'date:Y-m-d',
-        'last_login_at' => 'date:Y-m-d - H:i A'
+        'updated_at' => 'date:Y-m-d H:i', 'last_login_at' => 'date:Y-m-d - H:i A'
     ];
     protected $dates    = ['created_at', 'updated_at', 'deleted_at', 'last_login_at'];
 

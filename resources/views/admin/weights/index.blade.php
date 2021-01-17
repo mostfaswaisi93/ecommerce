@@ -71,7 +71,7 @@
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }, searchable: false, orderable: false
                 },
-                { data: 'name' },
+                { data: 'name_trans' },
                 { data: 'created_at' },
                 { data: 'action', orderable: false }
             ],
