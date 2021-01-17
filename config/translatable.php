@@ -12,7 +12,6 @@ return [
         'en',
     ],
 
-    
     // 'locale_separator' => '-',
 
     // 'locale' => null,
@@ -20,8 +19,6 @@ return [
     // 'use_fallback' => false,
 
     // 'use_property_fallback' => true,
-
-    // 'fallback_locale' => 'en',
 
     // 'translation_model_namespace' => null,
 

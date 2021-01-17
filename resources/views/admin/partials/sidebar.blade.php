@@ -134,7 +134,7 @@
                     @if (auth()->user()->can('read_colors'))
                     <li {{ request()->route()->getName() === 'admin.colors.index' ? 'class=active' : '' }}>
                         <a href="{{ route('admin.colors.index') }}" class="nav-link">
-                            <i class="fa fa-building-o"></i>
+                            <i class="feather icon-droplet"></i>
                             <span class="title">{{ trans('admin.colors') }}</span>
                         </a>
                     </li>
@@ -142,7 +142,7 @@
                     @if (auth()->user()->can('read_weights'))
                     <li {{ request()->route()->getName() === 'admin.weights.index' ? 'class=active' : '' }}>
                         <a href="{{ route('admin.weights.index') }}" class="nav-link">
-                            <i class="fa fa-building-o"></i>
+                            <i class="fa fa-balance-scale"></i>
                             <span class="title">{{ trans('admin.weights') }}</span>
                         </a>
                     </li>
@@ -150,7 +150,7 @@
                     @if (auth()->user()->can('read_sizes'))
                     <li {{ request()->route()->getName() === 'admin.sizes.index' ? 'class=active' : '' }}>
                         <a href="{{ route('admin.sizes.index') }}" class="nav-link">
-                            <i class="fa fa-building-o"></i>
+                            <i class="feather icon-camera"></i>
                             <span class="title">{{ trans('admin.sizes') }}</span>
                         </a>
                     </li>

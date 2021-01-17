@@ -26,11 +26,9 @@
                                         <div class="form-group">
                                             <div class="controls">
                                                 <label>{{ trans('admin.' . $locale . '.name') }}</label>
-                                                <input id="name" type="text" name="name" class="form-control"
-                                                    value="{{ old('name') }}"
+                                                <input id="name" type="text" name="name[{{ $locale }}]"
+                                                    class="form-control" value="{{ old('name.' . $locale) }}"
                                                     placeholder="{{ trans('admin.' . $locale . '.name') }}">
-                                                {{-- <input type="text" name="{{ $locale }}[name]" class="form-control"
-                                                value="{{ old($locale . '.name') }}"> --}}
                                             </div>
                                         </div>
                                     </div>

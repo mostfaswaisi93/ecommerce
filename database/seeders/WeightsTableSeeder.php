@@ -9,19 +9,19 @@ class WeightsTableSeeder extends Seeder
 {
     public function run()
     {
-        $w['name'] = [
-            'ar' => '',
-            'en' => ''
+        $weight['name'] = [
+            'ar' => 'الاسم في العربي',
+            'en' => 'Name in English'
         ];
 
-        Weight::create($w);
+        Weight::create($weight);
 
-        $weights = ['Weight One', 'Weight Two', 'Weight Three'];
-        foreach ($weights as $weight) {
-            Weight::create([
-                'ar' => ['name' => $weight],
-                'en' => ['name' => $weight],
-            ]);
-        }
+        // $weights = ['Weight One', 'Weight Two', 'Weight Three'];
+        // foreach ($weights as $weight) {
+        //     Weight::create([
+        //         'ar' => ['name' => $weight],
+        //         'en' => ['name' => $weight],
+        //     ]);
+        // }
     }
 }

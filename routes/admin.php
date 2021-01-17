@@ -62,7 +62,6 @@ Route::group(
             Route::get('colors/destroy/{id}', 'ColorsController@destroy');
 
             Route::get('weights/destroy/{id}', 'WeightsController@destroy');
-            Route::get('weights-test', 'WeightsController@test');
 
             Route::get('sizes/destroy/{id}', 'SizesController@destroy');
 

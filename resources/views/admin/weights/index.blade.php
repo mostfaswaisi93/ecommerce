@@ -130,11 +130,13 @@
         });
     });
     
+    // Delete
     $(document).on('click', '.delete', function(){
         weight_id = $(this).attr('id');
         swal({
-            title: "{{ trans('admin.are_sure') }}",
+            title: "{{ trans('admin.delete_msg') }}",
             type: 'warning',
+            showCloseButton: true,
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
