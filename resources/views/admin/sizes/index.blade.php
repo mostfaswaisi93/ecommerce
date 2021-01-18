@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.sizes') }} @endsection
+@section('title') {{ trans('admin.weights') }} @endsection
 
 @section('content')
 
@@ -7,22 +7,32 @@
     <section>
         <div class="card">
             <div class="card-header">
-                <div class="tbl-title">{{ trans('admin.sizes') }}</div>
+                <div class="tbl-title">{{ trans('admin.weights') }}</div>
             </div>
             <hr>
             <div class="card-content">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="sizes-table" class="table table-striped table-bordered dt-responsive nowrap">
+                        <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap"
+                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>
+                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                            <input type="checkbox" class="check_all" onclick="check_all()" name="ids">
+                                            <span class="vs-checkbox vs-checkbox-sm">
+                                                <span class="vs-checkbox--check">
+                                                    <i class="vs-icon feather icon-check"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </th>
                                     <th>#</th>
                                     <th>{{ trans('admin.name') }}</th>
-                                    <th>{{ trans('admin.users_count') }}</th>
+                                    <th>{{ trans('admin.status') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>
-                                        @if(auth()->user()->can(['update_sizes', 'delete_sizes']))
+                                        @if(auth()->user()->can(['update_weights', 'delete_weights']))
                                         {{ trans('admin.action') }}
                                         @endif
                                     </th>
@@ -41,37 +51,39 @@
 
 @push('scripts')
 
+@include('partials.delete')
+{{-- @include('partials.multi_delete.blade') --}}
+
 <script type="text/javascript">
+    var getLocation = "weights";
     $(document).ready(function(){
-        $('#sizes-table').DataTable({
+        // DataTable
+        $('#data-table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             order: [[ 2, "desc" ]],
             ajax: {
-                url: "{{ route('admin.sizes.index') }}",
+                url: "{{ route('admin.weights.index') }}",
             },
             columns: [
                 {
-                    'defaultContent': '<input type="checkbox" />',
-                    'data'           : 'checkbox',
-                    'name'           : 'checkbox',
-                    'orderable'      : false,
-                    'searchable'     : false,
-                    'exportable'     : false,
-                    'printable'      : true,
-                    'width'          : '10px'
+                    render: function(data, type, row, meta) {
+                        return '<div class="vs-checkbox-con vs-checkbox-primary"><input type="checkbox" name="item[]" class="item_checkbox" value="' + row.id + '"><span class="vs-checkbox vs-checkbox-sm"><span class="vs-checkbox--check"><i class="vs-icon feather icon-check"></i></span></span></div>';
+                    }, searchable: false, orderable: false
                 },
                 {
                     render: function(data, type, row, meta) {
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }, searchable: false, orderable: false
                 },
-                { data: 'name' },
-                { data: 'users_count', 
+                { data: 'name_trans' },
+                { data: 'enabled',
                     render: function(data, type, row, meta) {
-                        return "<div class='badge badge-success'>"+ data +"</div>";
-                    }
+                        var text = data ? "{{ trans('admin.active') }}" : "{{ trans('admin.inactive') }}";
+                        var color = data ? "success" : "danger"; 
+                        return "<div class='badge badge-" +color+ "'>"+ text +"</div>";
+                    }, searchable: false, orderable: false
                 },
                 { data: 'created_at' },
                 { data: 'action', orderable: false }
@@ -88,7 +100,7 @@
                     }
                 },
                 { text: '<i class="feather icon-trash-2"></i> {{ trans("admin.trash") }}',
-                  className: 'btn dtbtn btn-sm btn-danger delBtn',
+                className: 'btn dtbtn btn-sm btn-danger multi_delete delBtn',
                   attr: { title: '{{ trans("admin.trash") }}' }
                 },
                 { extend: 'csvHtml5', charset: "UTF-8", bom: true,
@@ -110,16 +122,16 @@
                   text: '<i class="feather icon-file"></i> PDF',
                   pageSize: 'A4', attr: { title: 'PDF' }
                 },
-                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_size") }}',
-                  className: '@if (auth()->user()->can("create_sizes")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
+                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_weight") }}',
+                  className: '@if (auth()->user()->can("create_weights")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
                   attr: {
-                          title: '{{ trans("admin.create_size") }}',
-                          href: '{{ route("admin.sizes.create") }}' 
+                          title: '{{ trans("admin.create_weight") }}',
+                          href: '{{ route("admin.weights.create") }}' 
                         },
                     action: function (e, dt, node, config)
                     {
                         // href location
-                        window.location.href = '{{ route("admin.sizes.create") }}';
+                        window.location.href = '{{ route("admin.weights.create") }}';
                     }
                 },
             ],
@@ -130,23 +142,41 @@
             }
         });
     });
-    
-    $(document).on('click', '.delete', function(){
-        size_id = $(this).attr('id');
-        swal({
-            title: "{{ trans('admin.are_sure') }}",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '{{ trans('admin.yes') }}',
-            cancelButtonText: '{{ trans('admin.cancel') }}'
-        }).then(function(result){
+
+    // Multiple Delete
+    $(document).on('click', '.multi_delete', function(){
+        var item_checked = $('input[class="item_checkbox"]:checkbox').filter(":checked").length;
+        var allids = [];
+        var swalAlert;
+        if (item_checked > 0) {
+            swalAlert = swal({
+                title: "{{ trans('admin.multi_delete') }} "+ item_checked +"!",
+                type: 'warning',
+                showCloseButton: true,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '{{ trans('admin.yes') }}',
+                cancelButtonText: '{{ trans('admin.cancel') }}'
+            }) 
+        } else {
+            swalAlert = swal({
+                title: "{{ trans('admin.no_multi_data') }}",
+                type: "warning",
+                showCloseButton: true,
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonColor: '#222223',
+                cancelButtonText: '{{ trans('admin.close') }}'
+            })
+        }
+        swalAlert.then(function(result){
             if(result.value){
                 $.ajax({
-                    url:"sizes/destroy/" + size_id,
+                    type: "DELETE",
+                    url: getLocation + "/multi" + item_checked,
                     success: function(data){
-                        $('#sizes-table').DataTable().ajax.reload();
+                        $('#data-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');
                     }
                 });

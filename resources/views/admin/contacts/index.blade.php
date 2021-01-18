@@ -13,13 +13,23 @@
             <div class="card-content">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="contacts-table" class="table table-striped table-bordered dt-responsive nowrap">
+                        <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap"
+                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
+                                    <th>
+                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                            <input type="checkbox" class="check_all" onclick="check_all()" name="ids">
+                                            <span class="vs-checkbox vs-checkbox-sm">
+                                                <span class="vs-checkbox--check">
+                                                    <i class="vs-icon feather icon-check"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </th>
                                     <th>#</th>
-                                    <th>{{ trans('admin.title') }}</th>
-                                    <th>{{ trans('admin.customer') }}</th>
-                                    <th>{{ trans('admin.mobile') }}</th>
+                                    <th>{{ trans('admin.name') }}</th>
+                                    <th>{{ trans('admin.status') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>
                                         @if(auth()->user()->can(['update_contacts', 'delete_contacts']))
@@ -41,9 +51,14 @@
 
 @push('scripts')
 
+@include('partials.delete')
+{{-- @include('partials.multi_delete.blade') --}}
+
 <script type="text/javascript">
+    var getLocation = "contacts";
     $(document).ready(function(){
-        $('#contacts-table').DataTable({
+        // DataTable
+        $('#data-table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
@@ -51,18 +66,25 @@
             ajax: {
                 url: "{{ route('admin.contacts.index') }}",
             },
-            columns: [{
+            columns: [
+                {
+                    render: function(data, type, row, meta) {
+                        return '<div class="vs-checkbox-con vs-checkbox-primary"><input type="checkbox" name="item[]" class="item_checkbox" value="' + row.id + '"><span class="vs-checkbox vs-checkbox-sm"><span class="vs-checkbox--check"><i class="vs-icon feather icon-check"></i></span></span></div>';
+                    }, searchable: false, orderable: false
+                },
+                {
                     render: function(data, type, row, meta) {
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }, searchable: false, orderable: false
                 },
-                { data: 'title' },
-                { data: 'customer', 
-                    render: function(data, type, full, meta) {
-                        return "<div class='badge badge-primary'>"+ data +"</div>";
-                    }, orderable: false , searchable: false
+                { data: 'name_trans' },
+                { data: 'enabled',
+                    render: function(data, type, row, meta) {
+                        var text = data ? "{{ trans('admin.active') }}" : "{{ trans('admin.inactive') }}";
+                        var color = data ? "success" : "danger"; 
+                        return "<div class='badge badge-" +color+ "'>"+ text +"</div>";
+                    }, searchable: false, orderable: false
                 },
-                { data: 'mobile' },
                 { data: 'created_at' },
                 { data: 'action', orderable: false }
             ],
@@ -78,7 +100,7 @@
                     }
                 },
                 { text: '<i class="feather icon-trash-2"></i> {{ trans("admin.trash") }}',
-                  className: 'btn dtbtn btn-sm btn-danger delBtn',
+                className: 'btn dtbtn btn-sm btn-danger multi_delete delBtn',
                   attr: { title: '{{ trans("admin.trash") }}' }
                 },
                 { extend: 'csvHtml5', charset: "UTF-8", bom: true,
@@ -100,18 +122,6 @@
                   text: '<i class="feather icon-file"></i> PDF',
                   pageSize: 'A4', attr: { title: 'PDF' }
                 },
-                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_contact") }}',
-                  className: '@if (auth()->user()->can("create_contacts")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
-                  attr: {
-                          title: '{{ trans("admin.create_contact") }}',
-                          href: '{{ route("admin.contacts.create") }}' 
-                        },
-                    action: function (e, dt, node, config)
-                    {
-                        // href location
-                        window.location.href = '{{ route("admin.contacts.create") }}';
-                    }
-                },
             ],
             language: {
                 url: getDataTableLanguage(),
@@ -120,23 +130,41 @@
             }
         });
     });
-    
-    $(document).on('click', '.delete', function(){
-        contact_id = $(this).attr('id');
-        swal({
-            title: "{{ trans('admin.are_sure') }}",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '{{ trans('admin.yes') }}',
-            cancelButtonText: '{{ trans('admin.cancel') }}'
-        }).then(function(result){
+
+    // Multiple Delete
+    $(document).on('click', '.multi_delete', function(){
+        var item_checked = $('input[class="item_checkbox"]:checkbox').filter(":checked").length;
+        var allids = [];
+        var swalAlert;
+        if (item_checked > 0) {
+            swalAlert = swal({
+                title: "{{ trans('admin.multi_delete') }} "+ item_checked +"!",
+                type: 'warning',
+                showCloseButton: true,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '{{ trans('admin.yes') }}',
+                cancelButtonText: '{{ trans('admin.cancel') }}'
+            }) 
+        } else {
+            swalAlert = swal({
+                title: "{{ trans('admin.no_multi_data') }}",
+                type: "warning",
+                showCloseButton: true,
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonColor: '#222223',
+                cancelButtonText: '{{ trans('admin.close') }}'
+            })
+        }
+        swalAlert.then(function(result){
             if(result.value){
                 $.ajax({
-                    url:"contacts/destroy/" + contact_id,
+                    type: "DELETE",
+                    url: getLocation + "/multi" + item_checked,
                     success: function(data){
-                        $('#contacts-table').DataTable().ajax.reload();
+                        $('#data-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');
                     }
                 });

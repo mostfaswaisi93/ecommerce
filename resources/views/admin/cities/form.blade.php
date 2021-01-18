@@ -1,5 +1,5 @@
-<!-- Role Modal -->
-<div class="modal fade" id="roleModal" role="dialog" aria-hidden="true">
+<!-- City Modal -->
+<div class="modal fade" id="cityModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <!-- Modal content-->
         <div class="modal-content">
@@ -12,7 +12,7 @@
             <!-- Modal body-->
             <div class="modal-body">
                 <span id="form_result"></span>
-                <form method="POST" id="roleForm" class="form-horizontal" accept-charset="UTF-8"
+                <form method="POST" id="cityForm" class="form-horizontal" accept-charset="UTF-8"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="row">
