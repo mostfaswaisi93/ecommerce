@@ -19,7 +19,7 @@
                                 <tr>
                                     <th>
                                         <div class="vs-checkbox-con vs-checkbox-primary">
-                                            <input type="checkbox" class="check_all" onclick="check_all()">
+                                            <input type="checkbox" class="check_all" onclick="check_all()" name="ids">
                                             <span class="vs-checkbox vs-checkbox-sm">
                                                 <span class="vs-checkbox--check">
                                                     <i class="vs-icon feather icon-check"></i>
@@ -29,6 +29,7 @@
                                     </th>
                                     <th>#</th>
                                     <th>{{ trans('admin.name') }}</th>
+                                    <th>{{ trans('admin.status') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>
                                         @if(auth()->user()->can(['update_weights', 'delete_weights']))
@@ -52,6 +53,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
+        // DataTable
         $('#weights-table').DataTable({
             processing: true,
             serverSide: true,
@@ -72,6 +74,13 @@
                     }, searchable: false, orderable: false
                 },
                 { data: 'name_trans' },
+                { data: 'enabled',
+                    render: function(data, type, row, meta) {
+                        var text = data ? "{{ trans('admin.active') }}" : "{{ trans('admin.inactive') }}";
+                        var color = data ? "success" : "danger"; 
+                        return "<div class='badge badge-" +color+ "'>"+ text +"</div>";
+                    }, searchable: false, orderable: false
+                },
                 { data: 'created_at' },
                 { data: 'action', orderable: false }
             ],
@@ -87,7 +96,7 @@
                     }
                 },
                 { text: '<i class="feather icon-trash-2"></i> {{ trans("admin.trash") }}',
-                  className: 'btn dtbtn btn-sm btn-danger delBtn',
+                className: 'btn dtbtn btn-sm btn-danger multi_delete delBtn',
                   attr: { title: '{{ trans("admin.trash") }}' }
                 },
                 { extend: 'csvHtml5', charset: "UTF-8", bom: true,
@@ -146,6 +155,47 @@
             if(result.value){
                 $.ajax({
                     url:"weights/destroy/" + weight_id,
+                    success: function(data){
+                        $('#weights-table').DataTable().ajax.reload();
+                        toastr.success('{{ trans('admin.deleted_successfully') }}!');
+                    }
+                });
+            }
+        });
+    });
+
+    // Multiple Delete
+    $(document).on('click', '.multi_delete', function(){
+        var item_checked = $('input[class="item_checkbox"]:checkbox').filter(":checked").length;
+        var allids = [];
+        var swalAlert;
+        if (item_checked > 0) {
+            swalAlert = swal({
+                title: "{{ trans('admin.multi_delete') }} "+ item_checked +"!",
+                type: 'warning',
+                showCloseButton: true,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '{{ trans('admin.yes') }}',
+                cancelButtonText: '{{ trans('admin.cancel') }}'
+            }) 
+        } else {
+            swalAlert = swal({
+                title: "{{ trans('admin.no_multi_data') }}",
+                type: "warning",
+                showCloseButton: true,
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonColor: '#222223',
+                cancelButtonText: '{{ trans('admin.close') }}'
+            })
+        }
+        swalAlert.then(function(result){
+            if(result.value){
+                $.ajax({
+                    type: "DELETE",
+                    url: "weights/multi" + item_checked,
                     success: function(data){
                         $('#weights-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');

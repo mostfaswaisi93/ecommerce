@@ -26,13 +26,4 @@ class Manufacturer extends BaseModel
     ];
     protected $appends      = ['name_trans'];
     public $translatable    = ['name'];
-
-    public function getNameTransAttribute()
-    {
-        if (app()->getLocale() == 'ar') {
-            return $this->getTranslation('name', 'ar');
-        } else {
-            return $this->getTranslation('name', 'en');
-        }
-    }
 }

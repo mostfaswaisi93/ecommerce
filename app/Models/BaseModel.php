@@ -19,6 +19,16 @@ class BaseModel extends Model
         return json_encode($value, JSON_UNESCAPED_UNICODE);
     }
 
+    // get Name Translatable
+    public function getNameTransAttribute()
+    {
+        if (app()->getLocale() == 'ar') {
+            return $this->getTranslation('name', 'ar');
+        } else {
+            return $this->getTranslation('name', 'en');
+        }
+    }
+
     public function scopeActive($query)
     {
         return $query->where('enabled', 1);

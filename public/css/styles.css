@@ -60,12 +60,12 @@ label {
     margin: 0;
 }
 
-.table-responsive thead>tr>th:first-child,
-.table-responsive thead>tr>th:nth-child(2) {
+.table-striped thead>tr>th:first-child,
+.table-striped thead>tr>th:nth-child(2) {
     width: 5%;
 }
 
-.table-responsive thead>tr>th:last-child {
+.table-striped thead>tr>th:last-child {
     width: 20%;
 }
 

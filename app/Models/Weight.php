@@ -13,13 +13,4 @@ class Weight extends BaseModel
     protected $fillable     = ['name', 'enabled'];
     protected $appends      = ['name_trans'];
     public $translatable    = ['name'];
-
-    public function getNameTransAttribute()
-    {
-        if (app()->getLocale() == 'ar') {
-            return $this->getTranslation('name', 'ar');
-        } else {
-            return $this->getTranslation('name', 'en');
-        }
-    }
 }
