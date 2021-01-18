@@ -48,7 +48,13 @@ class RolesController extends Controller
         Role::create([
             'name' => $request->name
         ]);
-        Toastr::success(__('admin.added_successfully'));
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.roles.index');
     }
 
@@ -62,7 +68,13 @@ class RolesController extends Controller
         $role->update([
             'name' => $request->name
         ]);
-        Toastr::success(__('admin.updated_successfully'));
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.roles.index');
     }
 

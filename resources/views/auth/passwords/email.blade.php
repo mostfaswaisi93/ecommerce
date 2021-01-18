@@ -99,7 +99,7 @@
                                             <div class="card-body">
                                                 <form method="POST" action="{{ route('password.email') }}">
                                                     @csrf
-                                                    @include('partials._errors')
+                                                    @include('partials.errors')
                                                     @if (session('status'))
                                                     <div class="alert alert-success" role="alert">
                                                         {{ session('status') }}

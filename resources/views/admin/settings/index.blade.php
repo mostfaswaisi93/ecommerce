@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body ">
-                            @include('partials._errors')
+                            @include('partials.errors')
                             <form action="{{ route('admin.settings.update') }}" method="post" role="form">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $settings->id }}">

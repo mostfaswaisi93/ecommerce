@@ -53,7 +53,13 @@ class WeightsController extends Controller
         $request->validate($rules);
 
         Weight::create($request->all());
-        Toastr::success(__('admin.added_successfully'));
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.weights.index');
     }
 
@@ -73,7 +79,13 @@ class WeightsController extends Controller
         $request->validate($rules);
 
         $weight->update($request->all());
-        Toastr::success(__('admin.updated_successfully'));
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.weights.index');
     }
 

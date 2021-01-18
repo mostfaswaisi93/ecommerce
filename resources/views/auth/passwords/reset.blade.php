@@ -98,7 +98,7 @@
                                             <div class="card-body pt-1">
                                                 <form method="POST" action="{{ route('password.update') }}">
                                                     @csrf
-                                                    @include('partials._errors')
+                                                    @include('partials.errors')
                                                     <input type="hidden" name="token" value="{{ $token }}">
                                                     <fieldset
                                                         class="form-label-group form-group position-relative has-icon-left">

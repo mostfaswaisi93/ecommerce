@@ -64,7 +64,12 @@ class UsersController extends Controller
         $user->assignRole('admin');
         $user->syncPermissions($request->permissions);
 
-        Toastr::success(__('admin.added_successfully'));
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.users.index');
     }
 
@@ -101,7 +106,12 @@ class UsersController extends Controller
         $user->update($request_data);
         $user->syncPermissions($request->permissions);
 
-        Toastr::success(__('admin.updated_successfully'));
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.users.index');
     }
 
@@ -114,26 +124,26 @@ class UsersController extends Controller
         $user->delete();
     }
 
-    public function multi_delete() {
-		if (is_array(request('item'))) {
-			User::destroy(request('item'));
-		} else {
+    public function multi_delete()
+    {
+        if (is_array(request('item'))) {
+            User::destroy(request('item'));
+        } else {
             $user = User::find(request('item'));
             if ($user->image != 'default.png') {
                 Storage::disk('public_uploads')->delete('/users/' . $user->image);
             }
             $user->delete();
-		}
-		session()->flash('success', trans('admin.deleted_record'));
-		return redirect(aurl('users'));
+        }
+        session()->flash('success', trans('admin.deleted_record'));
+        return redirect(aurl('users'));
     }
-    
+
     function multi(Request $request)
     {
         $users = $request->input('id');
         $user = User::whereIn('id', $users);
-        if($user->delete())
-        {
+        if ($user->delete()) {
             echo 'Data Deleted';
         }
     }

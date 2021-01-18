@@ -100,7 +100,7 @@
                                             <div class="card-body pt-0">
                                                 <form action="{{route('register')}}" method="POST">
                                                     @csrf
-                                                    @include('partials._errors')
+                                                    @include('partials.errors')
                                                     <fieldset
                                                         class="form-label-group form-group position-relative has-icon-left">
                                                         <input id="name" type="text" class="form-control" name="name"

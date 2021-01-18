@@ -26,6 +26,7 @@
 
 {{-- Custom js --}}
 <script src="{{ url('backend/js/functions.js') }}"></script>
+<script src="{{ url('backend/js/toastr.js') }}"></script>
 <script src="{{ url('backend/js/image_preview.js') }}"></script>
 
 {{-- CDNs --}}

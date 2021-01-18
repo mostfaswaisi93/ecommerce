@@ -13,7 +13,7 @@
             <div class="card-content">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="weights-table" class="table table-striped table-bordered dt-responsive nowrap"
+                        <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap"
                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
@@ -51,10 +51,13 @@
 
 @push('scripts')
 
+@include('partials.delete')
+
 <script type="text/javascript">
+    var getLocation = "weights";
     $(document).ready(function(){
         // DataTable
-        $('#weights-table').DataTable({
+        $('#data-table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
@@ -138,31 +141,6 @@
             }
         });
     });
-    
-    // Delete
-    $(document).on('click', '.delete', function(){
-        weight_id = $(this).attr('id');
-        swal({
-            title: "{{ trans('admin.delete_msg') }}",
-            type: 'warning',
-            showCloseButton: true,
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '{{ trans('admin.yes') }}',
-            cancelButtonText: '{{ trans('admin.cancel') }}'
-        }).then(function(result){
-            if(result.value){
-                $.ajax({
-                    url:"weights/destroy/" + weight_id,
-                    success: function(data){
-                        $('#weights-table').DataTable().ajax.reload();
-                        toastr.success('{{ trans('admin.deleted_successfully') }}!');
-                    }
-                });
-            }
-        });
-    });
 
     // Multiple Delete
     $(document).on('click', '.multi_delete', function(){
@@ -197,7 +175,7 @@
                     type: "DELETE",
                     url: "weights/multi" + item_checked,
                     success: function(data){
-                        $('#weights-table').DataTable().ajax.reload();
+                        $('#data-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');
                     }
                 });

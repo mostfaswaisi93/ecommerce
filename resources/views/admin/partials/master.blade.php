@@ -4,7 +4,6 @@
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
         @yield('content')
-        @include('partials._session')
     </div>
 </div>
 <!-- END: Content-->

@@ -99,7 +99,7 @@
                                             <div class="card-body pt-1">
                                                 <form action="{{route('login')}}" method="POST" id="loginForm">
                                                     @csrf
-                                                    @include('partials._errors')
+                                                    @include('partials.errors')
                                                     <fieldset
                                                         class="form-label-group form-group position-relative has-icon-left">
                                                         <input id="email" type="email" class="form-control" name="email"

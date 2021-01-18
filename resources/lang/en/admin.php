@@ -53,8 +53,8 @@ return [
     'back'                      => 'Back',
 
     'added_successfully'        => 'Added Successfully',
-    'updated_successfully'      => 'updated_successfully',
-    'deleted_successfully'      => 'deleted_successfully',
+    'updated_successfully'      => 'Updated Successfully',
+    'deleted_successfully'      => 'Deleted Successfully',
 
     'create_trade_mark'         => 'Add New Trade Mark',
     'create_category'           => 'Add New Category',
