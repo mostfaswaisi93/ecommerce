@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ColorsRequest;
 use App\Models\Color;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class ColorsController extends Controller
 {
@@ -42,10 +44,22 @@ class ColorsController extends Controller
 
     public function store(ColorsRequest $request)
     {
-        Color::create([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.added_successfully'));
+        $rules = [];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += ['name.' . $locale => 'required'];
+        }
+
+        $request->validate($rules);
+
+        Color::create($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.colors.index');
     }
 
@@ -56,10 +70,22 @@ class ColorsController extends Controller
 
     public function update(ColorsRequest $request, Color $color)
     {
-        $color->update([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.updated_successfully'));
+        $rules = [];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += ['name.' . $locale => 'required'];
+        }
+
+        $request->validate($rules);
+
+        $color->update($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.colors.index');
     }
 

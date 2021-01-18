@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             // CountriesTableSeeder::class,
             // CitiesTableSeeder::class,
             // WeightsTableSeeder::class,
+            // TradeMarksTableSeeder::class,
         ]);
     }
 }

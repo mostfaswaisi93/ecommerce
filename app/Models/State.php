@@ -19,11 +19,11 @@ class State extends BaseModel
 
     public function country_id()
     {
-        return $this->hasOne('App\Models\Country', 'id', 'country_id');
+        return $this->hasOne(Country::class, 'id', 'country_id');
     }
 
     public function city_id()
     {
-        return $this->hasOne('App\Models\City', 'id', 'city_id');
+        return $this->hasOne(City::class, 'id', 'city_id');
     }
 }

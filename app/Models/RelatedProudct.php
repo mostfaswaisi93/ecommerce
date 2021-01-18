@@ -18,6 +18,6 @@ class RelatedProudct extends Model
 
     public function product()
     {
-        return $this->hasOne('App\Models\Product', 'id', 'related_product');
+        return $this->hasOne(Product::class, 'id', 'related_product');
     }
 }

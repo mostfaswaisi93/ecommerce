@@ -18,6 +18,6 @@ class Size extends Model
 
     public function department_id()
     {
-        return $this->hasOne('App\Models\Department', 'id', 'department_id');
+        return $this->hasOne(Department::class, 'id', 'department_id');
     }
 }

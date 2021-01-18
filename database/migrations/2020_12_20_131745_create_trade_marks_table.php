@@ -15,6 +15,8 @@ class CreateTradeMarksTable extends Migration
     {
         Schema::create('trade_marks', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('logo')->default('default.png');
             $table->integer('enabled')->default(1);
             $table->timestamps();
             $table->softDeletes();

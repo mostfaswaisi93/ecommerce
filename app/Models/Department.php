@@ -21,6 +21,6 @@ class Department extends BaseModel
 
     public function parents()
     {
-        return $this->hasMany('App\Models\Department', 'id', 'parent');
+        return $this->hasMany(Department::class, 'id', 'parent');
     }
 }

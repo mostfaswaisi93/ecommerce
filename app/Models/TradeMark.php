@@ -11,6 +11,11 @@ class TradeMark extends BaseModel
 
     protected $table        = 'trade_marks';
     protected $fillable     = ['name', 'logo', 'enabled'];
-    protected $appends      = ['name_trans'];
+    protected $appends      = ['logo_path', 'name_trans'];
     public $translatable    = ['name'];
+
+    public function getLogoPathAttribute()
+    {
+        return asset('images/users/' . $this->logo);
+    }
 }

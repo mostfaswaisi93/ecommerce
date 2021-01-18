@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TradeMarksRequest;
 use App\Models\TradeMark;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class TradeMarksController extends Controller
 {
@@ -42,10 +44,22 @@ class TradeMarksController extends Controller
 
     public function store(TradeMarksRequest $request)
     {
-        TradeMark::create([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.added_successfully'));
+        $rules = [];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += ['name.' . $locale => 'required'];
+        }
+
+        $request->validate($rules);
+
+        TradeMark::create($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.trade_marks.index');
     }
 
@@ -56,10 +70,22 @@ class TradeMarksController extends Controller
 
     public function update(TradeMarksRequest $request, TradeMark $trade_mark)
     {
-        $trade_mark->update([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.updated_successfully'));
+        $rules = [];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += ['name.' . $locale => 'required'];
+        }
+
+        $request->validate($rules);
+
+        $trade_mark->update($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.trade_marks.index');
     }
 

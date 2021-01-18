@@ -21,13 +21,13 @@ if (!function_exists('get_parent')) {
 	}
 }
 
-/////// Scan Mall Id Exists /////
+// Scan Mall Id Exists
 if (!function_exists('check_mall')) {
 	function check_mall($id, $pid) {
 		return \App\Model\MallProduct::where('product_id', $pid)->where('mall_id', $id)->count() > 0?true:false;
 	}
 }
-/////// Scan Mall Id Exists /////
+// Scan Mall Id Exists
 
 if (!function_exists('load_dep')) {
 	function load_dep($select = null, $dep_hide = null) {
@@ -125,35 +125,7 @@ if (!function_exists('direction')) {
 	}
 }
 
-if (!function_exists('datatable_lang')) {
-	function datatable_lang() {
-		return ['sProcessing' => trans('admin.sProcessing'),
-			'sLengthMenu'        => trans('admin.sLengthMenu'),
-			'sZeroRecords'       => trans('admin.sZeroRecords'),
-			'sEmptyTable'        => trans('admin.sEmptyTable'),
-			'sInfo'              => trans('admin.sInfo'),
-			'sInfoEmpty'         => trans('admin.sInfoEmpty'),
-			'sInfoFiltered'      => trans('admin.sInfoFiltered'),
-			'sInfoPostFix'       => trans('admin.sInfoPostFix'),
-			'sSearch'            => trans('admin.sSearch'),
-			'sUrl'               => trans('admin.sUrl'),
-			'sInfoThousands'     => trans('admin.sInfoThousands'),
-			'sLoadingRecords'    => trans('admin.sLoadingRecords'),
-			'oPaginate'          => [
-				'sFirst'            => trans('admin.sFirst'),
-				'sLast'             => trans('admin.sLast'),
-				'sNext'             => trans('admin.sNext'),
-				'sPrevious'         => trans('admin.sPrevious'),
-			],
-			'oAria'            => [
-				'sSortAscending'  => trans('admin.sSortAscending'),
-				'sSortDescending' => trans('admin.sSortDescending'),
-			],
-		];
-	}
-}
-
-/////// Validate Helper Functions ///////
+// Validate Helper Functions
 if (!function_exists('v_image')) {
 	function v_image($ext = null) {
 		if (null === $ext) {
@@ -163,4 +135,4 @@ if (!function_exists('v_image')) {
 		}
 	}
 }
-/////// Validate Helper Functions ///////
+// Validate Helper Functions

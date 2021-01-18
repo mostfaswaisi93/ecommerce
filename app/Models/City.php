@@ -18,6 +18,6 @@ class City extends BaseModel
 
     public function country_id()
     {
-        return $this->hasOne('App\Models\Country', 'id', 'country_id');
+        return $this->hasOne(Country::class, 'id', 'country_id');
     }
 }

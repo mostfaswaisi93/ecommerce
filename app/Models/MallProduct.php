@@ -14,6 +14,6 @@ class MallProduct extends Model
 
     public function mall()
     {
-        return $this->hasOne('App\Models\Mall', 'id', 'mall_id');
+        return $this->hasOne(Mall::class, 'id', 'mall_id');
     }
 }

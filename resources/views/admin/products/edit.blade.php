@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.create_color') }} @endsection
+@section('title') {{ trans('admin.edit_weight') }} @endsection
 
 @section('content')
 
@@ -7,16 +7,16 @@
     <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
             <div class="col-12">
-                <h2 class="content-header-title float-left mb-0">{{ trans('admin.create_color') }}</h2>
+                <h2 class="content-header-title float-left mb-0">{{ trans('admin.edit_weight') }}</h2>
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.index') }}">{{ trans('admin.home') }}</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.colors.index') }}">{{ trans('admin.colors') }}</a>
+                            <a href="{{ route('admin.weights.index') }}">{{ trans('admin.weights') }}</a>
                         </li>
-                        <li class="breadcrumb-item active">{{ trans('admin.create_color') }}</li>
+                        <li class="breadcrumb-item active">{{ trans('admin.edit_weight') }}</li>
                     </ol>
                 </div>
             </div>
@@ -31,16 +31,17 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">
-                            <i class="feather icon-plus-circle mr-25"></i>
-                            {{ trans('admin.create_color') }}
+                            <i class="feather icon-edit mr-25"></i>
+                            {{ trans('admin.edit_weight') }} - {{ $weight->name }}
                         </h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                             @include('partials.errors')
-                            <form action="{{ route('admin.colors.store') }}" method="post">
+                            <form action="{{ route('admin.weights.update', $weight->id) }}" method="post"
+                                enctype="multipart/form-data">
                                 @csrf
-                                @method('POST')
+                                @method('PUT')
                                 <div class="row">
                                     @foreach (config('translatable.locales') as $locale)
                                     <div class="col-md-6 col-12">
@@ -48,7 +49,8 @@
                                             <div class="controls">
                                                 <label>{{ trans('admin.' . $locale . '.name') }}</label>
                                                 <input id="name" type="text" name="name[{{ $locale }}]"
-                                                    class="form-control" value="{{ old('name.' . $locale) }}"
+                                                    class="form-control"
+                                                    value="{{ old('name.' . $locale, $weight->getTranslation('name', $locale)) }}"
                                                     placeholder="{{ trans('admin.' . $locale . '.name') }}">
                                             </div>
                                         </div>
@@ -61,7 +63,7 @@
                                         <div class="form-group">
                                             <div class="controls">
                                                 <button type="submit" class="btn btn-primary">
-                                                    {{ trans('admin.add') }}
+                                                    {{ trans('admin.edit') }}
                                                 </button>
                                             </div>
                                         </div>

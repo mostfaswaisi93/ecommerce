@@ -1,5 +1,5 @@
-<!-- Color Modal -->
-<div class="modal fade" id="colorModal" role="dialog" aria-hidden="true">
+<!-- Trade Mark Modal -->
+<div class="modal fade" id="trade_markModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <!-- Modal content-->
         <div class="modal-content">
@@ -12,7 +12,7 @@
             <!-- Modal body-->
             <div class="modal-body">
                 <span id="form_result"></span>
-                <form method="POST" id="colorForm" class="form-horizontal" accept-charset="UTF-8"
+                <form method="POST" id="trade_markForm" class="form-horizontal" accept-charset="UTF-8"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="row">

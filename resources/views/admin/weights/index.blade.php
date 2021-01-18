@@ -52,6 +52,7 @@
 @push('scripts')
 
 @include('partials.delete')
+{{-- @include('partials.multi_delete.blade') --}}
 
 <script type="text/javascript">
     var getLocation = "weights";
@@ -173,7 +174,7 @@
             if(result.value){
                 $.ajax({
                     type: "DELETE",
-                    url: "weights/multi" + item_checked,
+                    url: getLocation + "/multi" + item_checked,
                     success: function(data){
                         $('#data-table').DataTable().ajax.reload();
                         toastr.success('{{ trans('admin.deleted_successfully') }}!');
