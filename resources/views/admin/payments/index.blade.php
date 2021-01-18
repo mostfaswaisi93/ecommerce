@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.weights') }} @endsection
+@section('title') {{ trans('admin.payments') }} @endsection
 
 @section('content')
 
@@ -7,7 +7,7 @@
     <section>
         <div class="card">
             <div class="card-header">
-                <div class="tbl-title">{{ trans('admin.weights') }}</div>
+                <div class="tbl-title">{{ trans('admin.payments') }}</div>
             </div>
             <hr>
             <div class="card-content">
@@ -32,7 +32,7 @@
                                     <th>{{ trans('admin.status') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>
-                                        @if(auth()->user()->can(['update_weights', 'delete_weights']))
+                                        @if(auth()->user()->can(['update_payments', 'delete_payments']))
                                         {{ trans('admin.action') }}
                                         @endif
                                     </th>
@@ -55,7 +55,7 @@
 {{-- @include('partials.multi_delete.blade') --}}
 
 <script type="text/javascript">
-    var getLocation = "weights";
+    var getLocation = "payments";
     $(document).ready(function(){
         // DataTable
         $('#data-table').DataTable({
@@ -64,7 +64,7 @@
             responsive: true,
             order: [[ 2, "desc" ]],
             ajax: {
-                url: "{{ route('admin.weights.index') }}",
+                url: "{{ route('admin.payments.index') }}",
             },
             columns: [
                 {
@@ -122,16 +122,16 @@
                   text: '<i class="feather icon-file"></i> PDF',
                   pageSize: 'A4', attr: { title: 'PDF' }
                 },
-                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_weight") }}',
-                  className: '@if (auth()->user()->can("create_weights")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
+                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_payment") }}',
+                  className: '@if (auth()->user()->can("create_payments")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
                   attr: {
-                          title: '{{ trans("admin.create_weight") }}',
-                          href: '{{ route("admin.weights.create") }}' 
+                          title: '{{ trans("admin.create_payment") }}',
+                          href: '{{ route("admin.payments.create") }}' 
                         },
                     action: function (e, dt, node, config)
                     {
                         // href location
-                        window.location.href = '{{ route("admin.weights.create") }}';
+                        window.location.href = '{{ route("admin.payments.create") }}';
                     }
                 },
             ],

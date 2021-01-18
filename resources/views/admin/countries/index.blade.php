@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.weights') }} @endsection
+@section('title') {{ trans('admin.countries') }} @endsection
 
 @section('content')
 
@@ -7,7 +7,7 @@
     <section>
         <div class="card">
             <div class="card-header">
-                <div class="tbl-title">{{ trans('admin.weights') }}</div>
+                <div class="tbl-title">{{ trans('admin.countries') }}</div>
             </div>
             <hr>
             <div class="card-content">
@@ -32,7 +32,7 @@
                                     <th>{{ trans('admin.status') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>
-                                        @if(auth()->user()->can(['update_weights', 'delete_weights']))
+                                        @if(auth()->user()->can(['update_countries', 'delete_countries']))
                                         {{ trans('admin.action') }}
                                         @endif
                                     </th>
@@ -55,7 +55,7 @@
 {{-- @include('partials.multi_delete.blade') --}}
 
 <script type="text/javascript">
-    var getLocation = "weights";
+    var getLocation = "countries";
     $(document).ready(function(){
         // DataTable
         $('#data-table').DataTable({
@@ -64,7 +64,7 @@
             responsive: true,
             order: [[ 2, "desc" ]],
             ajax: {
-                url: "{{ route('admin.weights.index') }}",
+                url: "{{ route('admin.countries.index') }}",
             },
             columns: [
                 {
@@ -122,16 +122,16 @@
                   text: '<i class="feather icon-file"></i> PDF',
                   pageSize: 'A4', attr: { title: 'PDF' }
                 },
-                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_weight") }}',
-                  className: '@if (auth()->user()->can("create_weights")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
+                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_country") }}',
+                  className: '@if (auth()->user()->can("create_countries")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
                   attr: {
-                          title: '{{ trans("admin.create_weight") }}',
-                          href: '{{ route("admin.weights.create") }}' 
+                          title: '{{ trans("admin.create_country") }}',
+                          href: '{{ route("admin.countries.create") }}' 
                         },
                     action: function (e, dt, node, config)
                     {
                         // href location
-                        window.location.href = '{{ route("admin.weights.create") }}';
+                        window.location.href = '{{ route("admin.countries.create") }}';
                     }
                 },
             ],

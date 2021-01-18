@@ -16,6 +16,6 @@ class TradeMark extends BaseModel
 
     public function getLogoPathAttribute()
     {
-        return asset('images/users/' . $this->logo);
+        return asset('images/trade_marks/' . $this->logo);
     }
 }

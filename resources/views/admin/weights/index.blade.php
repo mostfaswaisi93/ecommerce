@@ -177,7 +177,12 @@
                     url: getLocation + "/multi" + item_checked,
                     success: function(data){
                         $('#data-table').DataTable().ajax.reload();
-                        toastr.success('{{ trans('admin.deleted_successfully') }}!');
+                        var lang = "{{ app()->getLocale() }}";
+                        if (lang == "ar") {
+                            toastr.success('{{ trans('admin.deleted_successfully') }}');
+                        } else {
+                            toastr.success('{{ trans('admin.deleted_successfully') }}', '', {positionClass: 'toast-bottom-left'});
+                        }
                     }
                 });
             }

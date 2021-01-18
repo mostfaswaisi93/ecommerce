@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') {{ trans('admin.edit_weight') }} @endsection
+@section('title') {{ trans('admin.edit_size') }} @endsection
 
 @section('content')
 
@@ -7,16 +7,16 @@
     <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
             <div class="col-12">
-                <h2 class="content-header-title float-left mb-0">{{ trans('admin.edit_weight') }}</h2>
+                <h2 class="content-header-title float-left mb-0">{{ trans('admin.edit_size') }}</h2>
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.index') }}">{{ trans('admin.home') }}</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.weights.index') }}">{{ trans('admin.weights') }}</a>
+                            <a href="{{ route('admin.sizes.index') }}">{{ trans('admin.sizes') }}</a>
                         </li>
-                        <li class="breadcrumb-item active">{{ trans('admin.edit_weight') }}</li>
+                        <li class="breadcrumb-item active">{{ trans('admin.edit_size') }}</li>
                     </ol>
                 </div>
             </div>
@@ -32,13 +32,13 @@
                     <div class="card-header">
                         <h4 class="card-title">
                             <i class="feather icon-edit mr-25"></i>
-                            {{ trans('admin.edit_weight') }} - {{ $weight->name }}
+                            {{ trans('admin.edit_size') }} - {{ $size->name }}
                         </h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                             @include('partials.errors')
-                            <form action="{{ route('admin.weights.update', $weight->id) }}" method="post"
+                            <form action="{{ route('admin.sizes.update', $size->id) }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -50,7 +50,7 @@
                                                 <label>{{ trans('admin.' . $locale . '.name') }}</label>
                                                 <input id="name" type="text" name="name[{{ $locale }}]"
                                                     class="form-control"
-                                                    value="{{ old('name.' . $locale, $weight->getTranslation('name', $locale)) }}"
+                                                    value="{{ old('name.' . $locale, $size->getTranslation('name', $locale)) }}"
                                                     placeholder="{{ trans('admin.' . $locale . '.name') }}">
                                             </div>
                                         </div>

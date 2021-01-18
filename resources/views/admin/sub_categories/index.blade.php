@@ -122,10 +122,10 @@
                   text: '<i class="feather icon-file"></i> PDF',
                   pageSize: 'A4', attr: { title: 'PDF' }
                 },
-                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_weight") }}',
+                { text: '<i class="feather icon-plus"></i> {{ trans("admin.create_sub_category") }}',
                   className: '@if (auth()->user()->can("create_sub_categories")) btn dtbtn btn-sm btn-primary @else btn dtbtn btn-sm btn-primary disabled @endif',
                   attr: {
-                          title: '{{ trans("admin.create_weight") }}',
+                          title: '{{ trans("admin.create_sub_category") }}',
                           href: '{{ route("admin.sub_categories.create") }}' 
                         },
                     action: function (e, dt, node, config)
