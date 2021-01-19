@@ -11,18 +11,8 @@ class Manufacturer extends BaseModel
 
     protected $table        = 'manufacturers';
     protected $fillable     = [
-        'name',
-        'email',
-        'mobile',
-        'facebook',
-        'twitter',
-        'address',
-        'website',
-        'contact_name',
-        'lat',
-        'lng',
-        'icon',
-        'enabled'
+        'name', 'email', 'mobile', 'facebook', 'twitter', 'address', 'website',
+        'contact_name', 'lat', 'lng', 'icon', 'enabled'
     ];
     protected $appends      = ['name_trans'];
     public $translatable    = ['name'];

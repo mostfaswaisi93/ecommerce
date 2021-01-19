@@ -3,19 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Translatable\HasTranslations;
 
 class State extends BaseModel
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
-    protected $table = 'states';
-
-    protected $fillable = [
-        'state_name_ar',
-        'state_name_en',
-        'country_id',
-        'city_id',
-    ];
+    protected $table        = 'states';
+    protected $fillable     = ['name', 'country_id', 'city_id', 'enabled'];
+    protected $appends      = ['name_trans'];
+    public $translatable    = ['name'];
 
     public function country_id()
     {

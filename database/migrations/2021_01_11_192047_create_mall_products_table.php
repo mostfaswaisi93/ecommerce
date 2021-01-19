@@ -15,6 +15,8 @@ class CreateMallProductsTable extends Migration
     {
         Schema::create('mall_products', function (Blueprint $table) {
             $table->id();
+            $table->integer('product_id')->unsigned()->onDelete('cascade');
+            $table->integer('mall_id')->unsigned()->onDelete('cascade');
             $table->integer('enabled')->default(1);
             $table->timestamps();
             $table->softDeletes();

@@ -11,27 +11,29 @@ use Illuminate\Validation\Rule;
 
 class CitiesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:read_cities'])->only('index');
+        $this->middleware(['permission:create_cities'])->only('create');
+        $this->middleware(['permission:update_cities'])->only('edit');
+        $this->middleware(['permission:delete_cities'])->only('destroy');
+    }
+
     public function index()
     {
-        $cities = City::with(['country'])->get();
+        $cities = City::OrderBy('created_at', 'desc')->with(['country'])->get();
         if (request()->ajax()) {
             return datatables()->of($cities)
                 ->addColumn('country', function ($data) {
                     return $data->country->name;
                 })
                 ->addColumn('action', function ($data) {
-                    if (auth()->user()->hasPermission('update_cities')) {
-                        $button = '<a type="button" title="Edit" name="edit" href="cities/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
-                    } else {
-                        $button = '<a type="button" title="Edit" name="edit" id="' . $data->id . '" class="edit btn btn-sm btn-icon disabled"><i class="fa fa-edit"></i></a>';
+                    if (auth()->user()->can(['update_cities', 'delete_cities'])) {
+                        $button = '<a type="button" title="' . trans("admin.edit") . '" name="edit" href="cities/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="feather icon-edit"></i></a>';
+                        $button .= '&nbsp;';
+                        $button .= '<a type="button" title="' . trans("admin.delete") . '" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="feather icon-trash-2"></i></a>';
+                        return $button;
                     }
-                    $button .= '&nbsp;&nbsp;';
-                    if (auth()->user()->hasPermission('delete_cities')) {
-                        $button .= '<a type="button" title="Delete" name="delete" id="' . $data->id . '" class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
-                    } else {
-                        $button .= '<a type="button" title="Delete" name="delete" id="' . $data->id . '" class="delete btn btn-sm btn-icon disabled"><i class="fa fa-trash"></i></a>';
-                    }
-                    return $button;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -59,7 +61,12 @@ class CitiesController extends Controller
         $request_data = $request->all();
         City::create($request_data);
 
-        Toastr::success(__('admin.added_successfully'));
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.cities.index');
     }
 
@@ -81,7 +88,13 @@ class CitiesController extends Controller
 
         $request->validate($rules);
         $city->update($request->all());
-        Toastr::success(__('admin.updated_successfully'));
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.cities.index');
     }
 
@@ -94,8 +107,8 @@ class CitiesController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $city           = City::find($id);
-        $active         = $request->get('active');
-        $city->active   = $active;
+        $enabled        = $request->get('enabled');
+        $city->enabled  = $enabled;
         $city           = $city->save();
 
         if ($city) {

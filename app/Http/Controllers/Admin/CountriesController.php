@@ -10,24 +10,26 @@ use Illuminate\Validation\Rule;
 
 class CountriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:read_countries'])->only('index');
+        $this->middleware(['permission:create_countries'])->only('create');
+        $this->middleware(['permission:update_countries'])->only('edit');
+        $this->middleware(['permission:delete_countries'])->only('destroy');
+    }
+
     public function index()
     {
-        $countries = Country::get();
+        $countries = Country::OrderBy('created_at', 'desc')->get();
         if (request()->ajax()) {
             return datatables()->of($countries)
                 ->addColumn('action', function ($data) {
-                    if (auth()->user()->hasPermission('update_countries')) {
-                        $button = '<a type="button" title="Edit" name="edit" href="countries/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="fa fa-edit"></i></a>';
-                    } else {
-                        $button = '<a type="button" title="Edit" name="edit" id="' . $data->id . '" class="edit btn btn-sm btn-icon disabled"><i class="fa fa-edit"></i></a>';
+                    if (auth()->user()->can(['update_countries', 'delete_countries'])) {
+                        $button = '<a type="button" title="' . trans("admin.edit") . '" name="edit" href="countries/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="feather icon-edit"></i></a>';
+                        $button .= '&nbsp;';
+                        $button .= '<a type="button" title="' . trans("admin.delete") . '" name="delete" id="' . $data->id . '"  class="delete btn btn-sm btn-icon"><i class="feather icon-trash-2"></i></a>';
+                        return $button;
                     }
-                    $button .= '&nbsp;&nbsp;';
-                    if (auth()->user()->hasPermission('delete_countries')) {
-                        $button .= '<a type="button" title="Delete" name="delete" id="' . $data->id . '" class="delete btn btn-sm btn-icon"><i class="fa fa-trash"></i></a>';
-                    } else {
-                        $button .= '<a type="button" title="Delete" name="delete" id="' . $data->id . '" class="delete btn btn-sm btn-icon disabled"><i class="fa fa-trash"></i></a>';
-                    }
-                    return $button;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -55,7 +57,13 @@ class CountriesController extends Controller
         $request->validate($rules);
 
         Country::create($request->all());
-        Toastr::success(__('admin.added_successfully'));
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.countries.index');
     }
 
@@ -78,7 +86,13 @@ class CountriesController extends Controller
 
         $request->validate($rules);
         $country->update($request->all());
-        Toastr::success(__('admin.updated_successfully'));
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.countries.index');
     }
 
@@ -91,8 +105,8 @@ class CountriesController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $country           = Country::find($id);
-        $active            = $request->get('active');
-        $country->active   = $active;
+        $enabled           = $request->get('enabled');
+        $country->enabled  = $enabled;
         $country           = $country->save();
 
         if ($country) {

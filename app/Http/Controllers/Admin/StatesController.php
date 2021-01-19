@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\State;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StatesController extends Controller
 {
@@ -18,9 +22,15 @@ class StatesController extends Controller
 
     public function index()
     {
-        $states = State::OrderBy('created_at', 'desc')->get();
+        $states = State::OrderBy('created_at', 'desc')->with(['city', 'country'])->get();
         if (request()->ajax()) {
             return datatables()->of($states)
+                ->addColumn('city', function ($data) {
+                    return $data->city->name;
+                })
+                ->addColumn('country', function ($data) {
+                    return $data->country->name;
+                })
                 ->addColumn('action', function ($data) {
                     if (auth()->user()->can(['update_states', 'delete_states'])) {
                         $button = '<a type="button" title="' . trans("admin.edit") . '" name="edit" href="states/' . $data->id . '/edit" class="edit btn btn-sm btn-icon"><i class="feather icon-edit"></i></a>';
@@ -37,29 +47,62 @@ class StatesController extends Controller
 
     public function create()
     {
-        return view('admin.states.create');
+        $cities = City::active()->get();
+        $countries = Country::active()->get();
+        return view('admin.states.create')->with('countries', $countries);
     }
 
-    public function store(StatesRequest $request)
+    public function store(Request $request)
     {
-        State::create([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.added_successfully'));
+        $rules = [
+            'city_id'       => 'required',
+            'country_id'    => 'required'
+        ];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale . '.name'        => 'required|unique:state_translations,name'];
+        }
+
+        $request->validate($rules);
+        $request_data = $request->all();
+        State::create($request_data);
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.states.index');
     }
 
     public function edit(State $state)
     {
-        return view('admin.states.edit')->with('state', $state);
+        $cities = City::active()->get();
+        $countries = Country::active()->get();
+        return view('admin.states.edit', compact('countries', 'state'));
     }
 
-    public function update(StatesRequest $request, State $state)
+    public function update(Request $request, State $state)
     {
-        $state->update([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.updated_successfully'));
+        $rules = [
+            'city_id'       => 'required',
+            'country_id'    => 'required'
+        ];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale . '.name'        => ['required', Rule::unique('state_translations', 'name')->ignore($state->id, 'state_id')]];
+        }
+
+        $request->validate($rules);
+        $state->update($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.states.index');
     }
 
@@ -67,5 +110,17 @@ class StatesController extends Controller
     {
         $state = State::findOrFail($id);
         $state->delete();
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $state           = State::find($id);
+        $enabled         = $request->get('enabled');
+        $state->enabled  = $enabled;
+        $state           = $state->save();
+
+        if ($state) {
+            return response(['success' => TRUE, "message" => 'Done']);
+        }
     }
 }
