@@ -14,7 +14,8 @@ class ShippingsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name.ar' => 'required',
+            'name.en' => 'required'
         ];
     }
 }

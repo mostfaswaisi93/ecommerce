@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Size extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
-    protected $fillable = [
-        'name_ar',
-        'name_en',
-        'department_id',
-        'is_public',
-    ];
+    protected $table        = 'sizes';
+    protected $fillable     = ['name', 'department_id', 'is_public', 'enabled'];
+    protected $appends      = ['name_trans'];
+    public $translatable    = ['name'];
 
     public function department_id()
     {

@@ -3,21 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Translatable\HasTranslations;
 
 class Department extends BaseModel
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
-    protected $table = 'departments';
-
-    protected $fillable = [
-        'dep_name_ar',
-        'dep_name_en',
-        'icon',
-        'description',
-        'keyword',
-        'parent',
-    ];
+    protected $table        = 'departments';
+    protected $fillable     = ['name', 'icon', 'description', 'keyword', 'parent', 'enabled'];
+    protected $appends      = ['name_trans'];
+    public $translatable    = ['name'];
 
     public function parents()
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SizesRequest;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
@@ -43,10 +44,22 @@ class SizesController extends Controller
 
     public function store(SizesRequest $request)
     {
-        Size::create([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.added_successfully'));
+        $rules = [];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += ['name.' . $locale => 'required'];
+        }
+
+        $request->validate($rules);
+
+        Size::create($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.sizes.index');
     }
 
@@ -57,10 +70,22 @@ class SizesController extends Controller
 
     public function update(SizesRequest $request, Size $size)
     {
-        $size->update([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.updated_successfully'));
+        $rules = [];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += ['name.' . $locale => 'required'];
+        }
+
+        $request->validate($rules);
+
+        $size->update($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.sizes.index');
     }
 

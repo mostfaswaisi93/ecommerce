@@ -3,21 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Translatable\HasTranslations;
 
 class Shipping extends BaseModel
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
-    protected $table = 'shippings';
-
-    protected $fillable = [
-        'name_ar',
-        'name_en',
-        'user_id',
-        'lat',
-        'lng',
-        'icon',
-    ];
+    protected $table        = 'shippings';
+    protected $fillable     = ['name', 'user_id', 'lat', 'lng', 'icon', 'enabled'];
+    protected $appends      = ['name_trans'];
+    public $translatable    = ['name'];
 
     public function user_id()
     {

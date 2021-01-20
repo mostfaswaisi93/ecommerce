@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShippingsRequest;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class ShippingsController extends Controller
 {
@@ -42,10 +44,22 @@ class ShippingsController extends Controller
 
     public function store(ShippingsRequest $request)
     {
-        Shipping::create([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.added_successfully'));
+        $rules = [];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += ['name.' . $locale => 'required'];
+        }
+
+        $request->validate($rules);
+
+        Shipping::create($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.shippings.index');
     }
 
@@ -56,10 +70,22 @@ class ShippingsController extends Controller
 
     public function update(ShippingsRequest $request, Shipping $shipping)
     {
-        $shipping->update([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.updated_successfully'));
+        $rules = [];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += ['name.' . $locale => 'required'];
+        }
+
+        $request->validate($rules);
+
+        $shipping->update($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.shippings.index');
     }
 

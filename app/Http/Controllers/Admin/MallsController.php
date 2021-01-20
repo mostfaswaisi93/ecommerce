@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MallsRequest;
 use App\Models\Mall;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class MallsController extends Controller
 {
@@ -40,12 +42,24 @@ class MallsController extends Controller
         return view('admin.malls.create');
     }
 
-    public function store(mallsRequest $request)
+    public function store(MallsRequest $request)
     {
-        Mall::create([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.added_successfully'));
+        $rules = [];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += ['name.' . $locale => 'required'];
+        }
+
+        $request->validate($rules);
+
+        Mall::create($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.added_successfully'));
+        } else {
+            Toastr::success(__('admin.added_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.malls.index');
     }
 
@@ -54,12 +68,24 @@ class MallsController extends Controller
         return view('admin.malls.edit')->with('mall', $mall);
     }
 
-    public function update(mallsRequest $request, Mall $mall)
+    public function update(MallsRequest $request, Mall $mall)
     {
-        $mall->update([
-            'name' => $request->name
-        ]);
-        Toastr::success(__('admin.updated_successfully'));
+        $rules = [];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += ['name.' . $locale => 'required'];
+        }
+
+        $request->validate($rules);
+
+        $mall->update($request->all());
+
+        if (app()->getLocale() == 'ar') {
+            Toastr::success(__('admin.updated_successfully'));
+        } else {
+            Toastr::success(__('admin.updated_successfully'), '', ["positionClass" => "toast-bottom-left"]);
+        }
+
         return redirect()->route('admin.malls.index');
     }
 

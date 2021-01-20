@@ -9,12 +9,8 @@ class RelatedProudct extends Model
 {
     use HasFactory;
 
-    protected $table    = 'related_proudcts';
-
-    protected $fillable = [
-        'product_id',
-        'related_product',
-    ];
+    protected $table        = 'related_proudcts';
+    protected $fillable     = ['product_id', 'related_product', 'enabled'];
 
     public function product()
     {
