@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TradeMarksRequest;
 use App\Models\TradeMark;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Brian2694\Toastr\Facades\Toastr;
 
 class TradeMarksController extends Controller
@@ -52,7 +54,18 @@ class TradeMarksController extends Controller
 
         $request->validate($rules);
 
-        TradeMark::create($request->all());
+        $request_data = $request->all();
+
+        if ($request->logo) {
+            Image::make($request->logo)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(public_path('images/trade_marks/' . $request->logo->hashName()));
+            $request_data['logo'] = $request->logo->hashName();
+        }
+
+        TradeMark::create($request_data);
 
         if (app()->getLocale() == 'ar') {
             Toastr::success(__('admin.added_successfully'));
@@ -78,7 +91,21 @@ class TradeMarksController extends Controller
 
         $request->validate($rules);
 
-        $trade_mark->update($request->all());
+        $request_data = $request->all();
+
+        if ($request->logo) {
+            if ($trade_mark->logo != 'default.png') {
+                Storage::disk('public_uploads')->delete('/trade_marks/' . $trade_mark->logo);
+            }
+            Image::make($request->logo)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(public_path('images/trade_marks/' . $request->logo->hashName()));
+            $request_data['logo'] = $request->logo->hashName();
+        }
+
+        $trade_mark->update($request_data);
 
         if (app()->getLocale() == 'ar') {
             Toastr::success(__('admin.updated_successfully'));
@@ -92,6 +119,9 @@ class TradeMarksController extends Controller
     public function destroy($id)
     {
         $trade_mark = TradeMark::findOrFail($id);
+        if ($trade_mark->logo != 'default.png') {
+            Storage::disk('public_uploads')->delete('/trade_marks/' . $trade_mark->logo);
+        }
         $trade_mark->delete();
     }
 }

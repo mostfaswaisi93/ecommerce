@@ -79,7 +79,11 @@
                     }, searchable: false, orderable: false
                 },
                 { data: 'name_trans' },
-                { data: getCountry },
+                { data: 'country', name: 'country', 
+                    render: function(data, type, row, meta) {
+                        return "<div class='badge badge-primary'>"+ data +"</div>";
+                    }, searchable: false, orderable: false
+                },
                 { data: 'enabled',
                     render: function(data, type, row, meta) {
                         var text = data ? "{{ trans('admin.active') }}" : "{{ trans('admin.inactive') }}";
@@ -143,16 +147,6 @@
                 searchPlaceholder: '{{ trans("admin.search") }}...'
             }
         });
-
-        function getCountry(data , type, full, meta){
-            var orderType = data.DataType;
-            var nameTage = JSON.parse(data.country_id.replace(/&quot;/g,'"'));
-            var fName = '';
-            nameTage.forEach(element => {
-                fName+= "<span class='badge badge-primary'>"+element.ar.name+"</span> ";
-            });
-            return fName;
-        }
     });
 
     // Multiple Delete

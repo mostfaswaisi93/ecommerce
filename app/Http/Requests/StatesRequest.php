@@ -14,8 +14,10 @@ class StatesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name.ar' => 'required',
-            'name.en' => 'required'
+            'name.ar'       => 'required',
+            'name.en'       => 'required',
+            'city_id'       => 'required',
+            'country_id'    => 'required'
         ];
     }
 }

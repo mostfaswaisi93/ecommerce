@@ -21,11 +21,11 @@ class CitiesController extends Controller
 
     public function index()
     {
-        $cities = City::OrderBy('created_at', 'desc')->with(['country_id'])->get();
+        $cities = City::OrderBy('created_at', 'desc')->with(['country'])->get();
         if (request()->ajax()) {
             return datatables()->of($cities)
-                ->addColumn('country_id', function ($data) {
-                    return $data->country_id->id;
+                ->addColumn('country', function ($data) {
+                    return $data->country->name_trans;
                 })
                 ->addColumn('action', function ($data) {
                     if (auth()->user()->can(['update_cities', 'delete_cities'])) {
@@ -70,13 +70,13 @@ class CitiesController extends Controller
         return redirect()->route('admin.cities.index');
     }
 
-    public function edit(CitiesRequest $city)
+    public function edit(City $city)
     {
         $countries = Country::active()->get();
         return view('admin.cities.edit', compact('countries', 'city'));
     }
 
-    public function update(Request $request, City $city)
+    public function update(CitiesRequest $request, City $city)
     {
         $rules = [
             'country_id'   => 'required'

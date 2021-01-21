@@ -174,6 +174,7 @@ return [
     'total'                     => 'Total',
     'price'                     => 'Price',
     'currency'                  => 'Currency',
+    'logo'                      => 'Logo',
 
     'copyright'                 => 'Copyright',
     'all_rights'                => 'All Rights Reserved',

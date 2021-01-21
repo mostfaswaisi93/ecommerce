@@ -29,6 +29,8 @@
                                     </th>
                                     <th>#</th>
                                     <th>{{ trans('admin.name') }}</th>
+                                    <th>{{ trans('admin.city') }}</th>
+                                    <th>{{ trans('admin.country') }}</th>
                                     <th>{{ trans('admin.status') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
                                     <th>
@@ -78,6 +80,16 @@
                     }, searchable: false, orderable: false
                 },
                 { data: 'name_trans' },
+                { data: 'city', name: 'city', 
+                    render: function(data, type, row, meta) {
+                        return "<div class='badge badge-info'>"+ data +"</div>";
+                    }, searchable: false, orderable: false
+                },
+                { data: 'country', name: 'country', 
+                    render: function(data, type, row, meta) {
+                        return "<div class='badge badge-primary'>"+ data +"</div>";
+                    }, searchable: false, orderable: false
+                },
                 { data: 'enabled',
                     render: function(data, type, row, meta) {
                         var text = data ? "{{ trans('admin.active') }}" : "{{ trans('admin.inactive') }}";

@@ -9,7 +9,6 @@ use App\Models\Country;
 use App\Models\State;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class StatesController extends Controller
 {
@@ -27,10 +26,10 @@ class StatesController extends Controller
         if (request()->ajax()) {
             return datatables()->of($states)
                 ->addColumn('city', function ($data) {
-                    return $data->city->name;
+                    return $data->city->name_trans;
                 })
                 ->addColumn('country', function ($data) {
-                    return $data->country->name;
+                    return $data->country->name_trans;
                 })
                 ->addColumn('action', function ($data) {
                     if (auth()->user()->can(['update_states', 'delete_states'])) {
@@ -50,7 +49,7 @@ class StatesController extends Controller
     {
         $cities = City::active()->get();
         $countries = Country::active()->get();
-        return view('admin.states.create')->with('countries', $countries);
+        return view('admin.states.create', compact('cities', 'countries'));
     }
 
     public function store(StatesRequest $request)
@@ -66,7 +65,7 @@ class StatesController extends Controller
 
         $request->validate($rules);
 
-        City::create($request->all());
+        State::create($request->all());
 
         if (app()->getLocale() == 'ar') {
             Toastr::success(__('admin.added_successfully'));
@@ -81,7 +80,7 @@ class StatesController extends Controller
     {
         $cities = City::active()->get();
         $countries = Country::active()->get();
-        return view('admin.states.edit', compact('countries', 'state'));
+        return view('admin.states.edit', compact('cities', 'countries', 'state'));
     }
 
     public function update(StatesRequest $request, State $state)

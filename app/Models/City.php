@@ -14,8 +14,8 @@ class City extends BaseModel
     protected $appends      = ['name_trans'];
     public $translatable    = ['name'];
 
-    public function country_id()
+    public function country()
     {
-        return $this->hasOne(Country::class, 'id', 'country_id');
+        return $this->belongsTo(Country::class);
     }
 }

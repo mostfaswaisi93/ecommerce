@@ -28,6 +28,7 @@
                                         </div>
                                     </th>
                                     <th>#</th>
+                                    <th>{{ trans('admin.logo') }}</th>
                                     <th>{{ trans('admin.name') }}</th>
                                     <th>{{ trans('admin.status') }}</th>
                                     <th>{{ trans('admin.created_at') }}</th>
@@ -62,7 +63,7 @@
             processing: true,
             serverSide: true,
             responsive: true,
-            order: [[ 2, "desc" ]],
+            order: [[ 3, "desc" ]],
             ajax: {
                 url: "{{ route('admin.trade_marks.index') }}",
             },
@@ -75,6 +76,11 @@
                 {
                     render: function(data, type, row, meta) {
                         return meta.row + meta.settings._iDisplayStart + 1;
+                    }, searchable: false, orderable: false
+                },
+                { data: 'logo_path',
+                    render: function(data, type, row, meta) {
+                        return "<img src=" + data + " width='60px' class='img-thumbnail' />";
                     }, searchable: false, orderable: false
                 },
                 { data: 'name_trans' },

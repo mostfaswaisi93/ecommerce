@@ -42,6 +42,22 @@
                                 @csrf
                                 @method('POST')
                                 <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <div class="controls">
+                                                <label>{{ trans('admin.countries') }}</label>
+                                                <select name="country_id" class="form-control select2">
+                                                    <option value="">{{ trans('admin.all_countries') }}</option>
+                                                    @foreach ($countries as $country)
+                                                    <option value="{{ $country->id }}"
+                                                        {{ old('country_id') == $country->id ? 'selected' : '' }}>
+                                                        {{ $country->name_trans }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @foreach (config('translatable.locales') as $locale)
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
@@ -54,19 +70,6 @@
                                         </div>
                                     </div>
                                     @endforeach
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <div class="controls">
-                                                <label>{{ trans('admin.country') }}</label>
-                                                <select class="form-control" id="country_id"
-                                                    name="country_id">
-                                                    @foreach ($countries as $country)
-                                                    <option value="{{$country->id}}">{{$country->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="col-12">
                                         <hr>
                                     </div>

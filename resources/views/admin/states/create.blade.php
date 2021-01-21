@@ -42,6 +42,38 @@
                                 @csrf
                                 @method('POST')
                                 <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <div class="controls">
+                                                <label>{{ trans('admin.cities') }}</label>
+                                                <select name="city_id" class="form-control select2">
+                                                    <option value="">{{ trans('admin.all_cities') }}</option>
+                                                    @foreach ($cities as $city)
+                                                    <option value="{{ $city->id }}"
+                                                        {{ old('city_id') == $city->id ? 'selected' : '' }}>
+                                                        {{ $city->name_trans }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <div class="controls">
+                                                <label>{{ trans('admin.countries') }}</label>
+                                                <select name="country_id" class="form-control select2">
+                                                    <option value="">{{ trans('admin.all_countries') }}</option>
+                                                    @foreach ($countries as $country)
+                                                    <option value="{{ $country->id }}"
+                                                        {{ old('country_id') == $country->id ? 'selected' : '' }}>
+                                                        {{ $country->name_trans }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @foreach (config('translatable.locales') as $locale)
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
@@ -54,58 +86,6 @@
                                         </div>
                                     </div>
                                     @endforeach
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <div class="controls">
-                                                <label>{{ trans('admin.mob') }}</label>
-                                                <input id="mob" type="text" name="mob" class="form-control"
-                                                    value="{{ old('name.mob') }}"
-                                                    placeholder="{{ trans('admin.mob') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <div class="controls">
-                                                <label>{{ trans('admin.code') }}</label>
-                                                <input id="code" type="text" name="code" class="form-control"
-                                                    value="{{ old('name.code') }}"
-                                                    placeholder="{{ trans('admin.code') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @foreach (config('translatable.locales') as $locale)
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <div class="controls">
-                                                <label>{{ trans('admin.' . $locale . '.currency') }}</label>
-                                                <input id="currency" type="text" name="currency[{{ $locale }}]"
-                                                    class="form-control" value="{{ old('currency.' . $locale) }}"
-                                                    placeholder="{{ trans('admin.' . $locale . '.currency') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                    {{-- <div class="col-md-6 col-12">
-                                        <div class="media mb-2">
-                                            <a class="mr-2 my-25" href="#">
-                                                <img src="{{ asset('images/users/default.png') }}" alt="users avatar"
-                                                    class="users-avatar-shadow rounded image img-thumbnail image-preview"
-                                                    height="70" width="70">
-                                            </a>
-                                            <div class="media-body mt-50">
-                                                <label>{{ trans('admin.user_image') }}</label>
-                                                <div class="col-12 d-flex mt-1 px-0">
-                                                    <input type="file" class="form-control-file image" name="image"
-                                                        id="image" style="display:none;">
-                                                    <button class="btn btn-primary" onclick="FileUpload();">
-                                                        <i class="fa fa-plus"></i>
-                                                        {{ trans('admin.file_upload') }}
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <div class="col-12">
                                         <hr>
                                     </div>
