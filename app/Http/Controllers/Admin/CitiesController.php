@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CitiesRequest;
 use App\Models\City;
 use App\Models\Country;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class CitiesController extends Controller
 {
@@ -21,11 +21,11 @@ class CitiesController extends Controller
 
     public function index()
     {
-        $cities = City::OrderBy('created_at', 'desc')->with(['country'])->get();
+        $cities = City::OrderBy('created_at', 'desc')->with(['country_id'])->get();
         if (request()->ajax()) {
             return datatables()->of($cities)
-                ->addColumn('country', function ($data) {
-                    return $data->country->name;
+                ->addColumn('country_id', function ($data) {
+                    return $data->country_id->id;
                 })
                 ->addColumn('action', function ($data) {
                     if (auth()->user()->can(['update_cities', 'delete_cities'])) {
@@ -47,19 +47,19 @@ class CitiesController extends Controller
         return view('admin.cities.create')->with('countries', $countries);
     }
 
-    public function store(Request $request)
+    public function store(CitiesRequest $request)
     {
         $rules = [
-            'country_id'   => 'required'
+            'country_id'   => 'required',
         ];
 
         foreach (config('translatable.locales') as $locale) {
-            $rules += [$locale . '.name'        => 'required|unique:city_translations,name'];
+            $rules += ['name.' . $locale => 'required'];
         }
 
         $request->validate($rules);
-        $request_data = $request->all();
-        City::create($request_data);
+
+        City::create($request->all());
 
         if (app()->getLocale() == 'ar') {
             Toastr::success(__('admin.added_successfully'));
@@ -70,7 +70,7 @@ class CitiesController extends Controller
         return redirect()->route('admin.cities.index');
     }
 
-    public function edit(City $city)
+    public function edit(CitiesRequest $city)
     {
         $countries = Country::active()->get();
         return view('admin.cities.edit', compact('countries', 'city'));
@@ -83,10 +83,11 @@ class CitiesController extends Controller
         ];
 
         foreach (config('translatable.locales') as $locale) {
-            $rules += [$locale . '.name'        => ['required', Rule::unique('city_translations', 'name')->ignore($city->id, 'city_id')]];
+            $rules += ['name.' . $locale => 'required'];
         }
 
         $request->validate($rules);
+
         $city->update($request->all());
 
         if (app()->getLocale() == 'ar') {

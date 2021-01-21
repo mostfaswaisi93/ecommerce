@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StatesRequest;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\State;
@@ -52,7 +53,7 @@ class StatesController extends Controller
         return view('admin.states.create')->with('countries', $countries);
     }
 
-    public function store(Request $request)
+    public function store(StatesRequest $request)
     {
         $rules = [
             'city_id'       => 'required',
@@ -60,12 +61,12 @@ class StatesController extends Controller
         ];
 
         foreach (config('translatable.locales') as $locale) {
-            $rules += [$locale . '.name'        => 'required|unique:state_translations,name'];
+            $rules += ['name.' . $locale => 'required'];
         }
 
         $request->validate($rules);
-        $request_data = $request->all();
-        State::create($request_data);
+
+        City::create($request->all());
 
         if (app()->getLocale() == 'ar') {
             Toastr::success(__('admin.added_successfully'));
@@ -83,7 +84,7 @@ class StatesController extends Controller
         return view('admin.states.edit', compact('countries', 'state'));
     }
 
-    public function update(Request $request, State $state)
+    public function update(StatesRequest $request, State $state)
     {
         $rules = [
             'city_id'       => 'required',
@@ -91,10 +92,11 @@ class StatesController extends Controller
         ];
 
         foreach (config('translatable.locales') as $locale) {
-            $rules += [$locale . '.name'        => ['required', Rule::unique('state_translations', 'name')->ignore($state->id, 'state_id')]];
+            $rules += ['name.' . $locale => 'required'];
         }
 
         $request->validate($rules);
+
         $state->update($request->all());
 
         if (app()->getLocale() == 'ar') {

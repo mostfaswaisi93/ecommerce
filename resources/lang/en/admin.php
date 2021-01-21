@@ -173,6 +173,7 @@ return [
     'created_at'                => 'Created at',
     'total'                     => 'Total',
     'price'                     => 'Price',
+    'currency'                  => 'Currency',
 
     'copyright'                 => 'Copyright',
     'all_rights'                => 'All Rights Reserved',
@@ -182,4 +183,15 @@ return [
     'no_messages'               => 'No Messages',
     'read_all_messages'         => 'Read All Messages',
     'read_all_notifications'    => 'Read All Notifications',
+
+    'ar'                        => [
+        'name'          => 'Name in Arabic',
+        'currency'      => 'Currency in Arabic',
+        'description'   => 'Description in Arabic',
+    ],
+    'en'                        => [
+        'name'          => 'Name in English',
+        'currency'      => 'Currency in English',
+        'description'   => 'Description in English',
+    ],
 ];

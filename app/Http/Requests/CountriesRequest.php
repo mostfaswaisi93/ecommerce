@@ -14,8 +14,13 @@ class CountriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name.ar' => 'required',
-            'name.en' => 'required'
+            'name.ar'       => 'required',
+            'name.en'       => 'required',
+            'mob'           => 'required',
+            'code'          => 'required',
+            'currency.ar'   => 'required',
+            'currency.en'   => 'required',
+            // 'logo'          => 'required'
         ];
     }
 }

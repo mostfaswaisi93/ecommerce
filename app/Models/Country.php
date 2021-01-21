@@ -10,9 +10,9 @@ class Country extends BaseModel
     use HasFactory, HasTranslations;
 
     protected $table        = 'countries';
-    protected $fillable     = ['name', 'mob', 'code', 'logo', 'enabled'];
-    protected $appends      = ['name_trans'];
-    public $translatable    = ['name'];
+    protected $fillable     = ['name', 'mob', 'code', 'currency', 'logo', 'enabled'];
+    protected $appends      = ['logo_path', 'name_trans', 'currency_trans'];
+    public $translatable    = ['name', 'currency'];
 
     // get Currency Translatable
     public function getCurrencyTransAttribute()
@@ -22,5 +22,10 @@ class Country extends BaseModel
         } else {
             return $this->getTranslation('currency', 'en');
         }
+    }
+
+    public function getLogoPathAttribute()
+    {
+        return asset('images/countries/' . $this->logo);
     }
 }

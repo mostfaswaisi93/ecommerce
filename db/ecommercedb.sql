@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2021 at 12:33 PM
+-- Generation Time: Jan 21, 2021 at 12:59 PM
 -- Server version: 10.5.4-MariaDB-log
 -- PHP Version: 7.4.10
 
@@ -65,6 +65,13 @@ CREATE TABLE `cities` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `cities`
+--
+
+INSERT INTO `cities` (`id`, `name`, `country_id`, `enabled`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '{\"ar\":\"تيست\",\"en\":\"test\"}', 2, 1, '2021-01-21 12:34:21', '2021-01-21 12:34:21', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +120,14 @@ CREATE TABLE `countries` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO `countries` (`id`, `name`, `mob`, `code`, `currency`, `logo`, `enabled`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '{\"ar\":\"تيست 1\",\"en\":\"test\"}', 'test', 'test', '{\"ar\":\"تيست\",\"en\":\"test\"}', NULL, 1, '2021-01-21 11:24:23', '2021-01-21 11:53:21', '2021-01-21 11:53:21'),
+(2, '{\"ar\":\"تيست\",\"en\":\"test\"}', 'test', 'test', '{\"ar\":\"تيست\",\"en\":\"test\"}', NULL, 1, '2021-01-21 11:53:36', '2021-01-21 11:53:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -174,6 +189,18 @@ CREATE TABLE `files` (
 
 CREATE TABLE `malls` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `facebook` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lng` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_id` int(10) UNSIGNED NOT NULL,
   `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -188,6 +215,8 @@ CREATE TABLE `malls` (
 
 CREATE TABLE `mall_products` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `mall_id` int(10) UNSIGNED NOT NULL,
   `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -202,6 +231,17 @@ CREATE TABLE `mall_products` (
 
 CREATE TABLE `manufacturers` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `facebook` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lng` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `enabled` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -325,6 +365,13 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('super@admin.com', '$2y$10$NaEK8SnYtlBLSh/6p.K8FOCPIu7rFKA7/CiwvX14Lk6ldV0W9DSaq', '2021-01-19 15:22:07');
+
 -- --------------------------------------------------------
 
 --
@@ -344,94 +391,94 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'create_trade_marks', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(2, 'read_trade_marks', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(3, 'update_trade_marks', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(4, 'delete_trade_marks', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(5, 'create_departments', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(6, 'read_departments', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(7, 'update_departments', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(8, 'delete_departments', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(9, 'create_categories', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(10, 'read_categories', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(11, 'update_categories', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(12, 'delete_categories', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(13, 'create_sub_categories', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(14, 'read_sub_categories', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(15, 'update_sub_categories', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(16, 'delete_sub_categories', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(17, 'create_products', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(18, 'read_products', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(19, 'update_products', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(20, 'delete_products', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(21, 'create_manufacturers', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(22, 'read_manufacturers', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(23, 'update_manufacturers', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(24, 'delete_manufacturers', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(25, 'create_shippings', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(26, 'read_shippings', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(27, 'update_shippings', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(28, 'delete_shippings', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(29, 'create_orders', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(30, 'read_orders', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(31, 'update_orders', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(32, 'delete_orders', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(33, 'create_malls', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(34, 'read_malls', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(35, 'update_malls', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(36, 'delete_malls', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(37, 'create_sliders', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(38, 'read_sliders', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(39, 'update_sliders', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(40, 'delete_sliders', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(41, 'create_brands', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(42, 'read_brands', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(43, 'update_brands', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(44, 'delete_brands', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(45, 'create_notifications', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(46, 'read_notifications', 'web', '2021-01-19 12:21:06', '2021-01-19 12:21:06'),
-(47, 'update_notifications', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(48, 'delete_notifications', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(49, 'create_contacts', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(50, 'read_contacts', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(51, 'update_contacts', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(52, 'delete_contacts', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(53, 'create_countries', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(54, 'read_countries', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(55, 'update_countries', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(56, 'delete_countries', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(57, 'create_cities', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(58, 'read_cities', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(59, 'update_cities', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(60, 'delete_cities', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(61, 'create_states', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(62, 'read_states', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(63, 'update_states', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(64, 'delete_states', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(65, 'create_colors', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(66, 'read_colors', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(67, 'update_colors', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(68, 'delete_colors', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(69, 'create_weights', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(70, 'read_weights', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(71, 'update_weights', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(72, 'delete_weights', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(73, 'create_sizes', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(74, 'read_sizes', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(75, 'update_sizes', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(76, 'delete_sizes', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(77, 'create_users', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(78, 'read_users', 'web', '2021-01-19 12:21:07', '2021-01-19 12:21:07'),
-(79, 'update_users', 'web', '2021-01-19 12:21:08', '2021-01-19 12:21:08'),
-(80, 'delete_users', 'web', '2021-01-19 12:21:08', '2021-01-19 12:21:08'),
-(81, 'create_roles', 'web', '2021-01-19 12:21:08', '2021-01-19 12:21:08'),
-(82, 'read_roles', 'web', '2021-01-19 12:21:08', '2021-01-19 12:21:08'),
-(83, 'update_roles', 'web', '2021-01-19 12:21:08', '2021-01-19 12:21:08'),
-(84, 'delete_roles', 'web', '2021-01-19 12:21:08', '2021-01-19 12:21:08'),
-(85, 'create_settings', 'web', '2021-01-19 12:21:08', '2021-01-19 12:21:08'),
-(86, 'read_settings', 'web', '2021-01-19 12:21:08', '2021-01-19 12:21:08'),
-(87, 'update_settings', 'web', '2021-01-19 12:21:08', '2021-01-19 12:21:08'),
-(88, 'delete_settings', 'web', '2021-01-19 12:21:08', '2021-01-19 12:21:08');
+(1, 'create_trade_marks', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(2, 'read_trade_marks', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(3, 'update_trade_marks', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(4, 'delete_trade_marks', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(5, 'create_departments', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(6, 'read_departments', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(7, 'update_departments', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(8, 'delete_departments', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(9, 'create_categories', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(10, 'read_categories', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(11, 'update_categories', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(12, 'delete_categories', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(13, 'create_sub_categories', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(14, 'read_sub_categories', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(15, 'update_sub_categories', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(16, 'delete_sub_categories', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(17, 'create_products', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(18, 'read_products', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(19, 'update_products', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(20, 'delete_products', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(21, 'create_manufacturers', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(22, 'read_manufacturers', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(23, 'update_manufacturers', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(24, 'delete_manufacturers', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(25, 'create_shippings', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(26, 'read_shippings', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(27, 'update_shippings', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(28, 'delete_shippings', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(29, 'create_orders', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(30, 'read_orders', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(31, 'update_orders', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(32, 'delete_orders', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(33, 'create_malls', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(34, 'read_malls', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(35, 'update_malls', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(36, 'delete_malls', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(37, 'create_sliders', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(38, 'read_sliders', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(39, 'update_sliders', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(40, 'delete_sliders', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(41, 'create_brands', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(42, 'read_brands', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(43, 'update_brands', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(44, 'delete_brands', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(45, 'create_notifications', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(46, 'read_notifications', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(47, 'update_notifications', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(48, 'delete_notifications', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(49, 'create_contacts', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(50, 'read_contacts', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(51, 'update_contacts', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(52, 'delete_contacts', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(53, 'create_countries', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(54, 'read_countries', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(55, 'update_countries', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(56, 'delete_countries', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(57, 'create_cities', 'web', '2021-01-19 12:44:49', '2021-01-19 12:44:49'),
+(58, 'read_cities', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(59, 'update_cities', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(60, 'delete_cities', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(61, 'create_states', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(62, 'read_states', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(63, 'update_states', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(64, 'delete_states', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(65, 'create_colors', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(66, 'read_colors', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(67, 'update_colors', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(68, 'delete_colors', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(69, 'create_weights', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(70, 'read_weights', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(71, 'update_weights', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(72, 'delete_weights', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(73, 'create_sizes', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(74, 'read_sizes', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(75, 'update_sizes', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(76, 'delete_sizes', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(77, 'create_users', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(78, 'read_users', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(79, 'update_users', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(80, 'delete_users', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(81, 'create_roles', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(82, 'read_roles', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(83, 'update_roles', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(84, 'delete_roles', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(85, 'create_settings', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(86, 'read_settings', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(87, 'update_settings', 'web', '2021-01-19 12:44:50', '2021-01-19 12:44:50'),
+(88, 'delete_settings', 'web', '2021-01-19 12:44:51', '2021-01-19 12:44:51');
 
 -- --------------------------------------------------------
 
@@ -480,8 +527,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'super_admin', 'web', '2021-01-19 12:21:05', '2021-01-19 12:21:05'),
-(2, 'admin', 'web', '2021-01-19 12:21:11', '2021-01-19 12:21:11');
+(1, 'super_admin', 'web', '2021-01-19 12:44:48', '2021-01-19 12:44:48'),
+(2, 'admin', 'web', '2021-01-19 12:44:54', '2021-01-19 12:44:54');
 
 -- --------------------------------------------------------
 
@@ -732,8 +779,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `image`, `enabled`, `email_verified_at`, `password`, `remember_token`, `last_login_at`, `last_login_ip`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'super', 'admin', 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$dxjVHaBQEp52TZHjE4qFE.tKq9bDBHxrr3YybxJxSo54fx7lcgLli', NULL, '2021-01-19 12:21:11', NULL, '2021-01-18 22:00:00', '2021-01-18 22:00:00', NULL),
-(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$90oxF1e0llin7jJwI69yo.ziK.JbryZiaFIRTupTMIvrSXUAWXS3q', NULL, '2021-01-19 12:21:11', NULL, '2021-01-18 22:00:00', '2021-01-18 22:00:00', NULL);
+(1, 'super', 'admin', 'super_admin', 'super@admin.com', 'default.png', 1, NULL, '$2y$10$yWuLDKPJf.xD0MWJN.0ZBOl3nIef1d3.1D.FLGbOqKymqGDPd/432', NULL, '2021-01-19 15:22:32', '127.0.0.1', '2021-01-18 22:00:00', '2021-01-19 15:22:32', NULL),
+(2, 'Mustafa', 'Al-Swaisi', 'mostfaswaisi93', 'mostfaswaisi93@gmail.com', 'default.png', 1, NULL, '$2y$10$vMqC/v9C1dTwULB/8dV..eRSznSQG/d0PlpoLqZn2i7u9/9lUFSua', NULL, '2021-01-19 12:44:54', NULL, '2021-01-18 22:00:00', '2021-01-18 22:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -972,7 +1019,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `colors`
@@ -990,7 +1037,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `departments`

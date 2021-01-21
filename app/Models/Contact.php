@@ -8,6 +8,7 @@ class Contact extends BaseModel
 {
     use HasFactory;
 
-    protected $table    = 'contacts';
-    protected $guarded  = [];
+    protected $table        = 'contacts';
+    protected $guarded      = [];
+    // protected $fillable     = ['', '', '', '', '', 'enabled'];
 }

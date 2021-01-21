@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CountriesRequest;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Validation\Rule;
 
 class CountriesController extends Controller
 {
@@ -42,16 +42,16 @@ class CountriesController extends Controller
         return view('admin.countries.create');
     }
 
-    public function store(Request $request)
+    public function store(CountriesRequest $request)
     {
         $rules = [
-            'iso_code'      => 'required|max:3|unique:countries',
-            'phone_code'    => 'required|unique:countries'
+            'mob'       => 'required',
+            'code'      => 'required',
         ];
 
         foreach (config('translatable.locales') as $locale) {
-            $rules += [$locale . '.name'        => 'required|unique:country_translations,name'];
-            $rules += [$locale . '.currency'    => 'required|unique:country_translations,currency'];
+            $rules += ['name.' . $locale => 'required'];
+            $rules += ['currency.' . $locale => 'required'];
         }
 
         $request->validate($rules);
@@ -72,19 +72,20 @@ class CountriesController extends Controller
         return view('admin.countries.edit', compact('country'));
     }
 
-    public function update(Request $request, Country $country)
+    public function update(CountriesRequest $request, Country $country)
     {
         $rules = [
-            'iso_code'      => ['required', Rule::unique('countries')->ignore($country->id)],
-            'phone_code'    => ['required', Rule::unique('countries')->ignore($country->id)],
+            'mob'       => 'required',
+            'code'      => 'required',
         ];
 
         foreach (config('translatable.locales') as $locale) {
-            $rules += [$locale . '.name'        => ['required', Rule::unique('country_translations', 'name')->ignore($country->id, 'country_id')]];
-            $rules += [$locale . '.currency'    => ['required', Rule::unique('country_translations', 'currency')->ignore($country->id, 'country_id')]];
+            $rules += ['name.' . $locale => 'required'];
+            $rules += ['currency.' . $locale => 'required'];
         }
 
         $request->validate($rules);
+
         $country->update($request->all());
 
         if (app()->getLocale() == 'ar') {

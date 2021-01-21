@@ -10,7 +10,8 @@ class Setting extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'settings';
+    protected $table        = 'settings';
+    protected $fillable     = ['name', 'title', 'value', 'type', 'options', 'sorting_number', 'enabled'];
 
     // protected $fillable = [
     //     'sitename_ar',
@@ -24,10 +25,6 @@ class Setting extends Model
     //     'message_maintenance',
     //     'main_lang',
     // ];
-
-    protected $fillable = [
-        'name', 'title', 'value', 'type', 'options', 'sorting_number'
-    ];
 
     public function getOptionsAttribute()
     {

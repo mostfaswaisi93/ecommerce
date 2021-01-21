@@ -151,15 +151,21 @@ return [
             'ar'        => 'Name in Arabic',
             'en'        => 'Name in English',
         ],
+        'currency' => [
+            'ar'        => 'Currency in Arabic',
+            'en'        => 'Currency in English',
+        ],
 
         'ar' => [
             'name'          => 'Name in Arabic',
+            'currency'      => 'Currency in Arabic',
             'title'         => 'Title in Arabic',
             'description'   => 'Description in Arabic',
             'image'         => 'Image in Arabic',
         ],
         'en' => [
             'name'          => 'Name in English',
+            'currency'      => 'Currency in English',
             'title'         => 'Title in English',
             'description'   => 'Description in English',
             'image'         => 'Image in English',
